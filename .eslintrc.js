@@ -1,5 +1,3 @@
-const { readonly } = require("vue");
-
 module.exports = {
   env: {
     node: true,
@@ -18,5 +16,8 @@ module.exports = {
   parserOptions: {
     parser: "@typescript-eslint/parser",
     sourceType: "module",
+  },
+  globals: {
+    "defineProps": 'readonly',
   },
 }
