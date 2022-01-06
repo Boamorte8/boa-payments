@@ -1,3 +1,5 @@
+const { readonly } = require("vue");
+
 module.exports = {
   env: {
     node: true,
