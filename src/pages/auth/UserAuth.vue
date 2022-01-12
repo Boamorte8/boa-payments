@@ -1,7 +1,7 @@
 <template>
   <div>
     <base-card>
-      Hello to Auth page
+      {{ t('hello') }} to Auth page
       <!-- <form @submit.prevent="submitForm">
         <div class="form-control">
           <label for="email">E-mail</label>
@@ -18,3 +18,15 @@
     </base-card>
   </div>
 </template>
+
+<script lang="ts">
+import { useI18n } from 'vue-i18n';
+
+export default {
+  setup() {
+    const { t } = useI18n();
+
+    return { t };
+  }
+}
+</script>

@@ -1299,6 +1299,44 @@
   "resolved" "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   "version" "1.2.1"
 
+"@intlify/core-base@9.2.0-beta.26":
+  "integrity" "sha512-4OXSF0zC70UElev6gam4FdWfC7u4l2ouNK9Hc6R44QlpEXkzhbwwbpZn9gIGB2l11zQnJkAwaovfYyiNJ/JvkA=="
+  "resolved" "https://registry.npmjs.org/@intlify/core-base/-/core-base-9.2.0-beta.26.tgz"
+  "version" "9.2.0-beta.26"
+  dependencies:
+    "@intlify/devtools-if" "9.2.0-beta.26"
+    "@intlify/message-compiler" "9.2.0-beta.26"
+    "@intlify/shared" "9.2.0-beta.26"
+    "@intlify/vue-devtools" "9.2.0-beta.26"
+
+"@intlify/devtools-if@9.2.0-beta.26":
+  "integrity" "sha512-7GiF7v2jlHf7g5hoLF6sKlrX5Di2INfHN4PEAeVr2ashgoSaq1EYIRouBVAnJkOrDOJzCOEY7y53me7+gIbeTw=="
+  "resolved" "https://registry.npmjs.org/@intlify/devtools-if/-/devtools-if-9.2.0-beta.26.tgz"
+  "version" "9.2.0-beta.26"
+  dependencies:
+    "@intlify/shared" "9.2.0-beta.26"
+
+"@intlify/message-compiler@9.2.0-beta.26":
+  "integrity" "sha512-qtDgHCMqrXNTekKXGzm0Dm6r3+/X7/jFXP+E07hx+PJbPMv7DzK1iU8h5LlAMQ1/jr2UIRBgXvR5wh35OKoGrA=="
+  "resolved" "https://registry.npmjs.org/@intlify/message-compiler/-/message-compiler-9.2.0-beta.26.tgz"
+  "version" "9.2.0-beta.26"
+  dependencies:
+    "@intlify/shared" "9.2.0-beta.26"
+    "source-map" "0.6.1"
+
+"@intlify/shared@9.2.0-beta.26":
+  "integrity" "sha512-MjUlkjNThqkqy8yXUcFKBiW/hIfqAn5cP3Vd0b4wdOHS8rPCEbvSbAnF08uiZDkVv8gTcsLyymX21GaU6oYyyQ=="
+  "resolved" "https://registry.npmjs.org/@intlify/shared/-/shared-9.2.0-beta.26.tgz"
+  "version" "9.2.0-beta.26"
+
+"@intlify/vue-devtools@9.2.0-beta.26":
+  "integrity" "sha512-Ghe2xTSezRzL2fBdIbZEus5+5spE2RMxgjBg6GyvbsDy1M05o2OvukBninJ4/Tc2I5A30lYgAsF1gQlOyfmv1g=="
+  "resolved" "https://registry.npmjs.org/@intlify/vue-devtools/-/vue-devtools-9.2.0-beta.26.tgz"
+  "version" "9.2.0-beta.26"
+  dependencies:
+    "@intlify/core-base" "9.2.0-beta.26"
+    "@intlify/shared" "9.2.0-beta.26"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   "integrity" "sha512-VjeHSlIzpv/NyD3N0YuHfXOPDIixcA1q2ZV98wsMqcYlPmv2n3Yb2lYP9XMElnaFVXg5A7YLTeLu6V84uQDjmQ=="
   "resolved" "https://registry.npmjs.org/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz"
@@ -3063,7 +3101,7 @@
     "@vue/compiler-dom" "3.2.26"
     "@vue/shared" "3.2.26"
 
-"@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.18":
+"@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.13", "@vue/devtools-api@^6.0.0-beta.18":
   "integrity" "sha512-FqC4s3pm35qGVeXRGOjTsRzlkJjrBLriDS9YXbflHLsfA9FrcKzIyWnLXoNm+/7930E8rRakXuAc2QkC50swAw=="
   "resolved" "https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.0.0-beta.21.1.tgz"
   "version" "6.0.0-beta.21.1"
@@ -10938,7 +10976,7 @@
   "resolved" "https://registry.npmjs.org/source-map/-/source-map-0.5.7.tgz"
   "version" "0.5.7"
 
-"source-map@^0.6.0", "source-map@^0.6.1", "source-map@~0.6.0", "source-map@~0.6.1":
+"source-map@^0.6.0", "source-map@^0.6.1", "source-map@~0.6.0", "source-map@~0.6.1", "source-map@0.6.1":
   "integrity" "sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g=="
   "resolved" "https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz"
   "version" "0.6.1"
@@ -12255,6 +12293,16 @@
     "esquery" "^1.4.0"
     "lodash" "^4.17.21"
     "semver" "^7.3.5"
+
+"vue-i18n@^9.2.0-beta.26":
+  "integrity" "sha512-xZgisyirT9hXFyXBL8pO8bYgdG7m98NLAUhbb1O9hMQS1qOXYU902+LIJA5k3BtoeiEIfjkGADHhSAlJTTzc9A=="
+  "resolved" "https://registry.npmjs.org/vue-i18n/-/vue-i18n-9.2.0-beta.26.tgz"
+  "version" "9.2.0-beta.26"
+  dependencies:
+    "@intlify/core-base" "9.2.0-beta.26"
+    "@intlify/shared" "9.2.0-beta.26"
+    "@intlify/vue-devtools" "9.2.0-beta.26"
+    "@vue/devtools-api" "^6.0.0-beta.13"
 
 "vue-inbrowser-compiler-utils@^4.43.2":
   "integrity" "sha512-kilHO+VZBiXGxaeSElEFplMilD1EqAxKh9SybFb0ZShC1pzGQC6z1EhCVjW1OBLQdkSHJE0hARVnZoqYjHhQIQ=="
