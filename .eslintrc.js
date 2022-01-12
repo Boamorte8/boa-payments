@@ -6,6 +6,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:vue/vue3-recommended',
     'prettier',
+    'plugin:jest/recommended',
   ],
   rules: {
     // override/add rules settings here, such as:
@@ -20,4 +21,5 @@ module.exports = {
   globals: {
     "defineProps": 'readonly',
   },
+  plugins: ["jest"],
 }
