@@ -1,12 +1,16 @@
-import MyBaseCard from './../components/ui/BaseCard.vue';
+import BaseCard from './../components/ui/BaseCard.vue';
 
 export default {
   title: 'UI/BaseCard',
-  component: MyBaseCard,
+  component: BaseCard,
 };
 
-
-export const BaseCard = () => ({
-  components: { MyBaseCard },
+const Template = args => ({
+  components: { BaseCard },
+  setup() {
+    return { args };
+  },
   template: '<base-card>Hello</base-card>',
 });
+
+export const Default = Template.bind({});
