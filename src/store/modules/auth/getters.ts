@@ -6,4 +6,5 @@ export default {
   token: (state: AuthState) => state.token,
   isAuthenticated: (state: AuthState) => !!state.token,
   didAutoLogout: (state: AuthState) => state.didAutoLogout,
+  counter: (state: AuthState) => state.counter,
 };

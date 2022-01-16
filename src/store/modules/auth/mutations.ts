@@ -8,5 +8,8 @@ export default {
   },
   setAutoLogout(state: AuthState) {
     state.didAutoLogout = true;
-  }
+  },
+  incrementCounter(state: AuthState) {
+    state.counter++;
+  },
 };

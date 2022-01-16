@@ -1,5 +1,5 @@
 import { InjectionKey } from 'vue';
-import { createStore, Store } from 'vuex';
+import { createStore, useStore as baseUseStore, Store } from 'vuex';
 
 import authModule from './modules/auth';
 
@@ -16,3 +16,7 @@ const store = createStore<AppState>({
 export const key: InjectionKey<Store<AppState>> = Symbol();
 
 export default store;
+
+export function useStore() {
+  return baseUseStore(key)
+};

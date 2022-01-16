@@ -7,6 +7,7 @@ export interface AuthState {
   token: string | null;
   tokenExpiration: number | null;
   didAutoLogout: boolean;
+  counter: number;
 }
 
 export default {
@@ -16,6 +17,7 @@ export default {
       token: null,
       tokenExpiration: null,
       didAutoLogout: false,
+      counter: 0,
     };
   },
   getters,

@@ -1,7 +1,11 @@
 <template>
   <div>
     <base-card>
-      {{ t('hello') }} to Auth page
+      <div>
+        <h1>{{ t('hello') }} to Auth page</h1>
+        <p>{{ counter }}</p>
+        <button @click="incrementCounter()">Increment</button>
+      </div>
       <!-- <form @submit.prevent="submitForm">
         <div class="form-control">
           <label for="email">E-mail</label>
@@ -15,18 +19,28 @@
         <base-button>{{ submitButtonCaption }}</base-button>
         <base-button type="button" mode="flat" @click="switchAuthMode">{{ switchModeButtonCaption }}</base-button>
       </form> -->
+
     </base-card>
   </div>
 </template>
 
 <script lang="ts">
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+import { useStore } from '../../store';
 
 export default {
   setup() {
     const { t } = useI18n();
+    const { getters, dispatch } = useStore();
+    const counter = computed(() => getters.counter);
 
-    return { t };
+    const incrementCounter = () => {
+      dispatch('incrementCounter');
+    };
+
+    return { t, counter, incrementCounter };
   }
 }
 </script>
