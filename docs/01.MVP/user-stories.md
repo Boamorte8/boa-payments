@@ -1,15 +1,17 @@
+# Boa Payments User Stories
+
 ## Description
+
 Aplication to save and check to follow your debts and loans
 
 <br/>
 <br/>
 
 ## 📕 Definitions
-- **Loan**: Una deuda que se le ha hecho a un usuario o entidad.
-- **Debt**: Es el  usuario.
 
-<br/>
-<br/>
+- **Loan**: Una deuda que se le ha hecho a un usuario o entidad.
+- **Debt**: Es el prestar algo a un usuario que luego deberá devolver.
+- **Payment**: Es el depósito hecho para el pago de una deuda.
 
 <!-- Without finished -->
 ## 📋 Functional Requirements
@@ -17,26 +19,32 @@ Aplication to save and check to follow your debts and loans
 ### Inicio de sesión
 
 - El usuario podrá iniciar sesión en la plataforma mediante un nombre de usuario y una contraseña
-- El usuario estará previamente registrado en el sistema, y no se podrán registrar nuevos usuarios.
+- El usuario se registrá e iniciará sesión al ingresar a la plataforma.
 
-### Creación de publicaciones
-- El usuario podrá crear publicaciones
-- Las publicaciones podrán ser publicadas en el momento de su creación
-- Las publicaciones podrán ser programadas para su publicación en una fecha y hora concretas
-- La programación de publicaciones puede realizarse en el momento de su creación, o con posterioridad
-- En caso de que una publicación no haya sido publicada, ni programada para su publicación, se marcará como borrador
-- El usuario podrá crear un número ilimitado de publicaciones en borrador
-- El usuario podrá programar un número ilimitado de publicaciones
+### Creación de registro de deuda/prestamo
 
-### Edición de publicaciones
-- El usuario podrá editar una publicación creada, siempre que esta no haya sido publicada.
-- El usuario podrá eliminar una publicación creada, siempre que esta no haya sido publicada.
+- El usuario podrá crear registros de deudas y prestamos.
 
-###  Listado de publicaciones
-- El usuario podrá listar las publicaciones creadas, independientemente de su estado
-- El usuario podrá ordenar las publicaciones creadas por su fecha de publicación / programación.
-- El usuario podrá filtrar el listado de publicaciones en base a su estado (borrador, programado, publicado)
+### Edición de registro de deuda/prestamo
 
-### Redes sociales
-- Las publicaciones podrán publicarse únicamente en la red social Twitter
-- Un usuario sólo puede vincular y realizar publicaciones para una única cuenta de la red social
+- El usuario podrá editar los registros de deuda/prestamo, uno a la vez.
+
+### Listado de registros de deuda/prestamo
+
+- El usuario podrá listar los registros de deuda/prestamo creados, independientemente de su estado
+- El usuario podrá ordenar los registros de deuda/prestamo creados por su fecha de registro.
+- El usuario podrá filtrar el listado de registros de deuda/prestamo en base a su estado (activo o finalizado) o por entidad (prestador o prestamista)
+
+### Creación de registro de pagos
+
+- El usuario podrá crear registros de pagos.
+
+### Edición de registro de pagos
+
+- El usuario podrá editar los registros de pagos, uno a la vez.
+
+### Listado de registros de pagos
+
+- El usuario podrá listar los registros de pagos creados, independientemente de su estado
+- El usuario podrá ordenar los registros de pagos creados por su fecha de registro.
+- El usuario podrá filtrar el listado de registros de pagos en base a su fecha o por entidad (prestador o prestamista)
