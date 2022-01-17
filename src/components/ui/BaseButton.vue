@@ -1,8 +1,8 @@
 <template>
-  <button v-if="!link" :class="mode">
+  <button v-if="!link" class="button" :class="mode">
     <slot></slot>
   </button>
-  <router-link v-else :to="to" :class="mode">
+  <router-link v-else class="link" :to="to" :class="mode">
     <slot></slot>
   </router-link>
 </template>
@@ -30,44 +30,34 @@ export default {
 </script>
 
 <style scoped>
-button,
-a {
-  text-decoration: none;
-  padding: 0.75rem 1.5rem;
+.button,
+.link {
+  @apply inline-block no-underline cursor-pointer text-white rounded-3xl py-3 px-6 border-2 border-purple-900
+    bg-purple-900 hover:bg-purple-700 hover:border-purple-700 active:bg-purple-700 active:border-purple-700;
+
   font: inherit;
-  background-color: #3a0061;
-  border: 1px solid #3a0061;
-  color: white;
-  cursor: pointer;
-  border-radius: 30px;
-  margin-right: 0.5rem;
-  display: inline-block;
 }
 
-a:hover,
+/* a:hover,
 a:active,
 button:hover,
 button:active {
   background-color: #270041;
   border-color: #270041;
-}
+} */
 
 .flat {
-  background-color: transparent;
-  color: #3a0061;
-  border: none;
+  @apply bg-transparent text-purple-900 border-0;
 }
 
 .outline {
-  background-color: transparent;
-  border-color: #270041;
-  color: #270041;
+  @apply bg-transparent border-purple-900 text-purple-900;
 }
 
 .flat:hover,
 .flat:active,
 .outline:hover,
 .outline:active {
-  background-color: #edd2ff;
+  @apply bg-purple-200;
 }
 </style>

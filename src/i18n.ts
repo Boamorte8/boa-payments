@@ -6,10 +6,16 @@ export default createI18n({
   fallbackLocale: 'en',
   messages: {
     en: {
-      hello: 'Hello',
+      login: 'Login',
+      signup: 'Signup',
+      loginSwitch: 'Signup instead',
+      signSwitch: 'Login instead',
     },
     es: {
-      hello: 'Hola',
+      login: 'Autenticar',
+      signup: 'Registrar',
+      loginSwitch: 'Registrarse',
+      signSwitch: 'Autenticarse',
     },
   },
 });
