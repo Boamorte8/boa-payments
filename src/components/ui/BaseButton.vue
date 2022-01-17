@@ -32,19 +32,11 @@ export default {
 <style scoped>
 .button,
 .link {
-  @apply inline-block no-underline cursor-pointer text-white rounded-3xl py-3 px-6 border-2 border-purple-900
+  @apply inline-block no-underline text-white rounded-3xl py-3 px-6 border-2 border-purple-900
     bg-purple-900 hover:bg-purple-700 hover:border-purple-700 active:bg-purple-700 active:border-purple-700;
 
   font: inherit;
 }
-
-/* a:hover,
-a:active,
-button:hover,
-button:active {
-  background-color: #270041;
-  border-color: #270041;
-} */
 
 .flat {
   @apply bg-transparent text-purple-900 border-0;
