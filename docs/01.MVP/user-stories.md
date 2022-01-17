@@ -48,3 +48,9 @@ Aplication to save and check to follow your debts and loans
 - El usuario podrá listar los registros de pagos creados, independientemente de su estado
 - El usuario podrá ordenar los registros de pagos creados por su fecha de registro.
 - El usuario podrá filtrar el listado de registros de pagos en base a su fecha o por entidad (prestador o prestamista)
+
+### Configuration
+
+- El usuario podrá configurar la aplicación.
+- El usuario podrá cambiar el idioma de la aplicación.
+- El usuario podrá cambiar el tema de la app (Dark / Light).
