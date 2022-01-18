@@ -2,18 +2,18 @@
   <div>
     <h1 class="max-w-2xl mx-auto my-8 flex justify-center text-3xl font-bold">Boa Payments</h1>
     <base-card>
-      <form class="w-full flex flex-col items-center" @submit.prevent="submitForm">
+      <form class="w-full flex flex-col items-center m-4 p-4" @submit.prevent="submitForm">
         <div class="form-control">
-          <label for="email">E-mail</label>
-          <input id="email" v-model.trim="email" type="email" name="email" />
+          <label class="form-label" for="email">{{ t('email') }}</label>
+          <input id="email" class="form-input" v-model.trim="email" type="email" name="email" />
         </div>
         <div class="form-control">
-          <label for="password">Password</label>
-          <input id="password" v-model.trim="password" type="password" name="password">
+          <label class="form-label" for="password">{{ t('password') }}</label>
+          <input id="password" class="form-input" v-model.trim="password" type="password" name="password">
         </div>
         <!-- <p v-if="!formIsValid">Please enter a valid email and password (must be at least 6 characters long).</p> -->
-        <div class="flex justify-center">
-          <base-button class="mr-4">{{ t(mode) }}</base-button>
+        <div class="flex flex-col items-center">
+          <base-button class="mb-4">{{ t(mode) }}</base-button>
           <base-button mode="flat" @click="switchAuthMode">{{ t(switchModeButtonCaption) }}</base-button>
         </div>
       </form>
@@ -26,7 +26,6 @@
 import { useRoute } from 'vue-router';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-
 // import { useStore } from '../../store';
 
 export default {
@@ -70,11 +69,21 @@ export default {
 </script>
 
 <style scoped>
-.form-control {
-  @apply w-80 my-2.5 flex justify-between;
+.form {
+  &-control {
+    @apply w-60 my-2.5;
 
-  &:nth-child(2) {
-    @apply mb-8;
+    &:nth-child(2) {
+      @apply mb-8;
+    }
+  }
+
+  &-label {
+    @apply font-bold mb-2 block;
+  }
+
+  &-input {
+    @apply w-full block border border-gray-300 p-0.5 rounded-md focus:border-purple-900 focus:outline-none focus:bg-gray-50;
   }
 }
 </style>
