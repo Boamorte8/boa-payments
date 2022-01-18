@@ -5,11 +5,11 @@
       <form class="w-full flex flex-col items-center m-4 p-4" @submit.prevent="submitForm">
         <div class="form-control">
           <label class="form-label" for="email">{{ t('email') }}</label>
-          <input id="email" class="form-input" v-model.trim="email" type="email" name="email" />
+          <input id="email" v-model.trim="email" class="form-input" type="email" name="email" />
         </div>
         <div class="form-control">
           <label class="form-label" for="password">{{ t('password') }}</label>
-          <input id="password" class="form-input" v-model.trim="password" type="password" name="password">
+          <input id="password" v-model.trim="password" class="form-input" type="password" name="password">
         </div>
         <!-- <p v-if="!formIsValid">Please enter a valid email and password (must be at least 6 characters long).</p> -->
         <div class="flex flex-col items-center">
