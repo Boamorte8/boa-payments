@@ -43,7 +43,12 @@ export default {
   @apply w-full h-20 flex items-center justify-center bg-purple-900;
 
   a {
-    @apply no-underline inline-block border border-transparent text-pink-300 py-3 px-6;
+    @apply no-underline inline-block border border-transparent rounded-lg text-gray-300 py-3 px-6
+      active:border-gray-300 hover:border-gray-300;
+
+    .router-link-active {
+      @apply active:border-gray-300 hover:border-gray-300;
+    }
   }
 }
 
