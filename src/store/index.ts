@@ -1,3 +1,5 @@
+// This is the old store with Vuex changed to Pinia
+
 import { InjectionKey } from 'vue';
 import { createStore, useStore as baseUseStore, Store } from 'vuex';
 

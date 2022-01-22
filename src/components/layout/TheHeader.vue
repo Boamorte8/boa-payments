@@ -11,15 +11,40 @@
       </ul>
     </nav>
   </header>
+  <!-- <Menu>
+    <MenuButton>More</MenuButton>
+    <MenuItems>
+      <MenuItem v-slot="{ active }">
+        <a :class='{ "bg-blue-500": active }' href="/account-settings">
+          Account settings
+        </a>
+      </MenuItem>
+      <MenuItem v-slot="{ active }">
+        <a :class='{ "bg-blue-500": active }' href="/account-settings">
+          Documentation
+        </a>
+      </MenuItem>
+      <MenuItem disabled>
+        <span class="opacity-75">Invite a friend (coming soon!)</span>
+      </MenuItem>
+    </MenuItems>
+  </Menu> -->
 </template>
 
 <script lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+// import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
 
 import { useStore } from '../../store';
 
 export default {
+  // components: {
+  //   Menu,
+  //   MenuButton,
+  //   MenuItems,
+  //   MenuItem,
+  // },
   setup() {
     const { t } = useI18n();
     const store = useStore();

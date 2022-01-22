@@ -1,4 +1,43 @@
+<script setup lang="ts">
+import { useRoute } from 'vue-router';
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useAuthUserStore } from '../../stores/auth-module';
+// import { useStore } from '../../store';
+
+const { t } = useI18n();
+const email = ref('');
+const password = ref('');
+const formIsValid = ref(true);
+// const isLoading = ref(false);
+// const { getters, dispatch } = useStore();
+const store = useAuthUserStore();
+const mode = ref('login');
+const switchModeButtonCaption = computed(() => mode.value === 'login' ? 'loginSwitch' : 'signSwitch');
+
+const switchAuthMode = () => {
+  mode.value = mode.value === 'login' ? 'signup' : 'login';
+};
+
+const route = useRoute();
+
+if (route.query.redirect) {
+  mode.value = 'signup';
+}
+// const incrementCounter = () => {
+//   dispatch('incrementCounter');
+// };
+
+const submitForm = () => {
+  // dispatch('submitForm');
+};
+</script>
+
 <template>
+  <div>
+    <h1>Test counter {{ store.counter }}</h1>
+    <button @click="store.incrementCounter">Increment</button>
+  </div>
   <div>
     <h1 class="max-w-2xl mx-auto my-8 flex justify-center text-3xl font-bold">Boa Payments</h1>
     <base-card>
@@ -11,7 +50,7 @@
           <label class="form-label" for="password">{{ t('password') }}</label>
           <input id="password" v-model.trim="password" class="form-input" type="password" name="password">
         </div>
-        <!-- <p v-if="!formIsValid">Please enter a valid email and password (must be at least 6 characters long).</p> -->
+        <p v-if="!formIsValid">Please enter a valid email and password (must be at least 6 characters long).</p>
         <div class="flex flex-col items-center">
           <base-button class="mb-4">{{ t(mode) }}</base-button>
           <base-button mode="flat" @click="switchAuthMode">{{ t(switchModeButtonCaption) }}</base-button>
@@ -21,52 +60,6 @@
     </base-card>
   </div>
 </template>
-
-<script lang="ts">
-import { useRoute } from 'vue-router';
-import { computed, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-// import { useStore } from '../../store';
-
-export default {
-  setup() {
-    const { t } = useI18n();
-    const email = ref('');
-    const password = ref('');
-    // const { getters, dispatch } = useStore();
-    const mode = ref('login');
-    const switchModeButtonCaption = computed(() => mode.value === 'login' ? 'loginSwitch' : 'signSwitch');
-
-    const switchAuthMode = () => {
-      mode.value = mode.value === 'login' ? 'signup' : 'login';
-    };
-
-    const route = useRoute();
-
-    if (route.query.redirect) {
-      mode.value = 'signup';
-    }
-    // const incrementCounter = () => {
-    //   dispatch('incrementCounter');
-    // };
-
-    const submitForm = () => {
-      // dispatch('submitForm');
-    };
-    return {
-      mode,
-      email,
-      password,
-      t,
-      submitForm,
-      switchAuthMode,
-      switchModeButtonCaption,
-      // counter,
-      // incrementCounter,
-    };
-  }
-}
-</script>
 
 <style scoped>
 .form {
