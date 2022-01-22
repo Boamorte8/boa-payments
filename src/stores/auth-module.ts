@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
-import { useI18n } from 'vue-i18n';
+import i18n from '../i18n';
 
 import { AuthPayload, AuthState, LoginPayload } from './models';
 
 let timer: number;
-const { t } = useI18n();
+const { t } = i18n.global;
 
 export const useAuthUserStore = defineStore('auth/user', {
   state: (): AuthState => ({

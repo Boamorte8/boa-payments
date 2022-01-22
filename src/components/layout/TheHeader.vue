@@ -1,69 +1,108 @@
 <script setup lang="ts">
 // import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-// import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
 
 import { useAuthUserStore } from '../../stores';
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const store = useAuthUserStore();
+
+const changeLanguage = () => {
+  locale.value = locale.value === 'en' ? 'es' : 'en';
+};
 
 const logout = () => {
   store.logout();
 };
-
-// export default {
-//   components: {
-//     Menu,
-//     MenuButton,
-//     MenuItems,
-//     MenuItem,
-//   },
-//   setup() {
-
-//     return {
-//       isLoggedIn: store.isAuthenticated,
-//       t,
-//       logout,
-//     };
-//   },
-// }
 </script>
 
 <template>
-  <header class="header">
-    <nav class="nav">
-      <h1 class="logo"><router-link class="link" to="/">Boa Payments</router-link></h1>
-      <ul class="nav-list">
-        <template v-if="store.isAuthenticated">
-          <!-- <li><router-link to="/requests">Requests</router-link></li> -->
-          <li class="nav-item"><base-button @click="logout">{{ t('logout') }}</base-button></li>
-        </template>
-        <li v-else class="nav-item"><router-link to="/auth">{{ t('login') }}</router-link></li>
-      </ul>
-    </nav>
-  </header>
-  <!-- <Menu>
-    <MenuButton>More</MenuButton>
-    <MenuItems>
-      <MenuItem v-slot="{ active }">
-        <a :class='{ "bg-blue-500": active }' href="/account-settings">
-          Account settings
-        </a>
-      </MenuItem>
-      <MenuItem v-slot="{ active }">
-        <a :class='{ "bg-blue-500": active }' href="/account-settings">
-          Documentation
-        </a>
-      </MenuItem>
-      <MenuItem disabled>
-        <span class="opacity-75">Invite a friend (coming soon!)</span>
-      </MenuItem>
-    </MenuItems>
-  </Menu> -->
+  <Menu>
+    <header class="header">
+      <nav class="nav">
+        <h1 class="logo"><router-link class="link" to="/">Boa Payments</router-link></h1>
+        <ul class="nav-list">
+          <li v-if="!store.isAuthenticated" class="nav-item"><router-link to="/auth">{{ t('login') }}</router-link></li>
+        </ul>
+        <MenuButton class="nav-item">More</MenuButton>
+      </nav>
+    </header>
+    <transition
+enter-active-class="transition duration-100 ease-out"
+                enter-from-class="transform scale-95 opacity-0"
+                enter-to-class="transform scale-100 opacity-100"
+                leave-active-class="transition duration-75 ease-in"
+                leave-from-class="transform scale-100 opacity-100"
+                leave-to-class="transform scale-95 opacity-0">
+      <MenuItems
+class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg
+            ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div class="px-1 py-1">
+            <MenuItem v-slot="{ active }">
+              <button
+                :class="[
+                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                  'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                ]"
+                @click="changeLanguage"
+              >
+                Edit
+              </button>
+            </MenuItem>
+            <MenuItem v-slot="{ active }">
+              <button
+                :class="[
+                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                  'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                ]"
+              >
+                Duplicate
+              </button>
+            </MenuItem>
+          </div>
+          <div class="px-1 py-1">
+            <MenuItem v-slot="{ active }">
+              <button
+                :class="[
+                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                  'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                ]"
+              >
+                Archive
+              </button>
+            </MenuItem>
+            <MenuItem v-slot="{ active }">
+              <button
+                :class="[
+                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                  'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                ]"
+                @click="logout"
+              >
+                Logout
+              </button>
+            </MenuItem>
+          </div>
+
+          <div class="px-1 py-1">
+            <MenuItem v-slot="{ active }">
+              <button
+                :class="[
+                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                  'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                ]"
+              >
+                Change lang
+              </button>
+            </MenuItem>
+          </div>
+      </MenuItems>
+    </transition>
+  </Menu>
 </template>
 
-<style scoped>
+<style lang="postcss" scoped>
 .header {
   @apply w-full h-20 flex items-center justify-center bg-purple-900;
 
@@ -85,12 +124,14 @@ const logout = () => {
   }
 
   &-item {
-    @apply my-0 mx-2;
+    @apply inline-flex justify-center w-20 px-4 py-2 font-medium text-white bg-black rounded-md bg-opacity-20
+      hover:bg-opacity-30 focus:outline-none;
+    /* @apply my-0 mx-2; */
   }
 }
 
 .logo {
-  @apply m-0;
+  @apply m-0 font-bold text-xl;
 
   .link {
     @apply text-white m-0;

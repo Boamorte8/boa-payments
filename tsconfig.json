@@ -11,6 +11,11 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "@types/jest"],
+    "paths": {
+      "@store": ["./src/stores/*"],
+      "@pages": ["./src/pages/*"],
+      "@components": ["./src/components/*"],
+    },
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

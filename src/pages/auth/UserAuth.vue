@@ -4,14 +4,12 @@ import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 // import { useAuthUserStore } from '../../stores';
-// import { useStore } from '../../store';
 
 const { t } = useI18n();
 const email = ref('');
 const password = ref('');
 const formIsValid = ref(true);
 // const isLoading = ref(false);
-// const { getters, dispatch } = useStore();
 // const store = useAuthUserStore();
 const mode = ref('login');
 const switchModeButtonCaption = computed(() => mode.value === 'login' ? 'loginSwitch' : 'signSwitch');
@@ -35,8 +33,6 @@ const submitForm = () => {
 </script>
 
 <template>
-  <div>
-    <h1 class="max-w-2xl mx-auto my-8 flex justify-center text-3xl font-bold">Boa Payments</h1>
     <base-card>
       <form class="w-full flex flex-col items-center m-4 p-4" @submit.prevent="submitForm">
         <div class="form-control">
@@ -55,10 +51,9 @@ const submitForm = () => {
       </form>
 
     </base-card>
-  </div>
 </template>
 
-<style scoped>
+<style lang="postcss" scoped>
 .form {
   &-control {
     @apply w-60 my-2.5;

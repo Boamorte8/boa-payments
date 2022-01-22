@@ -15,6 +15,10 @@ export default createI18n({
       signError: 'Failed sign up. Check your signup data',
       signSwitch: 'Login instead',
       signup: 'Signup',
+      pageNotFound: {
+        title: 'Page not found',
+        description: 'This page could not be found - maybe you need try first to',
+      },
     },
     es: {
       email: 'Correo',
@@ -26,6 +30,10 @@ export default createI18n({
       signError: 'Fallo al registrarse. Verifica tus datos de registro',
       signSwitch: 'Autenticarse',
       signup: 'Registrar',
+      pageNotFound: {
+        title: 'Página no encontrada',
+        description: 'Esta página no pudo ser encontrada - tal vez necesites intentar primero',
+      },
     },
   },
 });

@@ -7,6 +7,7 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'prettier',
     'plugin:jest/recommended',
+    'plugin:@intlify/vue-i18n/recommended',
   ],
   rules: {
     // override/add rules settings here, such as:
@@ -21,5 +22,5 @@ module.exports = {
   globals: {
     "defineProps": 'readonly',
   },
-  plugins: ["jest"],
+  plugins: ['jest', 'vue', 'prettier', '@intlify/vue-i18n'],
 }
