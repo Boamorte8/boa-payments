@@ -1,45 +1,73 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
+import { useI18n } from 'vue-i18n';
+
+import { AuthPayload, AuthState, LoginPayload } from './models';
 
 let timer: number;
-
-interface State {
-  userId: string | null;
-  token: string | null;
-  tokenExpiration: number | null;
-  didAutoLogout: boolean;
-  counter: number;
-}
+const { t } = useI18n();
 
 export const useAuthUserStore = defineStore('auth/user', {
-  state: (): State => ({
+  state: (): AuthState => ({
     userId: null,
     token: null,
     tokenExpiration: null,
     didAutoLogout: false,
-    counter: 0,
   }),
   getters: {
     isAuthenticated: (state) => !!state.token,
   },
   actions: {
-    // async login(payload) {
-    //   console.log(payload);
-    //   dispatch('auth', {
-    //     ...payload,
-    //     process: 'signInWithPassword',
-    //     customErrorMessage: 'Failed login. Check your login data',
-    //   });
-    // },
-    incrementCounter() {
-      this.counter += 1;
+    async login(payload: LoginPayload) {
+      this.auth({
+        ...payload,
+        process: 'signInWithPassword',
+        customErrorMessage: t('loginError'),
+      });
     },
-    // no context as first argument, use `this` instead
-    // async loadUser (id: number) {
-    //   if (this.userId !== null) throw new Error('Already logged in')
-    //   const res = await api.user.load(id)
-    //   this.updateUser(res)
-    // },
-    // mutations can now become actions, instead of `state` as first argument use `this`
+    async signup(payload: LoginPayload) {
+      this.auth({
+        ...payload,
+        process: 'signUp',
+        customErrorMessage: t('signupError'),
+      });
+    },
+    async auth({ email, password, process, customErrorMessage }: AuthPayload) {
+      console.log(email, password, process, customErrorMessage);
+      // const response = await fetch(
+      //   `https://identitytoolkit.googleapis.com/v1/accounts:${process}?key=AIzaSyC3_cyslUxiQrdiDD4__fARNPLf9v88JXw`,
+      //   {
+      //     method: 'POST',
+      //     body: JSON.stringify({
+      //       email,
+      //       password,
+      //       returnSecureToken: true,
+      //     }),
+      //   }
+      // );
+
+      // const responseData = await response.json();
+
+      // if (!response.ok) {
+      //   const error = new Error(responseData.message || customErrorMessage);
+      //   throw error;
+      // }
+
+      // const { idToken, localId, expiresIn } = responseData;
+      // const expiresInTime = +expiresIn * 1000;
+      // const expirationDate = new Date().getTime() + expiresInTime;
+
+      // localStorage.setItem('token', idToken);
+      // localStorage.setItem('userId', localId);
+      // localStorage.setItem('tokenExpiration', expirationDate.toString());
+      // timer = setTimeout(() => {
+      //   context.dispatch('autoLogout');
+      // }, expiresInTime);
+
+      // context.commit('setUser', {
+      //   token: idToken,
+      //   userId: localId,
+      // });
+    },
     logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
@@ -47,8 +75,7 @@ export const useAuthUserStore = defineStore('auth/user', {
 
       clearTimeout(timer);
 
-      this.token = null;
-      this.userId = null;
+      this.clearUser();
     },
     // updateUser (payload) {
     //   this.firstName = payload.firstName

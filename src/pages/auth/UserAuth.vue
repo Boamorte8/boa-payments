@@ -2,7 +2,8 @@
 import { useRoute } from 'vue-router';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useAuthUserStore } from '../../stores/auth-module';
+
+// import { useAuthUserStore } from '../../stores';
 // import { useStore } from '../../store';
 
 const { t } = useI18n();
@@ -11,7 +12,7 @@ const password = ref('');
 const formIsValid = ref(true);
 // const isLoading = ref(false);
 // const { getters, dispatch } = useStore();
-const store = useAuthUserStore();
+// const store = useAuthUserStore();
 const mode = ref('login');
 const switchModeButtonCaption = computed(() => mode.value === 'login' ? 'loginSwitch' : 'signSwitch');
 
@@ -34,10 +35,6 @@ const submitForm = () => {
 </script>
 
 <template>
-  <div>
-    <h1>Test counter {{ store.counter }}</h1>
-    <button @click="store.incrementCounter">Increment</button>
-  </div>
   <div>
     <h1 class="max-w-2xl mx-auto my-8 flex justify-center text-3xl font-bold">Boa Payments</h1>
     <base-card>

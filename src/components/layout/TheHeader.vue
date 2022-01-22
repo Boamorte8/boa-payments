@@ -1,9 +1,41 @@
+<script setup lang="ts">
+// import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+// import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
+
+import { useAuthUserStore } from '../../stores';
+
+const { t } = useI18n();
+const store = useAuthUserStore();
+
+const logout = () => {
+  store.logout();
+};
+
+// export default {
+//   components: {
+//     Menu,
+//     MenuButton,
+//     MenuItems,
+//     MenuItem,
+//   },
+//   setup() {
+
+//     return {
+//       isLoggedIn: store.isAuthenticated,
+//       t,
+//       logout,
+//     };
+//   },
+// }
+</script>
+
 <template>
   <header class="header">
     <nav class="nav">
       <h1 class="logo"><router-link class="link" to="/">Boa Payments</router-link></h1>
       <ul class="nav-list">
-        <template v-if="isLoggedIn">
+        <template v-if="store.isAuthenticated">
           <!-- <li><router-link to="/requests">Requests</router-link></li> -->
           <li class="nav-item"><base-button @click="logout">{{ t('logout') }}</base-button></li>
         </template>
@@ -30,38 +62,6 @@
     </MenuItems>
   </Menu> -->
 </template>
-
-<script lang="ts">
-import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
-// import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
-
-import { useStore } from '../../store';
-
-export default {
-  // components: {
-  //   Menu,
-  //   MenuButton,
-  //   MenuItems,
-  //   MenuItem,
-  // },
-  setup() {
-    const { t } = useI18n();
-    const store = useStore();
-    const isLoggedIn = computed((): boolean => Boolean(store.getters.isAuthenticated));
-
-    const logout = () => {
-      store.dispatch('logout');
-    };
-
-    return {
-      isLoggedIn,
-      t,
-      logout,
-    };
-  },
-}
-</script>
 
 <style scoped>
 .header {
