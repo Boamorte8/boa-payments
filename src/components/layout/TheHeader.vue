@@ -22,10 +22,12 @@ const logout = () => {
     <header class="header">
       <nav class="nav">
         <h1 class="logo"><router-link class="link" to="/">Boa Payments</router-link></h1>
-        <ul class="nav-list">
-          <li v-if="!store.isAuthenticated" class="nav-item"><router-link to="/auth">{{ t('login') }}</router-link></li>
-        </ul>
-        <MenuButton class="nav-item">More</MenuButton>
+        <div class="flex gap-2">
+          <ul class="nav-list">
+            <li v-if="!store.isAuthenticated"><router-link class="nav-item" to="/auth">{{ t('login') }}</router-link></li>
+          </ul>
+          <MenuButton class="nav-item">More</MenuButton>
+        </div>
       </nav>
     </header>
     <transition
@@ -35,65 +37,25 @@ enter-active-class="transition duration-100 ease-out"
                 leave-active-class="transition duration-75 ease-in"
                 leave-from-class="transform scale-100 opacity-100"
                 leave-to-class="transform scale-95 opacity-0">
-      <MenuItems
-class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg
-            ring-1 ring-black ring-opacity-5 focus:outline-none">
+      <MenuItems class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md
+                  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div class="px-1 py-1">
             <MenuItem v-slot="{ active }">
-              <button
-                :class="[
+              <button :class="[
                   active ? 'bg-violet-500 text-white' : 'text-gray-900',
                   'group flex rounded-md items-center w-full px-2 py-2 text-sm',
                 ]"
-                @click="changeLanguage"
-              >
-                Edit
-              </button>
-            </MenuItem>
-            <MenuItem v-slot="{ active }">
-              <button
-                :class="[
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                  'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                ]"
-              >
-                Duplicate
-              </button>
-            </MenuItem>
-          </div>
-          <div class="px-1 py-1">
-            <MenuItem v-slot="{ active }">
-              <button
-                :class="[
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                  'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                ]"
-              >
-                Archive
-              </button>
-            </MenuItem>
-            <MenuItem v-slot="{ active }">
-              <button
-                :class="[
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                  'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                ]"
-                @click="logout"
-              >
-                Logout
-              </button>
-            </MenuItem>
-          </div>
-
-          <div class="px-1 py-1">
-            <MenuItem v-slot="{ active }">
-              <button
-                :class="[
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                  'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                ]"
-              >
+                @click="changeLanguage">
                 Change lang
+              </button>
+            </MenuItem>
+          </div>
+          <div v-if="store.isAuthenticated" class="px-1 py-1">
+            <MenuItem v-slot="{ active }">
+              <button :class="[active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                      'group flex rounded-md items-center w-full px-2 py-2 text-sm']"
+                      @click="logout">
+                {{ t('logout') }}
               </button>
             </MenuItem>
           </div>
@@ -105,14 +67,8 @@ class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray
 <style lang="postcss" scoped>
 .header {
   @apply w-full h-20 flex items-center justify-center bg-purple-900;
-
-  a {
-    @apply no-underline inline-block border border-transparent rounded-lg text-gray-300 py-3 px-6
-      active:border-gray-300 hover:border-gray-300;
-
-    .router-link-active {
-      @apply active:border-gray-300 hover:border-gray-300;
-    }
+  .router-link-active {
+    @apply active:border-gray-300 hover:border-gray-300;
   }
 }
 
@@ -124,9 +80,8 @@ class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray
   }
 
   &-item {
-    @apply inline-flex justify-center w-20 px-4 py-2 font-medium text-white bg-black rounded-md bg-opacity-20
+    @apply inline-flex justify-center w-fit px-4 py-2 h-10 font-medium text-white bg-black rounded-md bg-opacity-20
       hover:bg-opacity-30 focus:outline-none;
-    /* @apply my-0 mx-2; */
   }
 }
 
@@ -134,7 +89,7 @@ class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray
   @apply m-0 font-bold text-xl;
 
   .link {
-    @apply text-white m-0;
+    @apply text-white m-0 hover:border-transparent ;
 
     .router-link-active {
       @apply border-transparent;
