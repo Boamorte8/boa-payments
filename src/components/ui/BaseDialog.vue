@@ -53,7 +53,7 @@ export default defineComponent({
         </section>
         <menu v-if="!fixed" class="flex justify-end m-0 p-4">
           <slot name="actions">
-            <base-button @click="tryClose">Close</base-button>
+            <base-button @click="tryClose">{{ t('close') }}</base-button>
           </slot>
         </menu>
       </dialog>

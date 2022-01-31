@@ -25,7 +25,7 @@ export default createI18n({
       },
     },
     es: {
-      close: 'Close',
+      close: 'Cerrar',
       email: 'Correo',
       login: 'Autenticar',
       loginError: 'Fallo al autenticar. Verifica tus datos de acceso',
