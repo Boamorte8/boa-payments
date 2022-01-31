@@ -4,6 +4,7 @@ import { useAuthUserStore } from './stores';
 import MainDashboard from './pages/MainDashboard.vue';
 import NotFound from './pages/NotFound.vue';
 import UserAuth from './pages/auth/UserAuth.vue';
+import UserData from './pages/UserData.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -11,6 +12,7 @@ const router = createRouter({
     { path: '/', redirect: '/auth' },
     { path: '/auth', component: UserAuth, meta: { requiresUnauth: true } },
     { path: '/dashboard', component: MainDashboard, meta: { requiresAuth: true } },
+    { path: '/user', component: UserData, meta: { requiresAuth: true } },
     { path: '/:notFound(.*)', component: NotFound },
   ],
 });

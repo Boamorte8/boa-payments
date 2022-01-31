@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
-import i18n from '../i18n';
 
 import { AuthPayload, AuthState, LoginPayload } from './models';
+import i18n from '../i18n';
 
 let timer: number;
 const { t } = i18n.global;
@@ -18,55 +18,70 @@ export const useAuthUserStore = defineStore('auth/user', {
   },
   actions: {
     async login(payload: LoginPayload) {
-      this.auth({
+      await this.auth({
         ...payload,
         process: 'signInWithPassword',
         customErrorMessage: t('loginError'),
       });
     },
     async signup(payload: LoginPayload) {
-      this.auth({
+      await this.auth({
         ...payload,
         process: 'signUp',
         customErrorMessage: t('signupError'),
       });
     },
     async auth({ email, password, process, customErrorMessage }: AuthPayload) {
-      console.log(email, password, process, customErrorMessage);
-      // const response = await fetch(
-      //   `https://identitytoolkit.googleapis.com/v1/accounts:${process}?key=AIzaSyC3_cyslUxiQrdiDD4__fARNPLf9v88JXw`,
-      //   {
-      //     method: 'POST',
-      //     body: JSON.stringify({
-      //       email,
-      //       password,
-      //       returnSecureToken: true,
-      //     }),
-      //   }
-      // );
+      const response = await fetch(
+        `https://identitytoolkit.googleapis.com/v1/accounts:${process}?key=AIzaSyCwvlEBeFd4J-TvREJda36ztri5PVESc_k`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            email,
+            password,
+            returnSecureToken: true,
+          }),
+        }
+      );
 
-      // const responseData = await response.json();
+      const responseData = await response.json();
 
-      // if (!response.ok) {
-      //   const error = new Error(responseData.message || customErrorMessage);
-      //   throw error;
-      // }
+      if (!response.ok) {
+        const error = new Error(responseData.message || customErrorMessage);
+        throw error;
+      }
 
-      // const { idToken, localId, expiresIn } = responseData;
-      // const expiresInTime = +expiresIn * 1000;
-      // const expirationDate = new Date().getTime() + expiresInTime;
+      const { idToken, localId, expiresIn } = responseData;
+      const expiresInTime = +expiresIn * 1000;
+      const expirationDate = new Date().getTime() + expiresInTime;
 
-      // localStorage.setItem('token', idToken);
-      // localStorage.setItem('userId', localId);
-      // localStorage.setItem('tokenExpiration', expirationDate.toString());
-      // timer = setTimeout(() => {
-      //   context.dispatch('autoLogout');
-      // }, expiresInTime);
+      localStorage.setItem('token', idToken);
+      localStorage.setItem('userId', localId);
+      localStorage.setItem('tokenExpiration', expirationDate.toString());
+      // timer = setTimeout(() => this.autoLogout(), expiresInTime);
 
-      // context.commit('setUser', {
-      //   token: idToken,
-      //   userId: localId,
-      // });
+      this.setUser(idToken, localId);
+    },
+    tryLogin() {
+      const token = localStorage.getItem('token');
+      const userId = localStorage.getItem('userId');
+      const tokenExpiration = localStorage.getItem('tokenExpiration');
+
+      const expiresIn = !tokenExpiration ? -1 : +tokenExpiration - new Date().getTime();
+
+      if (expiresIn < 0) {
+        return;
+      }
+
+      // timer = setTimeout(() => this.autoLogout(), expiresInTime);
+      this.setUser(token, userId);
+    },
+    setUser(token: string | null, userId: string | null) {
+      if (token && userId) {
+        this.token = token;
+        this.userId = userId;
+        this.didAutoLogout = false;
+      }
     },
     logout() {
       localStorage.removeItem('token');
@@ -77,13 +92,12 @@ export const useAuthUserStore = defineStore('auth/user', {
 
       this.clearUser();
     },
-    // updateUser (payload) {
-    //   this.firstName = payload.firstName
-    //   this.lastName = payload.lastName
-    //   this.userId = payload.userId
-    // },
     clearUser () {
       this.$reset()
+    },
+    autoLogout() {
+      this.logout();
+      this.didAutoLogout = true;
     }
   }
 })

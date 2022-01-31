@@ -1,19 +1,26 @@
 <script setup lang="ts">
 // import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
+import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
 import { useAuthUserStore } from '../../stores';
 
 const { t, locale } = useI18n();
 const store = useAuthUserStore();
+const router = useRouter();
 
 const changeLanguage = () => {
   locale.value = locale.value === 'en' ? 'es' : 'en';
 };
 
+const goToProfile = () => {
+  router.push('/user');
+};
+
 const logout = () => {
   store.logout();
+  router.replace('/');
 };
 </script>
 
@@ -26,33 +33,48 @@ const logout = () => {
           <ul class="nav-list">
             <li v-if="!store.isAuthenticated"><router-link class="nav-item" to="/auth">{{ t('login') }}</router-link></li>
           </ul>
-          <MenuButton class="nav-item">More</MenuButton>
+          <MenuButton class="nav-item"><OptionsIcon /></MenuButton>
         </div>
       </nav>
     </header>
     <transition
-enter-active-class="transition duration-100 ease-out"
+                enter-active-class="transition duration-100 ease-out"
                 enter-from-class="transform scale-95 opacity-0"
                 enter-to-class="transform scale-100 opacity-100"
                 leave-active-class="transition duration-75 ease-in"
                 leave-from-class="transform scale-100 opacity-100"
                 leave-to-class="transform scale-95 opacity-0">
-      <MenuItems class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md
+      <MenuItems
+                  class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md
                   shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div class="px-1 py-1">
             <MenuItem v-slot="{ active }">
-              <button :class="[
+              <button
+                :class="[
                   active ? 'bg-violet-500 text-white' : 'text-gray-900',
                   'group flex rounded-md items-center w-full px-2 py-2 text-sm',
                 ]"
                 @click="changeLanguage">
+                <TranslateIcon class="mr-2 text-violet-400" />
                 Change lang
               </button>
             </MenuItem>
           </div>
           <div v-if="store.isAuthenticated" class="px-1 py-1">
             <MenuItem v-slot="{ active }">
-              <button :class="[active ? 'bg-violet-500 text-white' : 'text-gray-900',
+              <button
+                      :class="[active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                      'group flex rounded-md items-center w-full px-2 py-2 text-sm']"
+                      @click="goToProfile">
+                <TranslateIcon class="mr-2 text-violet-400" />
+                {{ t('profile') }}
+              </button>
+            </MenuItem>
+          </div>
+          <div v-if="store.isAuthenticated" class="px-1 py-1">
+            <MenuItem v-slot="{ active }">
+              <button
+:class="[active ? 'bg-violet-500 text-white' : 'text-gray-900',
                       'group flex rounded-md items-center w-full px-2 py-2 text-sm']"
                       @click="logout">
                 {{ t('logout') }}

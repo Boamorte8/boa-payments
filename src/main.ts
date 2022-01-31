@@ -4,6 +4,10 @@ import { createPinia } from 'pinia';
 import App from './App.vue'
 import BaseButton from './components/ui/BaseButton.vue';
 import BaseCard from './components/ui/BaseCard.vue';
+import BaseDialog from './components/ui/BaseDialog.vue';
+import BaseSpinner from './components/ui/BaseSpinner.vue';
+import OptionsIcon from './components/common/OptionsIcon.vue';
+import TranslateIcon from './components/common/TranslateIcon.vue';
 import i18n from './i18n';
 import router from './router';
 import './index.css'
@@ -16,5 +20,9 @@ app.use(router);
 
 app.component('BaseButton', BaseButton);
 app.component('BaseCard', BaseCard);
+app.component('BaseDialog', BaseDialog);
+app.component('BaseSpinner', BaseSpinner);
+app.component('OptionsIcon', OptionsIcon);
+app.component('TranslateIcon', TranslateIcon);
 
 app.mount('#app')

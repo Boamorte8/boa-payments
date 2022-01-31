@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-// import { useAuthUserStore } from '../../stores';
+import { useAuthUserStore } from '../../stores';
 
 const { t } = useI18n();
 const email = ref('');
 const password = ref('');
 const formIsValid = ref(true);
-// const isLoading = ref(false);
-// const store = useAuthUserStore();
+const isLoading = ref(false);
+const store = useAuthUserStore();
 const mode = ref('login');
+const errorMessage = ref(null);
 const switchModeButtonCaption = computed(() => mode.value === 'login' ? 'loginSwitch' : 'signSwitch');
 
 const switchAuthMode = () => {
@@ -19,38 +20,74 @@ const switchAuthMode = () => {
 };
 
 const route = useRoute();
+const router = useRouter();
 
 if (route.query.redirect) {
   mode.value = 'signup';
 }
-// const incrementCounter = () => {
-//   dispatch('incrementCounter');
-// };
 
-const submitForm = () => {
-  // dispatch('submitForm');
+const submitForm = async () => {
+  formIsValid.value = true;
+  if (email.value === '' || !email.value.includes('@') || password.value.length < 6) {
+    formIsValid.value = false;
+    return;
+  }
+
+  isLoading.value = true;
+  const payload = {
+    email: email.value,
+    password: password.value,
+  };
+
+  try {
+    if (mode.value === 'login') {
+      await store.login(payload);
+    } else {
+      await store.signup(payload);
+    }
+    const redirectUrl = '/' + (route.query.redirect || 'dashboard');
+    router.replace(redirectUrl);
+  } catch (error: any) {
+    errorMessage.value = error || t('loginErrorGeneric');
+  }
+
+  isLoading.value = false;
+};
+
+const handleError = () => {
+  errorMessage.value = null;
 };
 </script>
 
 <template>
+  <div>
+    <base-dialog :show="!!errorMessage" title="An error ocurred" @close="handleError">
+      <p>{{ errorMessage }}</p>
+    </base-dialog>
+    <base-dialog :show="isLoading" title="Authenticating..." fixed>
+      <base-spinner></base-spinner>
+    </base-dialog>
     <base-card>
       <form class="w-full flex flex-col items-center m-4 p-4" @submit.prevent="submitForm">
         <div class="form-control">
           <label class="form-label" for="email">{{ t('email') }}</label>
           <input id="email" v-model.trim="email" class="form-input" type="email" name="email" />
         </div>
+
         <div class="form-control">
           <label class="form-label" for="password">{{ t('password') }}</label>
           <input id="password" v-model.trim="password" class="form-input" type="password" name="password">
         </div>
-        <p v-if="!formIsValid">Please enter a valid email and password (must be at least 6 characters long).</p>
+
+        <p v-if="!formIsValid" class="text-sm mb-2 text-red-600">{{ t('loginFormError') }}</p>
+
         <div class="flex flex-col items-center">
           <base-button class="mb-4">{{ t(mode) }}</base-button>
           <base-button mode="flat" @click="switchAuthMode">{{ t(switchModeButtonCaption) }}</base-button>
         </div>
       </form>
-
     </base-card>
+  </div>
 </template>
 
 <style lang="postcss" scoped>

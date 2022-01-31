@@ -1,5 +1,5 @@
 <template>
   <div>
-    Dashboard
+    User Config
   </div>
 </template>
