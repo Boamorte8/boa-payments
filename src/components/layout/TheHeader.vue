@@ -4,10 +4,15 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
-import { useAuthUserStore } from '../../stores';
+import { useAuthUserStore, usePreferencesUserStore } from '../../stores';
+import { UserTheme } from '../../stores/models';
 
 const { t, locale } = useI18n();
 const store = useAuthUserStore();
+const prefStore = usePreferencesUserStore();
+
+prefStore.updateTheme(UserTheme.LIGHT);
+
 const router = useRouter();
 
 const changeLanguage = () => {
@@ -74,7 +79,7 @@ const logout = () => {
           <div v-if="store.isAuthenticated" class="px-1 py-1">
             <MenuItem v-slot="{ active }">
               <button
-:class="[active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                      :class="[active ? 'bg-violet-500 text-white' : 'text-gray-900',
                       'group flex rounded-md items-center w-full px-2 py-2 text-sm']"
                       @click="logout">
                 {{ t('logout') }}

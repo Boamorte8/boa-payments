@@ -10,7 +10,7 @@ import OptionsIcon from './components/common/OptionsIcon.vue';
 import TranslateIcon from './components/common/TranslateIcon.vue';
 import i18n from './i18n';
 import router from './router';
-import './index.css'
+import './styles/index.css'
 
 const app = createApp(App);
 
@@ -25,4 +25,4 @@ app.component('BaseSpinner', BaseSpinner);
 app.component('OptionsIcon', OptionsIcon);
 app.component('TranslateIcon', TranslateIcon);
 
-app.mount('#app')
+app.mount('#app');

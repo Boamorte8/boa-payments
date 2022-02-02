@@ -9,10 +9,13 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "@types/jest"],
+    "baseUrl": ".",
     "paths": {
       "@store": ["./src/stores/*"],
+      "@store/*": ["./src/stores/*"],
       "@pages": ["./src/pages/*"],
       "@components": ["./src/components/*"],
     },
