@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import { computed } from 'vue';
+import { computed } from 'vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
@@ -19,6 +19,8 @@ const changeLanguage = () => {
   locale.value = locale.value === 'en' ? 'es' : 'en';
 };
 
+const changeLangTo = computed(() => locale.value === 'en' ? 'es' : 'en');
+
 const goToProfile = () => {
   router.push('/user');
 };
@@ -35,8 +37,10 @@ const logout = () => {
       <nav class="nav">
         <h1 class="logo"><router-link class="link" to="/">Boa Payments</router-link></h1>
         <div class="flex gap-2">
-          <ul class="nav-list">
+          <ul class="nav-list flex gap-2">
             <li v-if="!store.isAuthenticated"><router-link class="nav-item" to="/auth">{{ t('login') }}</router-link></li>
+            <li v-if="store.isAuthenticated"><router-link class="nav-item" to="/orders">{{ t('orders') }}</router-link></li>
+            <li v-if="store.isAuthenticated"><router-link class="nav-item" to="/payments">{{ t('payments') }}</router-link></li>
           </ul>
           <MenuButton class="nav-item"><OptionsIcon /></MenuButton>
         </div>
@@ -60,8 +64,8 @@ const logout = () => {
                   'group flex rounded-md items-center w-full px-2 py-2 text-sm',
                 ]"
                 @click="changeLanguage">
-                <TranslateIcon class="mr-2 text-violet-400" />
-                Change lang
+                <TranslateIcon class="mr-2 text-violet-400"/>
+                {{ t('changeLang') }} {{ changeLangTo }}
               </button>
             </MenuItem>
           </div>

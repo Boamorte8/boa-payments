@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import { useAuthUserStore } from './stores';
-import MainDashboard from './pages/MainDashboard.vue';
+import OrdersList from './pages/orders/OrdersList.vue';
+import PaymentsList from './pages/payments/PaymentsList.vue';
 import NotFound from './pages/NotFound.vue';
 import UserAuth from './pages/auth/UserAuth.vue';
 import UserData from './pages/UserData.vue';
@@ -11,7 +12,8 @@ const router = createRouter({
   routes: [
     { path: '/', redirect: '/auth' },
     { path: '/auth', component: UserAuth, meta: { requiresUnauth: true } },
-    { path: '/dashboard', component: MainDashboard, meta: { requiresAuth: true } },
+    { path: '/orders', component: OrdersList, meta: { requiresAuth: true } },
+    { path: '/payments', component: PaymentsList, meta: { requiresAuth: true } },
     { path: '/user', component: UserData, meta: { requiresAuth: true } },
     { path: '/:notFound(.*)', component: NotFound },
   ],
@@ -23,8 +25,8 @@ router.beforeEach((to, from, next) => {
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next('/auth');
-  // } else if (to.meta.requiresUnauth && store.getters.isAuthenticated) {
-  //   next('/coaches');
+  } else if (to.meta.requiresUnauth && authStore.isAuthenticated) {
+    next('/orders');
   } else {
     next();
   }

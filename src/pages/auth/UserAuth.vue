@@ -45,7 +45,7 @@ const submitForm = async () => {
     } else {
       await store.signup(payload);
     }
-    const redirectUrl = '/' + (route.query.redirect || 'dashboard');
+    const redirectUrl = '/' + (route.query.redirect || 'orders');
     router.replace(redirectUrl);
   } catch (error: any) {
     errorMessage.value = error || t('loginErrorGeneric');

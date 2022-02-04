@@ -6,6 +6,7 @@ export default createI18n({
   fallbackLocale: 'en',
   messages: {
     en: {
+      changeLang: 'Change lang to',
       close: 'Close',
       email: 'Email',
       login: 'Login',
@@ -14,7 +15,9 @@ export default createI18n({
       loginFormError: 'Please enter a valid email and password (must be at least 6 characters long).',
       loginSwitch: 'Signup instead',
       logout: 'Logout',
+      orders: 'Orders',
       password: 'Password',
+      payments: 'Payments',
       profile: 'Profile',
       signError: 'Failed sign up. Check your signup data',
       signSwitch: 'Login instead',
@@ -25,6 +28,7 @@ export default createI18n({
       },
     },
     es: {
+      changeLang: 'Change lang to',
       close: 'Cerrar',
       email: 'Correo',
       login: 'Autenticar',
@@ -33,7 +37,9 @@ export default createI18n({
       loginFormError: 'Por favor ingresen un correo electrónico y contraseña válidos (deben tener al menos 6 caracteres).',
       loginSwitch: 'Registrarse',
       logout: 'Cerrar sesión',
+      orders: 'Ordenes',
       password: 'Contraseña',
+      payments: 'Pagos',
       profile: 'Perfil',
       signError: 'Fallo al registrarse. Verifica tus datos de registro',
       signSwitch: 'Autenticarse',

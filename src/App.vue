@@ -3,7 +3,7 @@ import TheHeader from './components/layout/TheHeader.vue';
 </script>
 
 <template>
-  <div class="body">
+  <div class="body dark:bg-background-700">
     <the-header></the-header>
     <router-view v-slot="slotProps">
       <transition name="route" mode="out-in">

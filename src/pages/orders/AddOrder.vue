@@ -1,5 +1,5 @@
 <template>
   <div>
-    Dashboard
+    Orders List
   </div>
 </template>
