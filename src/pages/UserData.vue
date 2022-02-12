@@ -1,5 +1,3 @@
 <template>
-  <div>
-    User Config
-  </div>
+  <div>User Config</div>
 </template>

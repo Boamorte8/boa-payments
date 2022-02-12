@@ -1,51 +1,52 @@
-<script lang="ts">
-import { defineComponent, toRefs } from 'vue';
+<script setup lang="ts">
+import { toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-export default defineComponent({
-  props: {
-    show: {
-      type: Boolean,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: false,
-    },
-    fixed: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
+const props = defineProps({
+  show: {
+    type: Boolean,
+    required: true,
   },
-  emits: ['close'],
-  setup(props, context) {
-    const { fixed } = toRefs(props);
-    const { t } = useI18n();
-
-    const tryClose = () => {
-      if (fixed.value) {
-        return;
-      }
-      context.emit('close');
-    };
-
-    return {
-      t,
-      tryClose,
-    };
+  title: {
+    type: String,
+    required: false,
+  },
+  fixed: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 });
+
+// eslint-disable-next-line no-undef
+const emit = defineEmits<{
+  // eslint-disable-next-line no-unused-vars
+  (e: 'close'): void;
+}>();
+
+const { fixed } = toRefs(props);
+const { t } = useI18n();
+
+const tryClose = () => {
+  if (fixed.value) {
+    return;
+  }
+  emit('close');
+};
 </script>
 
 <template>
   <teleport to="body">
-    <div v-if="show" class="backdrop w-full h-screen top-0 left-0 fixed z-10" @click="tryClose"></div>
+    <div
+      v-if="show"
+      class="backdrop w-full h-screen top-0 left-0 fixed z-10"
+      @click="tryClose"
+    ></div>
     <transition name="dialog">
       <dialog v-if="show" open>
         <header v-if="title" class="w-full p-4 text-white bg-purple-900">
           <slot name="header">
-            <h2 class="m-0 font-semibold">{{ title }}</h2>
+            <h2 class="m-0 font-semibold">{{ props.title }}</h2>
           </slot>
         </header>
         <section class="p-4">
@@ -84,15 +85,15 @@ dialog {
 .dialog-enter-from,
 .dialog-leave-to {
   opacity: 0;
-  transform: scale(.8);
+  transform: scale(0.8);
 }
 
 .dialog-enter-active {
-  transition: all .3s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 .dialog-leave-active {
-  transition: all .3s ease-in;
+  transition: all 0.3s ease-in;
 }
 
 .dialog-enter-to,

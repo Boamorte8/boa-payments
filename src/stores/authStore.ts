@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-import { AuthPayload, AuthState, LoginPayload } from './models';
+import { type AuthPayload, type AuthState, type LoginPayload } from './models';
 import i18n from '../i18n';
 
 let timer: number;
@@ -28,7 +28,7 @@ export const useAuthUserStore = defineStore('auth/user', {
       await this.auth({
         ...payload,
         process: 'signUp',
-        customErrorMessage: t('signupError'),
+        customErrorMessage: t('signError'),
       });
     },
     async auth({ email, password, process, customErrorMessage }: AuthPayload) {
@@ -67,7 +67,9 @@ export const useAuthUserStore = defineStore('auth/user', {
       const userId = localStorage.getItem('userId');
       const tokenExpiration = localStorage.getItem('tokenExpiration');
 
-      const expiresIn = !tokenExpiration ? -1 : +tokenExpiration - new Date().getTime();
+      const expiresIn = !tokenExpiration
+        ? -1
+        : +tokenExpiration - new Date().getTime();
 
       if (expiresIn < 0) {
         return;
@@ -92,12 +94,12 @@ export const useAuthUserStore = defineStore('auth/user', {
 
       this.clearUser();
     },
-    clearUser () {
-      this.$reset()
+    clearUser() {
+      this.$reset();
     },
     autoLogout() {
       this.logout();
       this.didAutoLogout = true;
-    }
-  }
-})
+    },
+  },
+});

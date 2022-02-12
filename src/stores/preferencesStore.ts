@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-import { PreferenceState, UserTheme } from './models';
+import { type PreferenceState, UserTheme } from './models';
 
 export const usePreferencesUserStore = defineStore('preferences/user', {
   state: (): PreferenceState => ({
@@ -10,10 +10,10 @@ export const usePreferencesUserStore = defineStore('preferences/user', {
     updateTheme(theme: UserTheme) {
       this.theme = theme;
       if (theme === UserTheme.DARK) {
-        document.documentElement.classList.add('dark')
+        document.documentElement.classList.add('dark');
       } else {
-        document.documentElement.classList.remove('dark')
+        document.documentElement.classList.remove('dark');
       }
     },
-  }
-})
+  },
+});

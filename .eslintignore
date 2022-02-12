@@ -1,3 +1,5 @@
 .gitignore
 src/env.d.ts
-src/stories/**/*
+stories/**/*
+tailwind.config.js
+postcss.config.js

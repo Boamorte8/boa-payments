@@ -1,0 +1,14 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.node.json",
+  "include": ["src/**/__tests__/*"],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@stores": ["./src/stores/*"],
+      "@pages": ["./src/pages/*"],
+      "@components": ["./src/components/*"],
+    },
+    "types": ["node", "jsdom"]
+  }
+}

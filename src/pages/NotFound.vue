@@ -8,7 +8,10 @@ const { t } = useI18n();
   <section>
     <base-card class="flex-col">
       <h2 class="font-bold mb-4 text-lg">{{ t('pageNotFound.title') }}</h2>
-      <p>{{ t('pageNotFound.description') }} <router-link class="underline" to="/auth">{{ t('login') }}</router-link></p>
+      <p>
+        {{ t('pageNotFound.description') }}
+        <router-link class="underline" to="/auth">{{ t('login') }}</router-link>
+      </p>
     </base-card>
   </section>
 </template>

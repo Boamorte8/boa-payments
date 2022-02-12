@@ -13,7 +13,9 @@ const isLoading = ref(false);
 const store = useAuthUserStore();
 const mode = ref('login');
 const errorMessage = ref(null);
-const switchModeButtonCaption = computed(() => mode.value === 'login' ? 'loginSwitch' : 'signSwitch');
+const switchModeButtonCaption = computed(() =>
+  mode.value === 'login' ? 'loginSwitch' : 'signSwitch'
+);
 
 const switchAuthMode = () => {
   mode.value = mode.value === 'login' ? 'signup' : 'login';
@@ -28,7 +30,11 @@ if (route.query.redirect) {
 
 const submitForm = async () => {
   formIsValid.value = true;
-  if (email.value === '' || !email.value.includes('@') || password.value.length < 6) {
+  if (
+    email.value === '' ||
+    !email.value.includes('@') ||
+    password.value.length < 6
+  ) {
     formIsValid.value = false;
     return;
   }
@@ -61,29 +67,52 @@ const handleError = () => {
 
 <template>
   <div>
-    <base-dialog :show="!!errorMessage" title="An error ocurred" @close="handleError">
+    <base-dialog
+      :show="!!errorMessage"
+      title="An error ocurred"
+      @close="handleError"
+    >
       <p>{{ errorMessage }}</p>
     </base-dialog>
     <base-dialog :show="isLoading" title="Authenticating..." fixed>
       <base-spinner></base-spinner>
     </base-dialog>
     <base-card>
-      <form class="w-full flex flex-col items-center m-4 p-4" @submit.prevent="submitForm">
+      <form
+        class="w-full flex flex-col items-center m-4 p-4"
+        @submit.prevent="submitForm"
+      >
         <div class="form-control">
           <label class="form-label" for="email">{{ t('email') }}</label>
-          <input id="email" v-model.trim="email" class="form-input" type="email" name="email" />
+          <input
+            id="email"
+            v-model.trim="email"
+            class="form-input"
+            type="email"
+            name="email"
+          />
         </div>
 
         <div class="form-control">
           <label class="form-label" for="password">{{ t('password') }}</label>
-          <input id="password" v-model.trim="password" class="form-input" type="password" name="password">
+          <input
+            id="password"
+            v-model.trim="password"
+            class="form-input"
+            type="password"
+            name="password"
+          />
         </div>
 
-        <p v-if="!formIsValid" class="text-sm mb-2 text-red-600">{{ t('loginFormError') }}</p>
+        <p v-if="!formIsValid" class="text-sm mb-2 text-red-600">
+          {{ t('loginFormError') }}
+        </p>
 
         <div class="flex flex-col items-center">
           <base-button class="mb-4">{{ t(mode) }}</base-button>
-          <base-button mode="flat" @click="switchAuthMode">{{ t(switchModeButtonCaption) }}</base-button>
+          <base-button mode="flat" @click="switchAuthMode">{{
+            t(switchModeButtonCaption)
+          }}</base-button>
         </div>
       </form>
     </base-card>

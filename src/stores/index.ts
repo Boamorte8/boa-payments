@@ -1,2 +1,2 @@
-export * from './auth-module';
-export * from './preferences-module';
+export * from './authStore';
+export * from './preferencesStore';

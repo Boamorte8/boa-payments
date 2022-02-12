@@ -1,33 +1,31 @@
+<script setup lang="ts">
+const props = defineProps({
+  mode: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  link: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  to: {
+    type: String,
+    required: false,
+    default: '/',
+  },
+});
+</script>
+
 <template>
-  <button v-if="!link" class="button" :class="mode">
+  <button v-if="!props.link" class="button" :class="props.mode">
     <slot></slot>
   </button>
-  <router-link v-else class="link" :to="to" :class="mode">
+  <router-link v-else class="link" :to="props.to" :class="props.mode">
     <slot></slot>
   </router-link>
 </template>
-
-<script lang="ts">
-export default {
-  props: {
-    mode: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    link: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    to: {
-      type: String,
-      required: false,
-      default: '/',
-    },
-  },
-}
-</script>
 
 <style scoped>
 .button,
