@@ -12,6 +12,7 @@ import TranslateIcon from '@components/common/TranslateIcon.vue';
 import i18n from './i18n';
 import router from './router';
 import './styles/index.css';
+import LogoutIcon from '@components/common/LogoutIcon.vue';
 
 const app = createApp(App);
 
@@ -24,6 +25,7 @@ app.component('BaseCard', BaseCard);
 app.component('BaseDialog', BaseDialog);
 app.component('BaseSpinner', BaseSpinner);
 app.component('DropdownItem', DropdownItem);
+app.component('LogoutIcon', LogoutIcon);
 app.component('OptionsIcon', OptionsIcon);
 app.component('TranslateIcon', TranslateIcon);
 

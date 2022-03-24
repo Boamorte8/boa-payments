@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { beforeEach, describe, expect, test } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
 
 import { usePreferencesUserStore } from '../preferencesStore';
 import { UserTheme } from '../models';
 
-describe.skip('Preferences User Store', () => {
+describe('Preferences User Store', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });

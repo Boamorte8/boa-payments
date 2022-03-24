@@ -1,6 +1,6 @@
-// TODO - Create unit tests for DropdownItem
-import { createTestingPinia, TestingOptions } from '@pinia/testing';
-import { flushPromises, mount, RouterLinkStub } from '@vue/test-utils';
+import { createTestingPinia, type TestingOptions } from '@pinia/testing';
+import { describe, expect, fn, test } from 'vitest';
+import { mount, RouterLinkStub } from '@vue/test-utils';
 
 import DropdownItem from '@components/ui/DropdownItem.vue';
 import i18n from '../../i18n';
@@ -19,6 +19,13 @@ describe('DropdownItem', () => {
 
     return { wrapper };
   }
+
+  test('should create component', () => {
+    const { wrapper } = factory({
+      createSpy: fn,
+    });
+    expect(DropdownItem).toBeTruthy();
+  });
 
   // test('should display a button', async () => {
   //   const { wrapper } = factory();

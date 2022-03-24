@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-import { type AuthPayload, type AuthState, type LoginPayload } from './models';
+import type { AuthPayload, AuthState, LoginPayload } from './models';
 import i18n from '../i18n';
 
 let timer: number;

@@ -1,5 +1,6 @@
-import { createTestingPinia, TestingOptions } from '@pinia/testing';
-import { flushPromises, mount, RouterLinkStub } from '@vue/test-utils';
+import { createTestingPinia, type TestingOptions } from '@pinia/testing';
+import { describe, expect, fn, test } from 'vitest';
+import { mount, RouterLinkStub } from '@vue/test-utils';
 
 import BaseButton from '@components/ui/BaseButton.vue';
 import i18n from '../../i18n';
@@ -19,8 +20,17 @@ describe('BaseButton', () => {
     return { wrapper };
   }
 
+  test('should create component', () => {
+    const { wrapper } = factory({
+      createSpy: fn,
+    });
+    expect(BaseButton).toBeTruthy();
+  });
+
   test('should display a button', async () => {
-    const { wrapper } = factory();
+    const { wrapper } = factory({
+      createSpy: fn,
+    });
     wrapper.setProps({
       mode: 'flat',
     });
@@ -28,12 +38,13 @@ describe('BaseButton', () => {
     expect(wrapper.find('button')).toBeTruthy();
   });
 
-  test('should display a link', async () => {
-    const { wrapper } = factory();
+  test('should display a link', () => {
+    const { wrapper } = factory({
+      createSpy: fn,
+    });
     wrapper.setProps({
       link: true,
     });
-    await flushPromises();
 
     expect(wrapper.find('a')).toBeTruthy();
   });

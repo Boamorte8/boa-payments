@@ -1,16 +1,16 @@
-import { describe, it, expect } from 'vitest';
-import { setActivePinia, createPinia } from 'pinia';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { createPinia, setActivePinia } from 'pinia';
 
 import { useAuthUserStore } from '../authStore';
 
-describe.skip('Auth User Store', () => {
+describe('Auth User Store', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });
 
   test('should call auth action when login action is called', async () => {
     const authStore = useAuthUserStore();
-    jest.spyOn(authStore, 'auth').mockImplementation((..._params: any) => {});
+    vi.spyOn(authStore, 'auth');
 
     await authStore.login({ email: 'test@test.com', password: 'test' });
 
@@ -24,9 +24,7 @@ describe.skip('Auth User Store', () => {
 
   test('should call auth action when signup action is called', async () => {
     const authStore = useAuthUserStore();
-    jest
-      .spyOn(authStore, 'auth')
-      .mockImplementation(async (..._params: any) => {});
+    vi.spyOn(authStore, 'auth');
 
     await authStore.signup({ email: 'test@test.com', password: 'test' });
 

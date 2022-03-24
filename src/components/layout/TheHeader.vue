@@ -81,7 +81,7 @@ const logout = () => {
         </dropdown-item>
 
         <dropdown-item v-if="store.isAuthenticated" @click="logout">
-          {{ t('logout') }}
+          <LogoutIcon class="mr-2 text-violet-400" /> {{ t('logout') }}
         </dropdown-item>
       </MenuItems>
     </transition>
