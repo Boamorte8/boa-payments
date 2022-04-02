@@ -22,6 +22,8 @@
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@intlify/eslint-plugin-vue-i18n": "^1.2.0",
     "@pinia/testing": "^0.0.9",
     "@rushstack/eslint-patch": "^1.1.0",
@@ -29,7 +31,7 @@
     "@storybook/addon-essentials": "^6.5.0-alpha.14",
     "@storybook/addon-links": "^6.5.0-alpha.14",
     "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/vue3": "^6.5.0-alpha.14",
+    "@storybook/vue3": "^6.5.0-alpha.54",
     "@types/fetch-mock": "^7.3.5",
     "@types/jsdom": "^16.2.14",
     "@types/node": "^16.11.22",
