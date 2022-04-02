@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import type { AuthPayload, AuthState, LoginPayload } from './models';
 import i18n from '../i18n';
 
-let timer: number;
+let timer: NodeJS.Timeout;
 const { t } = i18n.global;
 
 export const useAuthUserStore = defineStore('auth/user', {
@@ -58,7 +58,7 @@ export const useAuthUserStore = defineStore('auth/user', {
       localStorage.setItem('token', idToken);
       localStorage.setItem('userId', localId);
       localStorage.setItem('tokenExpiration', expirationDate.toString());
-      // timer = setTimeout(() => this.autoLogout(), expiresInTime);
+      timer = setTimeout(() => this.autoLogout(), expiresInTime);
 
       this.setUser(idToken, localId);
     },
@@ -75,7 +75,7 @@ export const useAuthUserStore = defineStore('auth/user', {
         return;
       }
 
-      // timer = setTimeout(() => this.autoLogout(), expiresInTime);
+      timer = setTimeout(() => this.autoLogout(), expiresIn);
       this.setUser(token, userId);
     },
     setUser(token: string | null, userId: string | null) {

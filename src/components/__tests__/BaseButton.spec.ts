@@ -21,9 +21,6 @@ describe('BaseButton', () => {
   }
 
   test('should create component', () => {
-    const { wrapper } = factory({
-      createSpy: fn,
-    });
     expect(BaseButton).toBeTruthy();
   });
 

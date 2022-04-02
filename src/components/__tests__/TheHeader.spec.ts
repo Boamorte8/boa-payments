@@ -34,9 +34,6 @@ describe('TheHeader', () => {
   }
 
   test('should create component', () => {
-    const { wrapper } = factory({
-      createSpy: fn,
-    });
     expect(TheHeader).toBeTruthy();
   });
 

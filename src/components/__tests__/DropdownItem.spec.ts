@@ -15,6 +15,9 @@ describe('DropdownItem', () => {
       stubs: {
         RouterLink: RouterLinkStub,
       },
+      slots: {
+        default: '<span>test</span>',
+      },
     });
 
     return { wrapper };
@@ -24,25 +27,11 @@ describe('DropdownItem', () => {
     const { wrapper } = factory({
       createSpy: fn,
     });
+
+    const element = wrapper.find('span');
+
+    expect(element.text()).toBe('test');
+    expect(element).toBeTruthy();
     expect(DropdownItem).toBeTruthy();
   });
-
-  // test('should display a button', async () => {
-  //   const { wrapper } = factory();
-  //   wrapper.setProps({
-  //     mode: 'flat',
-  //   });
-
-  //   expect(wrapper.find('button')).toBeTruthy();
-  // });
-
-  // test('should display a link', async () => {
-  //   const { wrapper } = factory();
-  //   wrapper.setProps({
-  //     link: true,
-  //   });
-  //   await flushPromises();
-
-  //   expect(wrapper.find('a')).toBeTruthy();
-  // });
 });
