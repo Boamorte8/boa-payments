@@ -1,8 +1,8 @@
-import BaseButton from "../src/components/ui/BaseButton.vue";
+import BaseButton from "../../src/components/ui/BaseButton.vue";
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: "UI/BaseButton",
+  title: "Atoms/BaseButton",
   component: BaseButton,
   argTypes: {
     // backgroundColor: { control: 'color' },
@@ -19,7 +19,7 @@ const Template = (args) => ({
   setup() {
     return { args };
   },
-  template: "<base-button>My Button</base-button>",
+  template: '<base-button v-bind="args">My Button</base-button>',
 });
 
 export const Primary = Template.bind({});
