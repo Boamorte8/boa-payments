@@ -12,7 +12,8 @@
     "test:unit": "vitest --environment jsdom",
     "test:unitcommit": "vitest --run --environment jsdom",
     "typecheck": "vue-tsc --noEmit && vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
+    "commit": "commit"
   },
   "dependencies": {
     "@headlessui/vue": "^1.4.3",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
+    "@commitlint/prompt-cli": "^16.2.3",
     "@intlify/eslint-plugin-vue-i18n": "^1.2.0",
     "@pinia/testing": "^0.0.9",
     "@rushstack/eslint-patch": "^1.1.0",
