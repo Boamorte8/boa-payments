@@ -1,8 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# For macOS
-# npx --no -- commitlint --edit "$1"
-
-# For Windows
-npx --no -- commitlint --edit
+npx --no -- commitlint --edit "$1"
