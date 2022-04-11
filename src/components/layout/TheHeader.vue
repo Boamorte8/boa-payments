@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
 import { UserTheme } from '@stores/models';
-import { useAuthUserStore, usePreferencesUserStore } from '@stores/';
+import { useAuthUserStore, usePreferencesUserStore } from '@stores/index';
 
 const { t, locale } = useI18n();
 const store = useAuthUserStore();
