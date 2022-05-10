@@ -14,6 +14,10 @@ export default defineConfig({
       ),
       '@pages': fileURLToPath(new URL('./src/pages', import.meta.url)),
       '@stores': fileURLToPath(new URL('./src/stores', import.meta.url)),
+      '@atoms': fileURLToPath(new URL('./src/atoms', import.meta.url)),
+      '@molecules': fileURLToPath(new URL('./src/molecules', import.meta.url)),
+      '@organisms': fileURLToPath(new URL('./src/organisms', import.meta.url)),
+      '@templates': fileURLToPath(new URL('./src/templates', import.meta.url)),
     },
   },
   test: {

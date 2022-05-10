@@ -6,9 +6,9 @@ import i18n from '../../i18n';
 import router from '../../router';
 import TheHeader from '../layout/TheHeader.vue';
 import DropdownItem from '../ui/DropdownItem.vue';
-import LogoutIcon from '../common/LogoutIcon.vue';
-import OptionsIcon from '../common/OptionsIcon.vue';
-import TranslateIcon from '../common/TranslateIcon.vue';
+import LogoutIcon from '@atoms/LogoutIcon.vue';
+import OptionsIcon from '@atoms/OptionsIcon.vue';
+import TranslateIcon from '@atoms/TranslateIcon.vue';
 import { useAuthUserStore } from '../../stores';
 
 describe('TheHeader', () => {

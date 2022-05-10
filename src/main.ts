@@ -2,18 +2,18 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 
 import App from './App.vue';
-import BaseButton from '@components/ui/BaseButton.vue';
+import BaseButton from '@atoms/BaseButton.vue';
+import LogoutIcon from '@atoms/LogoutIcon.vue';
+import OptionsIcon from '@atoms/OptionsIcon.vue';
+import TranslateIcon from '@atoms/TranslateIcon.vue';
 import BaseCard from '@components/ui/BaseCard.vue';
 import BaseDialog from '@components/ui/BaseDialog.vue';
 import BaseSpinner from '@components/ui/BaseSpinner.vue';
 import DropdownItem from '@components/ui/DropdownItem.vue';
 import FloatButton from '@components/ui/FloatButton.vue';
-import OptionsIcon from '@components/common/OptionsIcon.vue';
-import TranslateIcon from '@components/common/TranslateIcon.vue';
 import i18n from './i18n';
 import router from './router';
 import './styles/index.css';
-import LogoutIcon from '@components/common/LogoutIcon.vue';
 
 const app = createApp(App);
 

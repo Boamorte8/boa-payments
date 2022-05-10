@@ -8,6 +8,10 @@
       "@stores": ["./src/stores/*"],
       "@pages": ["./src/pages/*"],
       "@components": ["./src/components/*"],
+      "@atoms/*": ["./src/atoms/*"],
+      "@molecules/*": ["./src/molecules/*"],
+      "@organisms/*": ["./src/organisms/*"],
+      "@templates/*": ["./src/templates/*"],
     },
     "types": ["node", "jsdom"]
   }

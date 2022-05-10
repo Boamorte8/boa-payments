@@ -2,7 +2,7 @@ import { createTestingPinia, type TestingOptions } from '@pinia/testing';
 import { describe, expect, fn, test } from 'vitest';
 import { mount, RouterLinkStub } from '@vue/test-utils';
 
-import BaseButton from '@components/ui/BaseButton.vue';
+import BaseButton from '@atoms/BaseButton.vue';
 import i18n from '../../i18n';
 import router from '../../router';
 
