@@ -1,8 +1,8 @@
 import { createTestingPinia, type TestingOptions } from '@pinia/testing';
-import { describe, expect, fn, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import { mount, RouterLinkStub } from '@vue/test-utils';
 
-import DropdownItem from '@components/ui/DropdownItem.vue';
+import DropdownItem from '../DropdownItem.vue';
 import i18n from '../../i18n';
 import router from '../../router';
 
@@ -25,7 +25,7 @@ describe('DropdownItem', () => {
 
   test('should create component', () => {
     const { wrapper } = factory({
-      createSpy: fn,
+      createSpy: vi.fn,
     });
 
     const element = wrapper.find('span');

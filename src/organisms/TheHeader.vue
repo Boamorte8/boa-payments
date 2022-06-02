@@ -1,34 +1,16 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Menu, MenuButton, MenuItems } from '@headlessui/vue';
+import { Menu, MenuButton } from '@headlessui/vue';
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
 
 import { UserTheme } from '@stores/models';
 import { useAuthUserStore, usePreferencesUserStore } from '@stores/index';
+import DropdownOptions from '@molecules/DropdownOptions.vue';
 
-const { t, locale } = useI18n();
+const { t } = useI18n();
 const store = useAuthUserStore();
 const prefStore = usePreferencesUserStore();
 
 prefStore.updateTheme(UserTheme.LIGHT);
-
-const router = useRouter();
-
-const changeLanguage = () => {
-  locale.value = locale.value === 'en' ? 'es' : 'en';
-};
-
-const changeLangTo = computed(() => (locale.value === 'en' ? 'es' : 'en'));
-
-const goToProfile = () => {
-  router.push({ name: 'user' });
-};
-
-const logout = () => {
-  store.logout();
-  router.replace('/');
-};
 </script>
 
 <template>
@@ -39,7 +21,7 @@ const logout = () => {
           <router-link class="link" to="/">Boa Payments</router-link>
         </h1>
         <div class="flex gap-2">
-          <ul class="nav-list flex gap-2">
+          <ul class="nav-list">
             <li v-if="!store.isAuthenticated">
               <router-link class="nav-item" :to="{ name: 'auth' }">{{
                 t('login')
@@ -68,22 +50,7 @@ const logout = () => {
       leave-from-class="transform scale-100 opacity-100"
       leave-to-class="transform scale-95 opacity-0"
     >
-      <MenuItems
-        class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-      >
-        <dropdown-item @click="changeLanguage">
-          <TranslateIcon class="mr-2 text-violet-400" /> {{ t('changeLang') }}
-          {{ changeLangTo }}
-        </dropdown-item>
-
-        <dropdown-item v-if="store.isAuthenticated" @click="goToProfile">
-          <TranslateIcon class="mr-2 text-violet-400" /> {{ t('profile') }}
-        </dropdown-item>
-
-        <dropdown-item v-if="store.isAuthenticated" @click="logout">
-          <LogoutIcon class="mr-2 text-violet-400" /> {{ t('logout') }}
-        </dropdown-item>
-      </MenuItems>
+      <dropdown-options></dropdown-options>
     </transition>
   </Menu>
 </template>
@@ -100,7 +67,7 @@ const logout = () => {
   @apply w-11/12 m-auto flex items-center justify-between;
 
   &-list {
-    @apply flex items-center justify-center p-0 m-0 list-none;
+    @apply flex items-center justify-center p-0 m-0 list-none gap-2;
   }
 
   &-item {

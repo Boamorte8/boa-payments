@@ -9,7 +9,7 @@ import TranslateIcon from '@atoms/TranslateIcon.vue';
 import BaseCard from '@components/ui/BaseCard.vue';
 import BaseDialog from '@components/ui/BaseDialog.vue';
 import BaseSpinner from '@components/ui/BaseSpinner.vue';
-import DropdownItem from '@components/ui/DropdownItem.vue';
+import DropdownItem from '@atoms/DropdownItem.vue';
 import FloatButton from '@components/ui/FloatButton.vue';
 import i18n from './i18n';
 import router from './router';

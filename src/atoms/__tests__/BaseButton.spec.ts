@@ -1,5 +1,5 @@
 import { createTestingPinia, type TestingOptions } from '@pinia/testing';
-import { describe, expect, fn, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import { mount, RouterLinkStub } from '@vue/test-utils';
 
 import BaseButton from '@atoms/BaseButton.vue';
@@ -26,7 +26,7 @@ describe('BaseButton', () => {
 
   test('should display a button', async () => {
     const { wrapper } = factory({
-      createSpy: fn,
+      createSpy: vi.fn,
     });
     wrapper.setProps({
       mode: 'flat',
@@ -37,7 +37,7 @@ describe('BaseButton', () => {
 
   test('should display a link', () => {
     const { wrapper } = factory({
-      createSpy: fn,
+      createSpy: vi.fn,
     });
     wrapper.setProps({
       link: true,

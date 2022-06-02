@@ -10,6 +10,7 @@ const props = defineProps({
   title: {
     type: String,
     required: false,
+    default: '',
   },
   fixed: {
     type: Boolean,
@@ -20,7 +21,6 @@ const props = defineProps({
 
 // eslint-disable-next-line no-undef
 const emit = defineEmits<{
-  // eslint-disable-next-line no-unused-vars
   (e: 'close'): void;
 }>();
 
