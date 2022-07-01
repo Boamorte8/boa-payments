@@ -8,6 +8,7 @@
       "@stores": ["./src/stores/*"],
       "@pages": ["./src/pages/*"],
       "@components": ["./src/components/*"],
+      "@app/*": ["./src/app/*"],
       "@atoms/*": ["./src/atoms/*"],
       "@molecules/*": ["./src/molecules/*"],
       "@organisms/*": ["./src/organisms/*"],
