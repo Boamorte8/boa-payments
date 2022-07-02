@@ -1,4 +1,4 @@
-import SettingsIcon from "../../src/components/common/SettingsIcon.vue";
+import SettingsIcon from "../../src/atoms/SettingsIcon.vue";
 
 export default {
   title: "Atoms/SettingsIcon",

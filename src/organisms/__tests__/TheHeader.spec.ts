@@ -5,7 +5,9 @@ import { mount, RouterLinkStub } from '@vue/test-utils';
 import i18n from '../../i18n';
 import router from '../../router';
 import TheHeader from '../TheHeader.vue';
+import BaseButton from '@atoms/BaseButton.vue';
 import DropdownItem from '@atoms/DropdownItem.vue';
+import LogoApp from '@atoms/LogoApp.vue';
 import LogoutIcon from '@atoms/LogoutIcon.vue';
 import OptionsIcon from '@atoms/OptionsIcon.vue';
 import TranslateIcon from '@atoms/TranslateIcon.vue';
@@ -16,7 +18,9 @@ describe('TheHeader', () => {
     const wrapper = mount(TheHeader, {
       global: {
         components: {
+          BaseButton,
           DropdownItem,
+          LogoApp,
           LogoutIcon,
           OptionsIcon,
           TranslateIcon,
@@ -43,9 +47,8 @@ describe('TheHeader', () => {
       createSpy: vi.fn,
     });
 
-    expect(wrapper.find('h1').text()).toEqual(msg);
-    expect(wrapper.find('.nav-item').text()).toEqual('Login');
-    expect(wrapper.find('.nav-item').text()).not.toEqual('Orders');
+    expect(wrapper.find('h2').text()).toEqual(msg);
+    expect(wrapper.findAll('.link').length).toBe(2);
   });
 
   test('should display app title and 2 buttons', async () => {
@@ -59,8 +62,7 @@ describe('TheHeader', () => {
       createSpy: vi.fn,
     });
 
-    expect(wrapper.find('h1').text()).toEqual(msg);
-    expect(wrapper.find('.nav-item').text()).toEqual('Orders');
-    expect(wrapper.find('.nav-item').text()).not.toEqual('Login');
+    expect(wrapper.find('h2').text()).toEqual(msg);
+    expect(wrapper.findAll('.link').length).toBe(3);
   });
 });

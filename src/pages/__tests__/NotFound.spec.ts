@@ -5,7 +5,7 @@ import { flushPromises, mount, RouterLinkStub } from '@vue/test-utils';
 import i18n from '../../i18n';
 import router from '../../router';
 import NotFound from '../NotFound.vue';
-import BaseCard from '@components/ui/BaseCard.vue';
+import BaseCard from '@atoms/BaseCard.vue';
 
 describe('NotFound', () => {
   beforeEach(() => {

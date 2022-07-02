@@ -1,4 +1,4 @@
-import OptionsIcon from "../../src/components/common/OptionsIcon.vue";
+import OptionsIcon from "../../src/atoms/OptionsIcon.vue";
 
 export default {
   title: "Atoms/OptionsIcon",

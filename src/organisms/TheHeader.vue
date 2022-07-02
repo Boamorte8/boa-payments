@@ -1,44 +1,43 @@
 <script setup lang="ts">
-import { Menu, MenuButton } from '@headlessui/vue';
+import { Menu } from '@headlessui/vue';
 import { useI18n } from 'vue-i18n';
 
 import { UserTheme } from '@stores/models';
 import { useAuthUserStore, usePreferencesUserStore } from '@stores/index';
+import LogoApp from '@atoms/LogoApp.vue';
 import DropdownOptions from '@molecules/DropdownOptions.vue';
 
 const { t } = useI18n();
 const store = useAuthUserStore();
 const prefStore = usePreferencesUserStore();
 
-prefStore.updateTheme(UserTheme.LIGHT);
+prefStore.updateTheme(UserTheme.DARK);
 </script>
 
 <template>
   <Menu>
     <header class="header">
       <nav class="nav">
-        <h1 class="logo">
-          <router-link class="link" to="/">Boa Payments</router-link>
-        </h1>
+        <router-link class="link" to="/">
+          <logo-app mode="complete"></logo-app>
+        </router-link>
         <div class="flex gap-2">
-          <ul class="nav-list">
-            <li v-if="!store.isAuthenticated">
-              <router-link class="nav-item" :to="{ name: 'auth' }">{{
-                t('login')
-              }}</router-link>
-            </li>
-            <li v-if="store.isAuthenticated">
-              <router-link class="nav-item" :to="{ name: 'orders' }">{{
-                t('orders')
-              }}</router-link>
-            </li>
-            <li v-if="store.isAuthenticated">
-              <router-link class="nav-item" :to="{ name: 'payments' }">{{
-                t('payments')
-              }}</router-link>
-            </li>
-          </ul>
-          <MenuButton class="nav-item"><OptionsIcon /></MenuButton>
+          <template v-if="!store.isAuthenticated">
+            <base-button :link="true" :to="{ name: 'auth' }">{{
+              t('login')
+            }}</base-button>
+          </template>
+          <template v-else>
+            <base-button :link="true" :to="{ name: 'orders' }">{{
+              t('orders')
+            }}</base-button>
+            <base-button :link="true" :to="{ name: 'payments' }">{{
+              t('payments')
+            }}</base-button>
+          </template>
+          <base-button :menu="true" class="inline-flex items-center">
+            <OptionsIcon />
+          </base-button>
         </div>
       </nav>
     </header>
@@ -57,41 +56,10 @@ prefStore.updateTheme(UserTheme.LIGHT);
 
 <style lang="postcss" scoped>
 .header {
-  @apply w-full h-20 flex items-center justify-center bg-purple-900;
-  .router-link-active {
-    @apply active:border-gray-300 hover:border-gray-300;
-  }
+  @apply w-full h-20 p-4 flex items-center justify-center bg-primary-700 dark:bg-background;
 }
 
 .nav {
-  @apply w-11/12 m-auto flex items-center justify-between;
-
-  &-list {
-    @apply flex items-center justify-center p-0 m-0 list-none gap-2;
-  }
-
-  &-item {
-    @apply inline-flex justify-center w-fit px-4 py-2 h-10 font-medium text-white bg-black rounded-md bg-opacity-20
-      hover:bg-opacity-30 focus:outline-none;
-  }
-}
-
-.logo {
-  @apply m-0 font-bold text-xl;
-
-  .link {
-    @apply text-white m-0 hover:border-transparent;
-
-    .router-link-active {
-      @apply border-transparent;
-    }
-  }
-}
-
-a:active,
-a:hover,
-a.router-link-active {
-  border: 1px solid transparent;
-  @apply border-primary-300;
+  @apply w-full flex items-center justify-between;
 }
 </style>

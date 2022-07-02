@@ -1,4 +1,4 @@
-import LogoutIcon from "../../src/components/common/LogoutIcon.vue";
+import LogoutIcon from "../../src/atoms/LogoutIcon.vue";
 
 export default {
   title: "Atoms/LogoutIcon",

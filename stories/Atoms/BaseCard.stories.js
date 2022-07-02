@@ -1,4 +1,4 @@
-import BaseCard from "../../src/components/ui/BaseCard.vue";
+import BaseCard from "../../src/atoms/BaseCard.vue";
 
 export default {
   title: "Atoms/BaseCard",

@@ -4,7 +4,7 @@ import { type PreferenceState, UserTheme } from './models';
 
 export const usePreferencesUserStore = defineStore('preferences/user', {
   state: (): PreferenceState => ({
-    theme: UserTheme.LIGHT,
+    theme: UserTheme.DARK,
   }),
   actions: {
     updateTheme(theme: UserTheme) {

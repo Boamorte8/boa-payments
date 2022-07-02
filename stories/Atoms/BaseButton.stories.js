@@ -1,4 +1,4 @@
-import BaseButton from "../../src/components/ui/BaseButton.vue";
+import BaseButton from "../../src/atoms/BaseButton.vue";
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {

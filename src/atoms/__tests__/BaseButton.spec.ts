@@ -2,6 +2,8 @@ import { createTestingPinia, type TestingOptions } from '@pinia/testing';
 import { describe, expect, test, vi } from 'vitest';
 import { mount, RouterLinkStub } from '@vue/test-utils';
 
+import { MenuButton } from '@headlessui/vue';
+
 import BaseButton from '@atoms/BaseButton.vue';
 import i18n from '../../i18n';
 import router from '../../router';
@@ -10,6 +12,9 @@ describe('BaseButton', () => {
   function factory(options?: TestingOptions) {
     const wrapper = mount(BaseButton, {
       global: {
+        components: {
+          MenuButton,
+        },
         plugins: [i18n, router, createTestingPinia(options)],
       },
       stubs: {
@@ -41,6 +46,7 @@ describe('BaseButton', () => {
     });
     wrapper.setProps({
       link: true,
+      to: '/',
     });
 
     expect(wrapper.find('a')).toBeTruthy();

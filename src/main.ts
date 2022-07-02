@@ -3,10 +3,10 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import BaseButton from '@atoms/BaseButton.vue';
+import BaseCard from '@atoms/BaseCard.vue';
 import LogoutIcon from '@atoms/LogoutIcon.vue';
 import OptionsIcon from '@atoms/OptionsIcon.vue';
 import TranslateIcon from '@atoms/TranslateIcon.vue';
-import BaseCard from '@components/ui/BaseCard.vue';
 import BaseDialog from '@components/ui/BaseDialog.vue';
 import BaseSpinner from '@components/ui/BaseSpinner.vue';
 import DropdownItem from '@atoms/DropdownItem.vue';

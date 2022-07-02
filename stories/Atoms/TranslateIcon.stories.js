@@ -1,4 +1,4 @@
-import TranslateIcon from "../../src/components/common/TranslateIcon.vue";
+import TranslateIcon from "../../src/atoms/TranslateIcon.vue";
 
 export default {
   title: "Atoms/TranslateIcon",
