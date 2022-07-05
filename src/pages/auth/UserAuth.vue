@@ -77,7 +77,7 @@ const handleError = () => {
     <base-dialog :show="isLoading" title="Authenticating..." fixed>
       <base-spinner></base-spinner>
     </base-dialog>
-    <base-card class="max-w-2xl mx-auto my-8 ">
+    <base-card class="max-w-2xl mx-auto my-8">
       <form
         class="w-full flex flex-col items-center m-4 p-4"
         @submit.prevent="submitForm"

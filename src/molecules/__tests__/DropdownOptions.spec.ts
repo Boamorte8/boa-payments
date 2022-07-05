@@ -2,8 +2,9 @@ import { createTestingPinia, type TestingOptions } from '@pinia/testing';
 import { describe, expect, test, vi } from 'vitest';
 import { mount, RouterLinkStub } from '@vue/test-utils';
 
-import { Menu, MenuItems } from '@headlessui/vue';
+import { Menu, MenuButton } from '@headlessui/vue';
 
+import BaseButton from '@atoms/BaseButton.vue';
 import DropdownItem from '@atoms/DropdownItem.vue';
 import DropdownOptions from '../DropdownOptions.vue';
 import i18n from '../../i18n';
@@ -15,11 +16,14 @@ describe('DropdownOptions', () => {
   function factory(options?: TestingOptions) {
     const App = {
       components: {
+        BaseButton,
         DropdownOptions,
         Menu,
+        MenuButton,
       },
       template: `
         <Menu>
+          <base-button :menu="true">Options</base-button>
           <dropdown-options></dropdown-options>
         </Menu>
       `
@@ -41,17 +45,37 @@ describe('DropdownOptions', () => {
     return { wrapper };
   }
 
-  test('should create component', () => {
+  test('should create component', async () => {
     const { wrapper } = factory({
       createSpy: vi.fn,
     });
+    const button = wrapper.find('#headlessui-menu-button-1');
+    await button.trigger('click');
 
-    const items = wrapper.findAll('dropdown-item');
-    console.log(items);
-    console.log('html', wrapper.html());
-    // FIXME - Fix unit test
+    const items = wrapper.findAll('[role="menuitem"]');
 
-    // expect(element).toBeTruthy();
     expect(DropdownOptions).toBeTruthy();
+    expect(items.length).toBe(1);
+    expect(items[0].text()).toBe('Change lang to es');
+  });
+
+  test('should display 3 menu items WHEN the user is authenticated', async () => {
+    const { wrapper } = factory({
+      createSpy: vi.fn,
+      initialState: {
+        'auth/user': {
+          token: 'token test',
+        },
+      },
+    });
+    const button = wrapper.find('#headlessui-menu-button-4');
+    await button.trigger('click');
+
+    const items = wrapper.findAll('[role="menuitem"]');
+
+    expect(items.length).toBe(3);
+    expect(items[0].text()).toBe('Change lang to es');
+    expect(items[1].text()).toBe('Profile');
+    expect(items[2].text()).toBe('Logout');
   });
 });
