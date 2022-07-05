@@ -3,6 +3,7 @@ import LogoApp from "../../src/atoms/LogoApp.vue";
 export default {
   title: "Atoms/LogoApp",
   component: LogoApp,
+  decorators: [() => ({ template: '<div style="margin: 3em;"><story/></div>' })],
   argTypes: {
     mode: {
       options: ["simple", "complete"],
@@ -14,6 +15,7 @@ export default {
 const Template = (args, { argTypes }) => ({
   components: { LogoApp },
   props: Object.keys(argTypes),
+  setup() { return { args }; },
   template: '<logo-app v-bind="$props"></logo-app>',
 });
 

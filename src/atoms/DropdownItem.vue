@@ -8,8 +8,8 @@ import { Menu, MenuItem } from '@headlessui/vue';
       <MenuItem v-slot="{ active }">
         <button
           :class="[
-            active ? 'bg-violet-500 text-white' : 'text-gray-900',
-            'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+            active ? 'bg-primary text-white' : 'text-gray-900',
+            'group flex rounded-md items-center w-full px-2 py-2 text-sm dark:text-white',
           ]"
         >
           <slot></slot>

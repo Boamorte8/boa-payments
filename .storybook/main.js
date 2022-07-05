@@ -7,14 +7,21 @@ module.exports = {
   core: {
     builder: "@storybook/builder-vite"
   },
-  addons: ["@storybook/addon-links", "@storybook/addon-essentials", {
-    name: "@storybook/addon-postcss",
-    options: {
-      postcssLoaderOptions: {
-        implementation: require("postcss")
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-actions",
+    "@storybook/addon-a11y",
+    "storybook-dark-mode",
+    {
+      name: "@storybook/addon-postcss",
+      options: {
+        postcssLoaderOptions: {
+          implementation: require("postcss")
+        }
       }
     }
-  }],
+  ],
   typescript: {
     check: false,
     checkOptions: {},
