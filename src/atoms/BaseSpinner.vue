@@ -19,10 +19,8 @@
   transform-origin: 40px 40px;
 }
 .lds-roller div:after {
-  @apply bg-primary-700;
+  @apply bg-primary-700 block absolute dark:bg-primary-300;
   content: ' ';
-  display: block;
-  position: absolute;
   width: 7px;
   height: 7px;
   border-radius: 50%;

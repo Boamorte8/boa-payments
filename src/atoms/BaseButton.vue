@@ -3,6 +3,7 @@ import type { PropType } from 'vue';
 import { MenuButton } from '@headlessui/vue';
 
 type LinkType = string | { name: string };
+type ButtonType = 'button' | 'reset' | 'submit';
 
 const props = defineProps({
   mode: {
@@ -20,6 +21,11 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  type: {
+    type: String as PropType<ButtonType>,
+    required: false,
+    default: 'button',
+  },
   to: {
     type: Object as PropType<LinkType>,
     required: false,
@@ -29,7 +35,12 @@ const props = defineProps({
 </script>
 
 <template>
-  <button v-if="!props.link && !props.menu" class="button" :class="props.mode">
+  <button
+    v-if="!props.link && !props.menu"
+    class="button"
+    :class="props.mode"
+    :type="props.type"
+  >
     <slot></slot>
   </button>
   <MenuButton v-else-if="props.menu" class="button" :class="props.mode">

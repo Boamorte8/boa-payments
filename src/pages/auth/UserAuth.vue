@@ -63,8 +63,6 @@ const submitForm = async () => {
 const handleError = () => {
   errorMessage.value = null;
 };
-
-// TODO - Change form-control by base input component
 </script>
 
 <template>
@@ -74,9 +72,9 @@ const handleError = () => {
       title="An error ocurred"
       @close="handleError"
     >
-      <p>{{ errorMessage }}</p>
+      <p class="dark:text-white">{{ errorMessage }}</p>
     </base-dialog>
-    <base-dialog :show="isLoading" title="Authenticating..." fixed>
+    <base-dialog loader fixed :show="isLoading">
       <base-spinner></base-spinner>
     </base-dialog>
     <base-card class="max-w-2xl mx-auto">
@@ -84,35 +82,33 @@ const handleError = () => {
         class="w-full flex flex-col items-center m-4 p-4"
         @submit.prevent="submitForm"
       >
-        <div class="form-control">
-          <label class="form-label" for="email">{{ t('email') }}</label>
-          <input
-            id="email"
-            v-model.trim="email"
-            class="form-input"
-            type="email"
-            name="email"
-          />
-        </div>
+        <base-input
+          id="email"
+          v-model.trim="email"
+          class="form-control"
+          type="email"
+          name="email"
+          for="email"
+          :label="t('email')"
+        ></base-input>
 
-        <div class="form-control">
-          <label class="form-label" for="password">{{ t('password') }}</label>
-          <input
-            id="password"
-            v-model.trim="password"
-            class="form-input"
-            type="password"
-            name="password"
-          />
-        </div>
+        <base-input
+          id="password"
+          v-model.trim="password"
+          class="form-control"
+          type="password"
+          name="password"
+          for="password"
+          :label="t('password')"
+        ></base-input>
 
         <p v-if="!formIsValid" class="text-sm mb-2 text-red-600">
           {{ t('loginFormError') }}
         </p>
 
         <div class="flex flex-col items-center">
-          <base-button class="mb-4">{{ t(mode) }}</base-button>
-          <base-button mode="flat" @click="switchAuthMode">{{
+          <base-button class="mb-4" type="submit">{{ t(mode) }}</base-button>
+          <base-button mode="flat" type="reset" @click="switchAuthMode">{{
             t(switchModeButtonCaption)
           }}</base-button>
         </div>
@@ -129,14 +125,6 @@ const handleError = () => {
     &:nth-child(2) {
       @apply mb-8;
     }
-  }
-
-  &-label {
-    @apply font-bold mb-2 block;
-  }
-
-  &-input {
-    @apply w-full block border border-gray-300 p-0.5 rounded-md focus:border-purple-900 focus:outline-none focus:bg-gray-50;
   }
 }
 </style>

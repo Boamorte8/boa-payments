@@ -25,7 +25,6 @@ const props = defineProps({
     default: null,
   },
 });
-// TODO - Create unit tests
 
 const emit = defineEmits(['update:modelValue']);
 
@@ -40,7 +39,7 @@ const updateValue = (event: Event) => {
       {{ props.label }}
     </base-label>
     <input
-      class="w-full block border border-gray-300 p-0.5 rounded-md focus:border-primary-700 focus:outline-none focus:bg-gray-50"
+      class="w-full h-10 block border border-transparent py-2 px-4 rounded-md dark:bg-background-300 dark:text-white focus:border-primary-700 focus:outline-none focus:bg-gray-50"
       :type="props.type"
       :name="props.name"
       :value="modelValue"

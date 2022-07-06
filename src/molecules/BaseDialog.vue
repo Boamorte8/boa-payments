@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from '@vue/reactivity';
 import { toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -10,9 +11,14 @@ const props = defineProps({
   title: {
     type: String,
     required: false,
-    default: null,
+    default: undefined,
   },
   fixed: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  loader: {
     type: Boolean,
     required: false,
     default: false,
@@ -26,6 +32,8 @@ const emit = defineEmits<{
 const { fixed } = toRefs(props);
 const { t } = useI18n();
 
+const loaderClass = computed(() => (props.loader ? 'loader' : ''));
+
 const tryClose = () => {
   if (fixed.value) {
     return;
@@ -38,12 +46,15 @@ const tryClose = () => {
   <teleport to="body">
     <div
       v-if="show"
-      class="backdrop w-full h-screen top-0 left-0 fixed z-10"
+      class="bg-overlay w-full h-screen top-0 left-0 fixed z-10"
       @click="tryClose"
     ></div>
     <transition name="dialog">
-      <dialog v-if="show" open>
-        <header v-if="title" class="w-full p-4 text-white bg-purple-900">
+      <dialog v-if="show" open :class="loaderClass">
+        <header
+          v-if="title"
+          class="w-full p-4 text-white bg-primary-700 dark:bg-background-300"
+        >
           <slot name="header">
             <h2 class="m-0 font-semibold">{{ props.title }}</h2>
           </slot>
@@ -61,24 +72,16 @@ const tryClose = () => {
   </teleport>
 </template>
 
-<style scoped>
-.backdrop {
-  background-color: rgba(0, 0, 0, 0.75);
-}
-
+<style lang="postcss" scoped>
 dialog {
-  position: fixed;
+  @apply fixed rounded-lg border-none overflow-hidden m-0 p-0 w-4/5 bg-white shadow dark:bg-background-700 dark:shadow-primary;
   top: 20vh;
   left: 10%;
-  width: 80%;
   z-index: 100;
-  border-radius: 12px;
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  background-color: white;
+
+  &.loader {
+    @apply bg-transparent shadow-transparent;
+  }
 }
 
 .dialog-enter-from,

@@ -31,19 +31,19 @@ prefStore.updateTheme(UserTheme.DARK);
         </router-link>
         <div class="flex gap-2">
           <template v-if="!store.isAuthenticated">
-            <base-button :link="true" :to="{ name: 'auth' }">{{
+            <base-button link :to="{ name: 'auth' }">{{
               t('login')
             }}</base-button>
           </template>
           <template v-else>
-            <base-button :link="true" :to="{ name: 'orders' }">{{
+            <base-button link :to="{ name: 'orders' }">{{
               t('orders')
             }}</base-button>
-            <base-button :link="true" :to="{ name: 'payments' }">{{
+            <base-button link :to="{ name: 'payments' }">{{
               t('payments')
             }}</base-button>
           </template>
-          <base-button :menu="true" class="inline-flex items-center">
+          <base-button menu class="inline-flex items-center">
             <OptionsIcon />
           </base-button>
         </div>
