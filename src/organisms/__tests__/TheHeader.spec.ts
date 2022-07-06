@@ -41,18 +41,18 @@ describe('TheHeader', () => {
     expect(TheHeader).toBeTruthy();
   });
 
-  test('should display app title and Login button', () => {
-    const msg = 'Boa Payments';
+  test('should display app title and Login button', async () => {
+    const msg = 'BP';
     const { wrapper } = factory({
       createSpy: vi.fn,
     });
 
-    expect(wrapper.find('h2').text()).toEqual(msg);
+    expect(wrapper.find('.title').text()).toEqual(msg);
     expect(wrapper.findAll('.link').length).toBe(2);
   });
 
   test('should display app title and 2 buttons', async () => {
-    const msg = 'Boa Payments';
+    const msg = 'BP';
     const { wrapper } = factory({
       initialState: {
         'auth/user': {
@@ -62,7 +62,7 @@ describe('TheHeader', () => {
       createSpy: vi.fn,
     });
 
-    expect(wrapper.find('h2').text()).toEqual(msg);
+    expect(wrapper.find('.title').text()).toEqual(msg);
     expect(wrapper.findAll('.link').length).toBe(3);
   });
 });

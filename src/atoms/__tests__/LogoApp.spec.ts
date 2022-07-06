@@ -10,7 +10,7 @@ describe('LogoApp', () => {
   function factory(options?: TestingOptions) {
     const wrapper = mount(LogoApp, {
       global: {
-        components: { },
+        components: {},
         plugins: [i18n, createTestingPinia(options)],
       },
     });

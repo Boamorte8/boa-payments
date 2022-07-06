@@ -2,7 +2,7 @@ import { createTestingPinia, type TestingOptions } from '@pinia/testing';
 import { describe, expect, test, vi } from 'vitest';
 import { mount, RouterLinkStub } from '@vue/test-utils';
 
-import {Menu, MenuButton } from '@headlessui/vue';
+import { Menu, MenuButton } from '@headlessui/vue';
 
 import BaseButton from '@atoms/BaseButton.vue';
 import i18n from '../../i18n';
@@ -35,7 +35,7 @@ describe('BaseButton', () => {
       slots: {
         default: 'Test',
       },
-    }
+    };
     const { wrapper } = factory(options, {
       createSpy: vi.fn,
     });
@@ -53,7 +53,7 @@ describe('BaseButton', () => {
       slots: {
         default: 'Test',
       },
-    }
+    };
     const { wrapper } = factory(options, {
       createSpy: vi.fn,
     });
@@ -79,8 +79,8 @@ describe('BaseButton', () => {
         <Menu>
           <base-button :menu="true">Test</base-button>
         </Menu>
-      `
-    }
+      `,
+    };
     const wrapper = mount(App, {
       global: {
         components: {

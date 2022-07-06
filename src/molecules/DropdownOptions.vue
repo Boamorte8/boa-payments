@@ -29,8 +29,7 @@ const logout = () => {
 
 <template>
   <MenuItems
-    class="absolute right-0 w-56 mt-2 origin-top-right bg-white dark:bg-background divide-y divide-gray-100
-           rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+    class="absolute right-0 w-56 mt-2 origin-top-right bg-white dark:bg-background divide-y divide-gray-100 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
   >
     <dropdown-item @click="changeLanguage">
       <TranslateIcon class="mr-2 text-primary-300" /> {{ t('changeLang') }}

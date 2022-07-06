@@ -43,8 +43,8 @@ const props = defineProps({
 <style scoped>
 .button,
 .link {
-  @apply inline-flex no-underline text-white leading-4 h-9 rounded-lg py-2 px-4 border-2 border-primary bg-primary
-    hover:bg-primary-700 hover:border-primary-700 active:bg-primary active:border-primary-300;
+  @apply inline-flex items-center no-underline text-white leading-4 h-9 rounded-lg py-2 px-4 border-2 border-primary
+    bg-primary hover:bg-primary-700 hover:border-primary-700 active:bg-primary active:border-primary-300;
 }
 
 .button.router-link-active,
@@ -53,17 +53,18 @@ const props = defineProps({
 }
 
 .flat {
-  @apply bg-transparent text-purple-900 border-0;
+  @apply bg-transparent text-primary-700 dark:text-primary-300 border-0;
 }
 
 .outline {
-  @apply bg-transparent border-purple-900 text-purple-900;
+  @apply bg-transparent border-primary-700 text-primary-700 dark:border-primary-300 dark:text-primary-300;
 }
 
 .flat:hover,
 .flat:active,
 .outline:hover,
 .outline:active {
-  @apply bg-purple-200;
+  /* @apply bg-primary-300; */
+  @apply bg-primary-300 dark:text-primary-700;
 }
 </style>

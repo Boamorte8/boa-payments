@@ -26,8 +26,8 @@ describe('DropdownOptions', () => {
           <base-button :menu="true">Options</base-button>
           <dropdown-options></dropdown-options>
         </Menu>
-      `
-    }
+      `,
+    };
     const wrapper = mount(App, {
       global: {
         components: {

@@ -24,6 +24,9 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['./src/tests/setup-env.ts'],
+    deps: {
+      inline: ['@vue', '@vueuse', '@vue/composition-api'],
+    },
+    setupFiles: ['./src/tests/setup-env.ts', './src/tests/setup.ts'],
   },
 });

@@ -1,16 +1,24 @@
 <script setup lang="ts">
+import { computed } from '@vue/reactivity';
+
+import { breakpointsTailwind, useMediaQuery } from '@vueuse/core';
 import { Menu } from '@headlessui/vue';
 import { useI18n } from 'vue-i18n';
 
 import { UserTheme } from '@stores/models';
 import { useAuthUserStore, usePreferencesUserStore } from '@stores/index';
-import LogoApp from '@atoms/LogoApp.vue';
 import DropdownOptions from '@molecules/DropdownOptions.vue';
+import LogoApp from '@atoms/LogoApp.vue';
+import { LogoType } from '@app/models';
 
 const { t } = useI18n();
 const store = useAuthUserStore();
 const prefStore = usePreferencesUserStore();
+const isMedium = useMediaQuery(`(min-width: ${breakpointsTailwind.sm}px)`);
 
+const mode = computed(() =>
+  isMedium.value ? LogoType.Complete : LogoType.Simple
+);
 prefStore.updateTheme(UserTheme.DARK);
 </script>
 
@@ -19,7 +27,7 @@ prefStore.updateTheme(UserTheme.DARK);
     <header class="header">
       <nav class="nav">
         <router-link class="link" to="/">
-          <logo-app mode="complete"></logo-app>
+          <logo-app :mode="mode"></logo-app>
         </router-link>
         <div class="flex gap-2">
           <template v-if="!store.isAuthenticated">
