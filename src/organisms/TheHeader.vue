@@ -27,7 +27,7 @@ prefStore.updateTheme(UserTheme.DARK);
     <header class="header">
       <nav class="nav">
         <router-link class="link" to="/">
-          <logo-app :mode="mode"></logo-app>
+          <LogoApp :mode="mode" />
         </router-link>
         <div class="flex gap-2">
           <template v-if="!store.isAuthenticated">
@@ -57,7 +57,7 @@ prefStore.updateTheme(UserTheme.DARK);
       leave-from-class="transform scale-100 opacity-100"
       leave-to-class="transform scale-95 opacity-0"
     >
-      <dropdown-options></dropdown-options>
+      <DropdownOptions />
     </transition>
   </Menu>
 </template>

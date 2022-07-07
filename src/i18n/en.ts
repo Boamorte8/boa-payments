@@ -20,6 +20,12 @@ const en = {
     title: 'Page not found',
     description: 'This page could not be found - maybe you need try first to',
   },
+  pageOrders: {
+    emptyMessage: 'No orders to display yet',
+  },
+  pagePayments: {
+    emptyMessage: 'No payments to display yet',
+  },
 };
 
 export default en;

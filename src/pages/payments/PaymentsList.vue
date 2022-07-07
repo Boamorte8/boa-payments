@@ -1,3 +1,3 @@
 <template>
-  <div>Orders List</div>
+  <div>Payments List</div>
 </template>

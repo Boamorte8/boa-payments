@@ -21,6 +21,12 @@ const es = {
     description:
       'Esta página no pudo ser encontrada - tal vez necesites intentar primero',
   },
+  pageOrders: {
+    emptyMessage: 'No hay ordenes para mostrar aún',
+  },
+  pagePayments: {
+    emptyMessage: 'No hay pagos para mostrar aún',
+  },
 };
 
 export default es;

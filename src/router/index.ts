@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import { useAuthUserStore } from '../stores';
-import OrdersList from '@pages/orders/OrdersList.vue';
+import OrdersView from '@pages/orders/OrdersView.vue';
 import PaymentsList from '@pages/payments/PaymentsList.vue';
 import NotFound from '@pages/NotFound.vue';
 import UserAuth from '@pages/auth/UserAuth.vue';
@@ -20,7 +20,7 @@ const router = createRouter({
     {
       path: '/orders',
       name: 'orders',
-      component: OrdersList,
+      component: OrdersView,
       meta: { requiresAuth: true },
     },
     {
