@@ -1,7 +1,10 @@
 const en = {
+  amount: 'Amount',
   changeLang: 'Change lang to',
   close: 'Close',
+  description: 'Description',
   email: 'Email',
+  fieldsRequired: '*Fields required',
   login: 'Login',
   loginError: 'Failed login. Check your login data',
   loginErrorGeneric: 'Failed to authenticate! Try later',
@@ -16,12 +19,17 @@ const en = {
   signError: 'Failed sign up. Check your signup data',
   signSwitch: 'Login instead',
   signup: 'Signup',
+  title: 'Title',
   pageNotFound: {
     title: 'Page not found',
     description: 'This page could not be found - maybe you need try first to',
   },
+  pageAddOrder: {
+    addTitle: 'Add title',
+  },
   pageOrders: {
-    emptyMessage: 'No orders to display yet',
+    emptyMessage: 'No orders to display yet. ',
+    addNewOrder: 'Add new order',
   },
   pagePayments: {
     emptyMessage: 'No payments to display yet',

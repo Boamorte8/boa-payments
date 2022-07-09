@@ -43,6 +43,7 @@ const updateValue = (event: Event) => {
       :type="props.type"
       :name="props.name"
       :value="modelValue"
+      :placeholder="props.label"
       @input="updateValue"
     />
   </div>

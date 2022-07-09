@@ -74,9 +74,9 @@ const handleError = () => {
     >
       <p class="dark:text-white">{{ errorMessage }}</p>
     </base-dialog>
-    <base-dialog loader fixed :show="isLoading">
-      <BaseSpinner />
-    </base-dialog>
+
+    <BaseLoader :loading="isLoading" />
+
     <base-card class="max-w-2xl mx-auto">
       <form
         class="w-full flex flex-col items-center m-4 p-4"

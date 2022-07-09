@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import { useAuthUserStore } from '../stores';
+import AddOrder from '@pages/orders/AddOrder.vue';
+import AddPayment from '@pages/payments/AddPayment.vue';
 import OrdersView from '@pages/orders/OrdersView.vue';
 import PaymentsList from '@pages/payments/PaymentsList.vue';
 import NotFound from '@pages/NotFound.vue';
@@ -21,6 +23,18 @@ const router = createRouter({
       path: '/orders',
       name: 'orders',
       component: OrdersView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/new-order',
+      name: 'new-order',
+      component: AddOrder,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/new-payment',
+      name: 'new-payment',
+      component: AddPayment,
       meta: { requiresAuth: true },
     },
     {

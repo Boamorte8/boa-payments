@@ -27,3 +27,9 @@ export interface Order {
   startDate: string;
   nextDate: string;
 }
+
+export interface OrderState {
+  orders: Order[];
+  loaded: boolean;
+  loading: boolean;
+}

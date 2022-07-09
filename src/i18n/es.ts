@@ -1,7 +1,10 @@
 const es = {
+  amount: 'Monto',
   changeLang: 'Change lang to',
   close: 'Cerrar',
+  description: 'Descripción',
   email: 'Correo',
+  fieldsRequired: '*Campos requeridos',
   login: 'Autenticar',
   loginError: 'Fallo al autenticar. Verifica tus datos de acceso',
   loginErrorGeneric: 'Fallo al autenticar. Intenta más tarde',
@@ -16,13 +19,18 @@ const es = {
   signError: 'Fallo al registrarse. Verifica tus datos de registro',
   signSwitch: 'Autenticarse',
   signup: 'Registrar',
+  title: 'Titulo',
   pageNotFound: {
     title: 'Página no encontrada',
     description:
       'Esta página no pudo ser encontrada - tal vez necesites intentar primero',
   },
+  pageAddOrder: {
+    addTitle: 'Añadir titulo',
+  },
   pageOrders: {
-    emptyMessage: 'No hay ordenes para mostrar aún',
+    emptyMessage: 'No hay ordenes para mostrar aún. ',
+    addNewOrder: 'Añadir nueva orden',
   },
   pagePayments: {
     emptyMessage: 'No hay pagos para mostrar aún',

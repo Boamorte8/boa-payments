@@ -1,3 +1,5 @@
 <template>
-  <div>Orders List</div>
+  <div>
+    <base-card>Add order</base-card>
+  </div>
 </template>
