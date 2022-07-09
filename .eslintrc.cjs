@@ -20,4 +20,10 @@ module.exports = {
       localeDir: [],
     },
   },
+  "prettier/prettier": [
+    "error",
+    {
+      "endOfLine": "auto"
+    },
+  ],
 };

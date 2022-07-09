@@ -1,6 +1,8 @@
 const en = {
+  add: 'Add',
   amount: 'Amount',
   changeLang: 'Change lang to',
+  cancel: 'Cancel',
   close: 'Close',
   description: 'Description',
   email: 'Email',

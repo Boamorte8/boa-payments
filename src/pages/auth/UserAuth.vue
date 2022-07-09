@@ -77,43 +77,42 @@ const handleError = () => {
 
     <BaseLoader :loading="isLoading" />
 
-    <base-card class="max-w-2xl mx-auto">
+    <BaseCard class="max-w-2xl mx-auto">
       <form
         class="w-full flex flex-col items-center m-4 p-4"
         @submit.prevent="submitForm"
       >
-        <base-input
+        <BaseInput
           id="email"
           v-model.trim="email"
           class="form-control"
           type="email"
           name="email"
-          for="email"
           :label="t('email')"
-        ></base-input>
+        ></BaseInput>
 
-        <base-input
+        <BaseInput
           id="password"
-          v-model.trim="password"
+          v-model="password"
           class="form-control"
           type="password"
           name="password"
-          for="password"
           :label="t('password')"
-        ></base-input>
+        ></BaseInput>
 
         <p v-if="!formIsValid" class="text-sm mb-2 text-red-600">
           {{ t('loginFormError') }}
         </p>
 
         <div class="flex flex-col items-center">
-          <base-button class="mb-4" type="submit">{{ t(mode) }}</base-button>
-          <base-button mode="flat" type="reset" @click="switchAuthMode">{{
+          <BaseButton class="mb-4" type="submit">{{ t(mode) }}</BaseButton>
+
+          <BaseButton mode="flat" type="reset" @click="switchAuthMode">{{
             t(switchModeButtonCaption)
-          }}</base-button>
+          }}</BaseButton>
         </div>
       </form>
-    </base-card>
+    </BaseCard>
   </div>
 </template>
 

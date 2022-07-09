@@ -1,6 +1,8 @@
 const es = {
+  add: 'Añadir',
   amount: 'Monto',
   changeLang: 'Change lang to',
+  cancel: 'Cancelar',
   close: 'Cerrar',
   description: 'Descripción',
   email: 'Correo',

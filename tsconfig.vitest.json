@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.node.json",
-  "include": ["src/**/__tests__/*", "src/tests/*"],
+  "include": ["src/**/__tests__/*", "src/tests/*", "src/router/*"],
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",

@@ -5,11 +5,6 @@ const props = defineProps({
     required: false,
     default: null,
   },
-  for: {
-    type: String,
-    required: false,
-    default: null,
-  },
   type: {
     type: String,
     required: false,
@@ -35,7 +30,7 @@ const updateValue = (event: Event) => {
 
 <template>
   <div>
-    <base-label v-if="!!props.label" :for="props.for" class="mb-2">
+    <base-label v-if="!!props.label" :for="props.name" class="mb-2">
       {{ props.label }}
     </base-label>
     <input
