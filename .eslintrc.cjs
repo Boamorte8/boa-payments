@@ -19,11 +19,11 @@ module.exports = {
     'vue-i18n': {
       localeDir: [],
     },
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
-  "prettier/prettier": [
-    "error",
-    {
-      "endOfLine": "auto"
-    },
-  ],
 };
