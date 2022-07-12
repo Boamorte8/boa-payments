@@ -22,6 +22,7 @@ const en = {
   signSwitch: 'Login instead',
   signup: 'Signup',
   title: 'Title',
+  tryAgain: 'Try Again',
   pageNotFound: {
     title: 'Page not found',
     description: 'This page could not be found - maybe you need try first to',
@@ -30,8 +31,9 @@ const en = {
     addTitle: 'Add title',
   },
   pageOrders: {
-    emptyMessage: 'No orders to display yet. ',
     addNewOrder: 'Add new order',
+    emptyMessage: 'No orders to display yet. ',
+    errorLoadingOrders: 'Failed loading orders',
   },
   pagePayments: {
     emptyMessage: 'No payments to display yet',

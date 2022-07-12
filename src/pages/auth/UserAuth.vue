@@ -67,13 +67,13 @@ const handleError = () => {
 
 <template>
   <div class="p-2 md:p-4">
-    <base-dialog
+    <BaseDialog
       :show="!!errorMessage"
       title="An error ocurred"
       @close="handleError"
     >
       <p class="dark:text-white">{{ errorMessage }}</p>
-    </base-dialog>
+    </BaseDialog>
 
     <BaseLoader :loading="isLoading" />
 

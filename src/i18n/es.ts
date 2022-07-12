@@ -22,6 +22,7 @@ const es = {
   signSwitch: 'Autenticarse',
   signup: 'Registrar',
   title: 'Titulo',
+  tryAgain: 'Intentar de nuevo',
   pageNotFound: {
     title: 'Página no encontrada',
     description:
@@ -31,8 +32,9 @@ const es = {
     addTitle: 'Añadir titulo',
   },
   pageOrders: {
-    emptyMessage: 'No hay ordenes para mostrar aún. ',
     addNewOrder: 'Añadir nueva orden',
+    emptyMessage: 'No hay ordenes para mostrar aún. ',
+    errorLoadingOrders: 'Error cargando las ordenes',
   },
   pagePayments: {
     emptyMessage: 'No hay pagos para mostrar aún',
