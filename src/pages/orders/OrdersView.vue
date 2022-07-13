@@ -19,9 +19,10 @@ const loadOrders = async () => {
   isLoading.value = true;
 
   try {
-    await store.loadOrders();
+    const errorMessage = t('pageOrders.errorLoadingOrders');
+    await store.loadOrders(errorMessage);
   } catch (error: any) {
-    errorMessage.value = error || t('pageOrders.errorLoadingOrders');
+    errorMessage.value = error || errorMessage;
   }
 
   isLoading.value = false;

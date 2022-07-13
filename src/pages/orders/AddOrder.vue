@@ -1,14 +1,31 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const title = ref('');
 const description = ref('');
+const amount = ref(0);
+const currency = ref('COP');
+const titleLabel = computed(() => t('title') + '*');
+const titlePlaceholder = computed(
+  () => `${t('add')} ${t('title').toLowerCase()}`
+);
+const descriptionLabel = computed(() => t('description') + '*');
+const descriptionPlaceholder = computed(
+  () => `${t('add')} ${t('description').toLowerCase()}`
+);
+const disabled = computed(() => {
+  return !title.value || amount.value <= 0;
+});
+
+const addNewOrder = () => {
+  console.log('addNewOrder', amount.value, title.value, description.value);
+};
 </script>
 
 <template>
-  <form class="p-4">
+  <form class="p-4" @submit.prevent="addNewOrder">
     <BaseCard>
       <div class="w-full flex flex-col gap-4">
         <div class="flex justify-between pb-4 w-full">
@@ -22,34 +39,45 @@ const description = ref('');
           <BaseInput
             id="title"
             v-model="title"
-            class=""
             type="text"
             name="title"
-            :label="t('title')"
-          ></BaseInput>
+            :label="titleLabel"
+            :placeholder="titlePlaceholder"
+          />
 
           <BaseInput
             id="description"
             v-model="description"
-            class=""
             type="text"
             name="description"
-            :label="t('description')"
-          ></BaseInput>
+            :label="descriptionLabel"
+            :placeholder="descriptionPlaceholder"
+          />
+
+          <CurrencyInput
+            id="amount"
+            v-model="amount"
+            name="amount"
+            :label="t('amount') + '*'"
+            :options="{ currency }"
+          />
         </div>
 
         <div class="flex justify-end gap-4">
           <BaseButton
             mode="outline"
+            class="outline-none"
             type="reset"
             link
+            :disabled="disabled"
             :to="{ name: 'orders' }"
-            class="outline-none"
           >
             {{ t('cancel') }}
           </BaseButton>
 
-          <BaseButton type="submit">{{ t('add') }}</BaseButton>
+          <BaseButton type="submit" :disabled="disabled">
+            {{ t('add') }}
+          </BaseButton>
         </div>
       </div>
     </BaseCard>

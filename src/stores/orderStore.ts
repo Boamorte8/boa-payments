@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
-import { useI18n } from 'vue-i18n';
 
 import { endpoints } from '@app/config';
 import { useAuthUserStore } from './authStore';
 import type { OrderState } from './models';
 
+// TODO - Add unit tests
 export const useOrderStore = defineStore('order', {
   state: (): OrderState => ({
     orders: [],
@@ -15,8 +15,7 @@ export const useOrderStore = defineStore('order', {
     areOrdersLoaded: ({ orders, loaded }) => loaded && !!orders.length,
   },
   actions: {
-    async loadOrders() {
-      const { t } = useI18n();
+    async loadOrders(errorMessage: string) {
       let { userId, token } = useAuthUserStore();
       this.loading = true;
       this.loaded = false;
@@ -28,8 +27,9 @@ export const useOrderStore = defineStore('order', {
       const response = await fetch(endpoints.getOrders(userId, token));
       const responseData = await response.json();
       if (!response.ok) {
-        const errorMessage = t('pageOrders.errorLoadingOrders');
         const error = new Error(responseData.message || errorMessage);
+        this.loaded = true;
+        this.loading = false;
         throw error;
       }
       const orders = [];

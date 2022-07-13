@@ -107,9 +107,9 @@ const handleError = () => {
         <div class="flex flex-col items-center">
           <BaseButton class="mb-4" type="submit">{{ t(mode) }}</BaseButton>
 
-          <BaseButton mode="flat" type="reset" @click="switchAuthMode">{{
-            t(switchModeButtonCaption)
-          }}</BaseButton>
+          <BaseButton mode="flat" type="reset" @click="switchAuthMode">
+            {{ t(switchModeButtonCaption) }}
+          </BaseButton>
         </div>
       </form>
     </BaseCard>

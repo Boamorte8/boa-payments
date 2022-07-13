@@ -2,22 +2,22 @@ import { createTestingPinia, type TestingOptions } from '@pinia/testing';
 import { describe, expect, test, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 
-import BaseInput from '../BaseInput.vue';
+import CurrencyInput from '../CurrencyInput.vue';
 import BaseLabel from '@atoms/BaseLabel.vue';
 import i18n from '../../i18n';
 
-describe('BaseInput', () => {
+describe('CurrencyInput', () => {
   const defaultTemplate = `
-    <BaseInput v-model="test" />
+    <CurrencyInput v-model="test" :options="{ currency: 'COP' }" />
   `;
   function factory(template = defaultTemplate, options?: TestingOptions) {
     const App = {
       components: {
-        BaseInput,
+        CurrencyInput,
         BaseLabel,
       },
       template,
-      data: () => ({ test: '' }),
+      data: () => ({ test: 0 }),
     };
     const wrapper = mount(App, {
       global: {
@@ -45,7 +45,7 @@ describe('BaseInput', () => {
 
   test('should create component with label', async () => {
     const template = `
-    <BaseInput v-model="test" label="Test" />
+    <CurrencyInput v-model="test" label="Test" :options="{ currency: 'COP' }" />
   `;
     const { wrapper } = factory(template, {
       createSpy: vi.fn,

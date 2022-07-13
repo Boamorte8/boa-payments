@@ -1,14 +1,20 @@
 <script setup lang="ts">
+import { watchDebounced } from '@vueuse/core';
+import { watch } from 'vue';
+import {
+  type CurrencyInputOptions,
+  useCurrencyInput,
+} from 'vue-currency-input';
+
 const props = defineProps({
   label: {
     type: String,
     required: false,
     default: null,
   },
-  type: {
-    type: String,
-    required: false,
-    default: 'text',
+  options: {
+    type: Object,
+    required: true,
   },
   name: {
     type: String,
@@ -21,16 +27,34 @@ const props = defineProps({
     default: null,
   },
   modelValue: {
-    type: String,
+    type: Number,
     default: null,
   },
 });
+const { inputRef, numberValue, setOptions, setValue } = useCurrencyInput(
+  props.options as CurrencyInputOptions,
+  false
+);
 
 const emit = defineEmits(['update:modelValue']);
 
-const updateValue = (event: Event) => {
-  emit('update:modelValue', (event.target as HTMLInputElement).value);
-};
+watch(
+  () => props.modelValue,
+  (value) => {
+    setValue(value);
+  }
+);
+
+watch(
+  () => props.options,
+  (options) => {
+    setOptions(options as CurrencyInputOptions);
+  }
+);
+
+watchDebounced(numberValue, (value) => emit('update:modelValue', value), {
+  debounce: 1000,
+});
 </script>
 
 <template>
@@ -39,12 +63,11 @@ const updateValue = (event: Event) => {
       {{ props.label }}
     </BaseLabel>
     <input
+      ref="inputRef"
       class="w-full h-10 block border border-transparent py-2 px-4 rounded-md dark:bg-background-300 dark:text-white focus:border-primary-700 focus:outline-none focus:bg-gray-50"
-      :type="props.type"
+      type="text"
       :name="props.name"
-      :value="modelValue"
       :placeholder="props.placeholder ?? props.label"
-      @input="updateValue"
     />
   </div>
 </template>

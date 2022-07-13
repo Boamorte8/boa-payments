@@ -21,6 +21,11 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  disabled: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
   type: {
     type: String as PropType<ButtonType>,
     required: false,
@@ -40,13 +45,25 @@ const props = defineProps({
     class="button"
     :class="props.mode"
     :type="props.type"
+    :disabled="props.disabled"
   >
     <slot></slot>
   </button>
-  <MenuButton v-else-if="props.menu" class="button" :class="props.mode">
+  <MenuButton
+    v-else-if="props.menu"
+    class="button"
+    :class="props.mode"
+    :disabled="props.disabled"
+  >
     <slot></slot>
   </MenuButton>
-  <router-link v-else class="link" :to="props.to" :class="props.mode">
+  <router-link
+    v-else
+    class="link"
+    :to="props.to"
+    :class="props.mode"
+    :disabled="props.disabled"
+  >
     <slot></slot>
   </router-link>
 </template>
@@ -55,7 +72,8 @@ const props = defineProps({
 .button,
 .link {
   @apply inline-flex items-center no-underline text-white leading-4 h-9 rounded-lg py-2 px-4 border-2 border-primary
-    bg-primary hover:bg-primary-700 hover:border-primary-700 active:bg-primary active:border-primary-300;
+    bg-primary hover:bg-primary-700 hover:border-primary-700 active:bg-primary active:border-primary-300
+    disabled:bg-gray-500 disabled:border-gray-500;
 }
 
 .button.router-link-active,
