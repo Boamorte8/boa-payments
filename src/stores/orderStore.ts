@@ -4,7 +4,6 @@ import { endpoints } from '@app/config';
 import { useAuthUserStore } from './authStore';
 import type { OrderState } from './models';
 
-// TODO - Add unit tests
 export const useOrderStore = defineStore('order', {
   state: (): OrderState => ({
     orders: [],

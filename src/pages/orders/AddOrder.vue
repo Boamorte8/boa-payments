@@ -41,6 +41,18 @@ watch(
 const addNewOrder = () => {
   console.log('addNewOrder', amount.value, title.value, description.value);
 };
+
+// TODO - 1 Add checkbox or toggle component
+// TODO - 2 Add subscription input
+// TODO - 3 Add datepicker component
+// TODO - 4 Add start date input
+// TODO - 5 Add next date input
+// TODO - 6 Add entity input
+// TODO - 7 Add get entities action
+// TODO - 8 Add 'Add Entity' modal
+// TODO - 9 Add categories input
+// TODO - 10 Add get categories action
+// TODO - 11 Add 'Add Categories' modal
 </script>
 
 <template>

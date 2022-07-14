@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { watchDebounced } from '@vueuse/core';
-import { watch } from 'vue';
 import {
   type CurrencyInputOptions,
   useCurrencyInput,
 } from 'vue-currency-input';
+import { watch } from 'vue';
+import { watchDebounced } from '@vueuse/core';
 
 const props = defineProps({
   label: {
@@ -54,6 +54,7 @@ watch(
 
 watchDebounced(numberValue, (value) => emit('update:modelValue', value), {
   debounce: 1000,
+  maxWait: 1200,
 });
 </script>
 
