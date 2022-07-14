@@ -4,9 +4,12 @@ const es = {
   changeLang: 'Change lang to',
   cancel: 'Cancelar',
   close: 'Cerrar',
+  currency: 'Moneda',
+  debt: 'Deuda',
   description: 'Descripción',
   email: 'Correo',
   fieldsRequired: '*Campos requeridos',
+  loan: 'Préstamo',
   login: 'Autenticar',
   loginError: 'Fallo al autenticar. Verifica tus datos de acceso',
   loginErrorGeneric: 'Fallo al autenticar. Intenta más tarde',
@@ -23,6 +26,7 @@ const es = {
   signup: 'Registrar',
   title: 'Titulo',
   tryAgain: 'Intentar de nuevo',
+  type: 'Tipo',
   pageNotFound: {
     title: 'Página no encontrada',
     description:

@@ -1,7 +1,14 @@
+import type { BaseSelectItem } from '@app/models';
+
 export enum OrderType {
   LOAN = 'LOAN',
   DEBT = 'DEBT',
 }
+
+export const orderTypes: BaseSelectItem[] = [
+  { text: 'loan', value: OrderType.LOAN },
+  { text: 'debt', value: OrderType.DEBT },
+];
 
 export interface Entity {
   id: string;

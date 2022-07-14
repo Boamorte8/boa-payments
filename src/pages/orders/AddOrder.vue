@@ -1,12 +1,22 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+import type { BaseSelectItem } from '@app/models';
+import { currencies, orderTypes, type Currency } from '@stores/models';
 
 const { t } = useI18n();
 const title = ref('');
 const description = ref('');
 const amount = ref(0);
 const currency = ref('COP');
+const currencyList = currencies;
+const orderTypeList: BaseSelectItem[] = orderTypes.map((type) => ({
+  ...type,
+  text: t(type.text),
+}));
+const currencyModel = ref(null);
+const type = ref(null);
 const titleLabel = computed(() => t('title') + '*');
 const titlePlaceholder = computed(
   () => `${t('add')} ${t('title').toLowerCase()}`
@@ -18,6 +28,15 @@ const descriptionPlaceholder = computed(
 const disabled = computed(() => {
   return !title.value || amount.value <= 0;
 });
+
+watch(
+  () => currencyModel.value,
+  (value) => {
+    if (value) {
+      currency.value = (value as Currency).value;
+    }
+  }
+);
 
 const addNewOrder = () => {
   console.log('addNewOrder', amount.value, title.value, description.value);
@@ -60,6 +79,22 @@ const addNewOrder = () => {
             name="amount"
             :label="t('amount') + '*'"
             :options="{ currency }"
+          />
+          <BaseSelect
+            id="currency"
+            v-model="currencyModel"
+            item-key="value"
+            :default-value-index="1"
+            :items="currencyList"
+            :label="t('currency')"
+          />
+          <BaseSelect
+            id="type"
+            v-model="type"
+            item-key="text"
+            :default-value-index="0"
+            :items="orderTypeList"
+            :label="t('type')"
           />
         </div>
 

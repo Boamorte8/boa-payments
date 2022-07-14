@@ -28,7 +28,7 @@ describe('OrderStore', () => {
       }
     });
 
-    test('should do an http request and signIn data', async () => {
+    test('should do an http request and return data', async () => {
       const authStore = useAuthUserStore();
       const orderStore = useOrderStore();
       authStore.userId = 'userIdTest';
