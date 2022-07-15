@@ -41,6 +41,11 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  name: {
+    type: String,
+    required: false,
+    default: null,
+  },
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -65,7 +70,9 @@ const handleDate = (modelData: Date) => {
       :format="props.formatInput"
       :placeholder="props.placeholder"
       :min-date="props.minDate"
+      :name="props.name"
       :enable-time-picker="props.enableTimePicker"
+      teleport="#testDiv"
       @update:model-value="handleDate"
     />
   </div>

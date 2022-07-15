@@ -19,7 +19,9 @@ const loadOrders = async () => {
   isLoading.value = true;
 
   try {
-    const errorMessage = t('pageOrders.errorLoadingOrders');
+    const errorMessage = t('errorLoadingEntity', {
+      entity: t('orders', 2).toLowerCase(),
+    });
     await store.loadOrders(errorMessage);
   } catch (error: any) {
     errorMessage.value = error || errorMessage;
@@ -50,12 +52,20 @@ const onAddNewOrder = () => {
 
     <EmptyMessage v-if="!orders && !errorLoadingMessage" class="pt-5">
       <p class="dark:text-white">
-        {{ t('pageOrders.emptyMessage') }}
+        {{
+          t('emptyEntityMessage', {
+            entity: t('orders', 2).toLowerCase(),
+          })
+        }}
         <router-link
           class="text-primary-700 dark:text-primary-300"
           :to="{ name: 'new-order' }"
         >
-          {{ t('pageOrders.addNewOrder') }}
+          {{
+            t('addNewEntity', {
+              entity: t('orders').toLowerCase(),
+            })
+          }}
         </router-link>
       </p>
     </EmptyMessage>

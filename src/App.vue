@@ -3,7 +3,7 @@ import TheHeader from '@organisms/TheHeader.vue';
 </script>
 
 <template>
-  <div class="body dark:bg-background-700 h-screen">
+  <div class="body dark:bg-background-700 min-h-screen h-full">
     <the-header></the-header>
     <router-view v-slot="slotProps">
       <transition name="route" mode="out-in">

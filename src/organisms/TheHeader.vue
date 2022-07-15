@@ -37,10 +37,10 @@ prefStore.updateTheme(UserTheme.DARK);
           </template>
           <template v-else>
             <base-button link :to="{ name: 'orders' }">{{
-              t('orders')
+              t('orders', 2)
             }}</base-button>
             <base-button link :to="{ name: 'payments' }">{{
-              t('payments')
+              t('payments', 2)
             }}</base-button>
           </template>
           <base-button menu class="inline-flex items-center">

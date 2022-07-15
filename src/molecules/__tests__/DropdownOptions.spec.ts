@@ -19,12 +19,11 @@ describe('DropdownOptions', () => {
         BaseButton,
         DropdownOptions,
         Menu,
-        MenuButton,
       },
       template: `
         <Menu>
-          <base-button :menu="true">Options</base-button>
-          <dropdown-options></dropdown-options>
+          <BaseButton :menu="true">Options</BaseButton>
+          <DropdownOptions />
         </Menu>
       `,
     };
@@ -33,6 +32,7 @@ describe('DropdownOptions', () => {
         components: {
           DropdownItem,
           LogoutIcon,
+          MenuButton,
           TranslateIcon,
         },
         plugins: [i18n, router, createTestingPinia(options)],

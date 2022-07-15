@@ -1,15 +1,17 @@
 import { createTestingPinia, type TestingOptions } from '@pinia/testing';
 import { describe, expect, test, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
+import { ref } from 'vue';
 
 import BaseLabel from '@atoms/BaseLabel.vue';
 import BaseCalendar from '../BaseCalendar.vue';
 import i18n from '../../i18n';
-import { ref } from 'vue';
 
 describe('BaseCalendar', () => {
   const defaultTemplate = `
-    <BaseCalendar v-model="test" />
+    <div id="testDiv">
+      <BaseCalendar v-model="test" />
+    </div>
   `;
   function factory(template = defaultTemplate, options?: TestingOptions) {
     const testModel = ref();
@@ -62,22 +64,4 @@ describe('BaseCalendar', () => {
     expect(input.element.value).toEqual('');
     expect(testModel.value).toBeUndefined();
   });
-
-  // test('should open datepicker menu on click', async () => {
-  //   const template = `<BaseCalendar v-model="test" label="Test" />`;
-  //   const { wrapper, testModel } = factory(template, {
-  //     createSpy: vi.fn,
-  //   });
-
-  //   const input = wrapper.find('input');
-  //   const label = wrapper.find('label');
-  //   await input.trigger('click');
-
-  //   console.log(wrapper.html());
-  //   expect(input.exists()).toBeTruthy();
-  //   expect(label.exists()).toBeTruthy();
-  //   expect(label.text()).toBe('Test');
-  //   expect(input.element.value).toEqual('');
-  //   expect(testModel.value).toBeUndefined();
-  // });
 });

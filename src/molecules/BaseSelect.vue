@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
 import {
   Listbox,
   ListboxButton,
   ListboxOptions,
   ListboxOption,
 } from '@headlessui/vue';
+import { ref } from 'vue';
 
 import type { SelectType } from '@app/models';
 
@@ -32,6 +32,21 @@ const props = defineProps({
     required: false,
     default: null,
   },
+  placeholder: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  noItemsMessage: {
+    type: String,
+    required: false,
+    default: 'There are no items available',
+  },
+  name: {
+    type: String,
+    required: false,
+    default: null,
+  },
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -48,7 +63,11 @@ const handleDate = (modelData: unknown) => {
 </script>
 
 <template>
-  <Listbox v-model="selectedItem" @update:model-value="handleDate">
+  <Listbox
+    v-model="selectedItem"
+    :name="props.name"
+    @update:model-value="handleDate"
+  >
     <div class="relative">
       <BaseLabel v-if="!!props.label">{{ props.label }}</BaseLabel>
       <ListboxButton
@@ -58,6 +77,9 @@ const handleDate = (modelData: unknown) => {
           <template v-if="!!selectedItem">
             {{ selectedItem[props.itemKey] }}
           </template>
+          <span v-else class="font-normal text-gray-400">
+            {{ props.placeholder }}
+          </span>
         </span>
         <span class="pointer-events-none flex items-center">
           <SelectIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -72,6 +94,12 @@ const handleDate = (modelData: unknown) => {
         <ListboxOptions
           class="absolute mt-2 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-background-300"
         >
+          <div
+            v-if="!props.items || !props.items.length"
+            class="p-4 font-normal text-gray-400"
+          >
+            {{ props.noItemsMessage }}
+          </div>
           <ListboxOption
             v-for="item in (props.items as SelectType[])"
             v-slot="{ active, selected }"
