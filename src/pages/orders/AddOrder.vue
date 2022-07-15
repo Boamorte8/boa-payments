@@ -10,6 +10,9 @@ const title = ref('');
 const description = ref('');
 const amount = ref(0);
 const currency = ref('COP');
+const isSubscription = ref(false);
+const startDate = ref();
+const nextDate = ref();
 const currencyList = currencies;
 const orderTypeList: BaseSelectItem[] = orderTypes.map((type) => ({
   ...type,
@@ -17,6 +20,8 @@ const orderTypeList: BaseSelectItem[] = orderTypes.map((type) => ({
 }));
 const currencyModel = ref(null);
 const type = ref(null);
+const startDateLabel = computed(() => t('startDate') + '*');
+const nextDateLabel = computed(() => t('nextDate') + '*');
 const titleLabel = computed(() => t('title') + '*');
 const titlePlaceholder = computed(
   () => `${t('add')} ${t('title').toLowerCase()}`
@@ -39,14 +44,11 @@ watch(
 );
 
 const addNewOrder = () => {
-  console.log('addNewOrder', amount.value, title.value, description.value);
+  console.log('addNewOrder', amount.value, title.value, description.value, isSubscription.value);
+  console.log('addNewOrder', startDate.value, nextDate.value);
 };
 
-// TODO - 1 Add checkbox or toggle component
-// TODO - 2 Add subscription input
 // TODO - 3 Add datepicker component
-// TODO - 4 Add start date input
-// TODO - 5 Add next date input
 // TODO - 6 Add entity input
 // TODO - 7 Add get entities action
 // TODO - 8 Add 'Add Entity' modal
@@ -107,6 +109,24 @@ const addNewOrder = () => {
             :default-value-index="0"
             :items="orderTypeList"
             :label="t('type')"
+          />
+          <BaseToggle
+            id="subscription"
+            v-model="isSubscription"
+            :label="t('pageAddOrder.isSubscription')"
+          />
+          <BaseCalendar
+            id="startDate"
+            v-model="startDate"
+            :label="startDateLabel"
+            :placeholder="t('selectDate')"
+          />
+          <BaseCalendar
+            id="nextDate"
+            v-model="nextDate"
+            :label="nextDateLabel"
+            :placeholder="t('selectDate')"
+            :min-date="startDate"
           />
         </div>
 

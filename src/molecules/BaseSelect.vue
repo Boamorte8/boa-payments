@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import {
   Listbox,
   ListboxButton,
@@ -42,14 +42,13 @@ const defaultValue =
     : undefined;
 const selectedItem = ref(defaultValue);
 
-watch(
-  () => selectedItem.value,
-  (value) => emit('update:modelValue', value)
-);
+const handleDate = (modelData: unknown) => {
+  emit('update:modelValue', modelData);
+};
 </script>
 
 <template>
-  <Listbox v-model="selectedItem">
+  <Listbox v-model="selectedItem" @update:model-value="handleDate">
     <div class="relative">
       <BaseLabel v-if="!!props.label">{{ props.label }}</BaseLabel>
       <ListboxButton

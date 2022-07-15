@@ -54,7 +54,6 @@ watch(
 
 watchDebounced(numberValue, (value) => emit('update:modelValue', value), {
   debounce: 1000,
-  maxWait: 1200,
 });
 </script>
 
