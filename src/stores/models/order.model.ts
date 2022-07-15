@@ -1,4 +1,6 @@
 import type { BaseSelectItem } from '@app/models';
+import type { Category } from './category.model';
+import type { Entity } from './entity.model';
 
 export enum OrderType {
   LOAN = 'LOAN',
@@ -9,17 +11,6 @@ export const orderTypes: BaseSelectItem[] = [
   { text: 'loan', value: OrderType.LOAN },
   { text: 'debt', value: OrderType.DEBT },
 ];
-
-export interface Entity {
-  id: string;
-  name: string;
-  description: string;
-}
-
-export interface Category {
-  id: string;
-  name: string;
-}
 
 export interface Order {
   id: string;

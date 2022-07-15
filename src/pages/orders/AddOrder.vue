@@ -3,14 +3,12 @@ import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import type { BaseSelectItem } from '@app/models';
-import {
-  currencies,
-  orderTypes,
-  type Category,
-  type Currency,
-  type Entity,
-} from '@stores/models';
+import { currencies, orderTypes, type Currency } from '@stores/models';
+import { useCategoryStore } from '@stores/categoryStore';
+import { useEntityStore } from '@stores/entityStore';
 
+const entityStore = useEntityStore();
+const categoryStore = useCategoryStore();
 const { t } = useI18n();
 const title = ref('');
 const description = ref('');
@@ -19,10 +17,8 @@ const currency = ref('COP');
 const isSubscription = ref(false);
 const startDate = ref();
 const nextDate = ref();
-const entity = ref();
 const category = ref();
-const entities: Entity[] = [];
-const categories: Category[] = [];
+const entity = ref();
 const currencyList = currencies;
 const orderTypeList: BaseSelectItem[] = orderTypes.map((type) => ({
   ...type,
@@ -30,6 +26,9 @@ const orderTypeList: BaseSelectItem[] = orderTypes.map((type) => ({
 }));
 const currencyModel = ref(null);
 const type = ref(null);
+const categories = computed(() => categoryStore.categories);
+const entities = computed(() => entityStore.entities);
+const isLoading = computed(() => entityStore.loading || categoryStore.loading);
 const startDateLabel = computed(() => t('startDate') + '*');
 const nextDateLabel = computed(() => t('nextDate') + '*');
 const titleLabel = computed(() => t('title') + '*');
@@ -48,6 +47,30 @@ watch(
     }
   }
 );
+
+const loadEntities = async () => {
+  try {
+    const errorMessage = t('errorLoadingEntity', {
+      entity: t('entity', 2).toLowerCase(),
+    });
+    await entityStore.loadEntities(errorMessage);
+  } catch (error: any) {
+    // errorMessage.value = error || errorMessage;
+  }
+};
+const loadCategories = async () => {
+  try {
+    const errorMessage = t('errorLoadingEntity', {
+      entity: t('category', 2).toLowerCase(),
+    });
+    await categoryStore.loadCategories(errorMessage);
+  } catch (error: any) {
+    // errorMessage.value = error || errorMessage;
+  }
+};
+
+loadEntities();
+loadCategories();
 
 const addNewOrder = () => {
   console.log(
@@ -68,177 +91,184 @@ const addNewCategory = () => {
   console.log('addNewCategory');
 };
 
-// TODO - 1 Add get entities action
+// TODO - 1 Create toast component
 // TODO - 2 Add 'Add Entity' modal
-// TODO - 3 Add get categories action
-// TODO - 4 Add 'Add Categories' modal
-// TODO - 5 Add create order action
+// TODO - 3 Add 'Add Categories' modal
+// TODO - 4 Add create order action
 </script>
 
 <template>
-  <form class="p-4" @submit.prevent="addNewOrder">
-    <BaseCard>
-      <div class="w-full flex flex-col gap-4">
-        <div class="flex justify-between pb-4 w-full">
-          <h2 class="text-xl dark:text-white font-bold">
-            {{
-              t('addNewEntity', {
-                entity: t('orders').toLowerCase(),
-              })
-            }}
-          </h2>
+  <div>
+    <BaseLoader :loading="isLoading" />
 
-          <p class="text-sm dark:text-white">{{ t('fieldsRequired') }}</p>
-        </div>
+    <form class="p-4" @submit.prevent="addNewOrder">
+      <BaseCard>
+        <div class="w-full flex flex-col gap-4">
+          <div class="flex justify-between pb-4 w-full">
+            <h2 class="text-xl dark:text-white font-bold">
+              {{
+                t('addNewEntity', {
+                  entity: t('orders').toLowerCase(),
+                })
+              }}
+            </h2>
 
-        <div class="flex gap-4 flex-wrap">
-          <BaseInput
-            id="title"
-            v-model="title"
-            type="text"
-            name="title"
-            :label="titleLabel"
-            :placeholder="t('addEntity', { entity: t('title').toLowerCase() })"
-          />
+            <p class="text-sm dark:text-white">{{ t('fieldsRequired') }}</p>
+          </div>
 
-          <BaseInput
-            id="description"
-            v-model="description"
-            type="text"
-            name="description"
-            :label="descriptionLabel"
-            :placeholder="
-              t('addEntity', { entity: t('description').toLowerCase() })
-            "
-          />
+          <div class="flex gap-4 flex-wrap">
+            <BaseInput
+              id="title"
+              v-model="title"
+              type="text"
+              name="title"
+              :label="titleLabel"
+              :placeholder="
+                t('addEntity', { entity: t('title').toLowerCase() })
+              "
+            />
 
-          <CurrencyInput
-            id="amount"
-            v-model="amount"
-            name="amount"
-            :label="t('amount') + '*'"
-            :options="{ currency }"
-          />
+            <BaseInput
+              id="description"
+              v-model="description"
+              type="text"
+              name="description"
+              :label="descriptionLabel"
+              :placeholder="
+                t('addEntity', { entity: t('description').toLowerCase() })
+              "
+            />
 
-          <BaseSelect
-            id="currency"
-            v-model="currencyModel"
-            item-key="value"
-            name="currency"
-            :default-value-index="1"
-            :items="currencyList"
-            :label="t('currency')"
-          />
+            <CurrencyInput
+              id="amount"
+              v-model="amount"
+              name="amount"
+              :label="t('amount') + '*'"
+              :options="{ currency }"
+            />
 
-          <BaseSelect
-            id="type"
-            v-model="type"
-            item-key="text"
-            name="type"
-            :default-value-index="0"
-            :items="orderTypeList"
-            :label="t('type')"
-          />
+            <BaseSelect
+              id="currency"
+              v-model="currencyModel"
+              item-key="value"
+              name="currency"
+              :default-value-index="1"
+              :items="currencyList"
+              :label="t('currency')"
+            />
 
-          <BaseToggle
-            id="subscription"
-            v-model="isSubscription"
-            :label="t('pageAddOrder.isSubscription')"
-          />
+            <BaseSelect
+              id="type"
+              v-model="type"
+              item-key="text"
+              name="type"
+              :default-value-index="0"
+              :items="orderTypeList"
+              :label="t('type')"
+            />
 
-          <BaseCalendar
-            id="startDate"
-            v-model="startDate"
-            name="startDate"
-            :label="startDateLabel"
-            :placeholder="t('addEntity', { entity: t('date').toLowerCase() })"
-          />
+            <BaseToggle
+              id="subscription"
+              v-model="isSubscription"
+              :label="t('pageAddOrder.isSubscription')"
+            />
 
-          <BaseCalendar
-            id="nextDate"
-            v-model="nextDate"
-            name="nextDate"
-            :label="nextDateLabel"
-            :placeholder="t('addEntity', { entity: t('date').toLowerCase() })"
-            :min-date="startDate"
-          />
+            <BaseCalendar
+              id="startDate"
+              v-model="startDate"
+              name="startDate"
+              :label="startDateLabel"
+              :placeholder="t('addEntity', { entity: t('date').toLowerCase() })"
+            />
 
-          <div>
-            <BaseLabel class="mb-2">{{ entityLabel }}</BaseLabel>
+            <BaseCalendar
+              id="nextDate"
+              v-model="nextDate"
+              name="nextDate"
+              :label="nextDateLabel"
+              :placeholder="t('addEntity', { entity: t('date').toLowerCase() })"
+              :min-date="startDate"
+            />
 
-            <div class="flex gap-4 items-center">
-              <BaseSelect
-                id="entity"
-                v-model="entity"
-                item-key="name"
-                name="entity"
-                :default-value-index="0"
-                :items="entities"
-                :placeholder="
-                  t('addEntity', { entity: t('entity').toLowerCase() })
-                "
-                :no-items-message="
-                  t('noEntities', { entities: t('entity', 2).toLowerCase() })
-                "
-              />
+            <div>
+              <BaseLabel class="mb-2">{{ entityLabel }}</BaseLabel>
 
-              <BaseButton mode="flat" @click="addNewEntity">
-                {{
-                  t('addNewEntity', {
-                    entity: t('entity').toLowerCase(),
-                  })
-                }}
-              </BaseButton>
+              <div class="flex gap-4 items-center">
+                <BaseSelect
+                  id="entity"
+                  v-model="entity"
+                  item-key="name"
+                  name="entity"
+                  :default-value-index="0"
+                  :items="entities"
+                  :placeholder="
+                    t('addEntity', { entity: t('entity').toLowerCase() })
+                  "
+                  :no-items-message="
+                    t('noEntities', { entities: t('entity', 2).toLowerCase() })
+                  "
+                />
+
+                <BaseButton mode="flat" @click="addNewEntity">
+                  {{
+                    t('addNewEntity', {
+                      entity: t('entity').toLowerCase(),
+                    })
+                  }}
+                </BaseButton>
+              </div>
+            </div>
+
+            <div>
+              <BaseLabel class="mb-2">{{ categoryLabel }}</BaseLabel>
+
+              <div class="flex gap-4 items-center">
+                <BaseSelect
+                  id="category"
+                  v-model="category"
+                  item-key="name"
+                  name="category"
+                  :default-value-index="0"
+                  :items="categories"
+                  :placeholder="
+                    t('addEntity', { entity: t('category', 2).toLowerCase() })
+                  "
+                  :no-items-message="
+                    t('noEntities', {
+                      entities: t('category', 2).toLowerCase(),
+                    })
+                  "
+                />
+
+                <BaseButton mode="flat" @click="addNewCategory">
+                  {{
+                    t('addNewEntity', {
+                      entity: t('category').toLowerCase(),
+                    })
+                  }}
+                </BaseButton>
+              </div>
             </div>
           </div>
 
-          <div>
-            <BaseLabel class="mb-2">{{ categoryLabel }}</BaseLabel>
+          <div class="flex justify-end gap-4">
+            <BaseButton
+              mode="outline"
+              class="outline-none"
+              type="reset"
+              link
+              :disabled="disabled"
+              :to="{ name: 'orders' }"
+            >
+              {{ t('cancel') }}
+            </BaseButton>
 
-            <div class="flex gap-4 items-center">
-              <BaseSelect
-                id="category"
-                v-model="category"
-                item-key="name"
-                name="category"
-                :default-value-index="0"
-                :items="categories"
-                :placeholder="
-                  t('addEntity', { entity: t('category', 2).toLowerCase() })
-                "
-                :no-items-message="
-                  t('noEntities', { entities: t('category', 2).toLowerCase() })
-                "
-              />
-
-              <BaseButton mode="flat" @click="addNewCategory">
-                {{
-                  t('addNewEntity', {
-                    entity: t('category').toLowerCase(),
-                  })
-                }}
-              </BaseButton>
-            </div>
+            <BaseButton type="submit" :disabled="disabled">
+              {{ t('add') }}
+            </BaseButton>
           </div>
         </div>
-
-        <div class="flex justify-end gap-4">
-          <BaseButton
-            mode="outline"
-            class="outline-none"
-            type="reset"
-            link
-            :disabled="disabled"
-            :to="{ name: 'orders' }"
-          >
-            {{ t('cancel') }}
-          </BaseButton>
-
-          <BaseButton type="submit" :disabled="disabled">
-            {{ t('add') }}
-          </BaseButton>
-        </div>
-      </div>
-    </BaseCard>
-  </form>
+      </BaseCard>
+    </form>
+  </div>
 </template>

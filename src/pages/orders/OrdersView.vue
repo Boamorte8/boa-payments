@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
-import { useOrderStore } from '../../stores';
+import { useOrderStore } from '@stores/orderStore';
 
 const { t } = useI18n();
 const router = useRouter();
