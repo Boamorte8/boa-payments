@@ -11,6 +11,7 @@ export interface Toast {
   title: string;
   type: TypeToast;
   message: string;
+  stopAutoDismiss?: boolean;
 }
 
 export interface ToastState {

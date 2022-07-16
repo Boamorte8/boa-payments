@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { computed } from '@vue/reactivity';
-
 import { breakpointsTailwind, useMediaQuery } from '@vueuse/core';
+import { computed } from 'vue';
 import { Menu } from '@headlessui/vue';
 import { useI18n } from 'vue-i18n';
 
-import { UserTheme } from '@stores/models';
-import { useAuthUserStore, usePreferencesUserStore } from '@stores/index';
 import DropdownOptions from '@molecules/DropdownOptions.vue';
 import LogoApp from '@atoms/LogoApp.vue';
 import { LogoType } from '@app/models';
+import { UserTheme } from '@stores/models';
+import { useAuthUserStore, usePreferencesUserStore } from '@stores/index';
 
 const { t } = useI18n();
 const store = useAuthUserStore();

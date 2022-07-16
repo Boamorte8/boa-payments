@@ -59,7 +59,7 @@ const displayError = (error: string) => {
   toastStore.addToast({
     id: 0,
     title: t('error'),
-    type: TypeToast.ERROR,
+    type: TypeToast.WARNING,
     message: error,
   });
 };
@@ -87,7 +87,6 @@ const loadCategories = async () => {
 
 loadEntities();
 loadCategories();
-displayError('Testing toast');
 
 const addNewOrder = () => {
   console.log(
@@ -102,6 +101,7 @@ const addNewOrder = () => {
 
 const addNewEntity = () => {
   console.log('addNewEntity');
+  displayError('Testing toast');
 };
 
 const addNewCategory = () => {

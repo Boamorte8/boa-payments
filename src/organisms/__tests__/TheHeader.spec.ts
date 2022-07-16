@@ -26,9 +26,9 @@ describe('TheHeader', () => {
           TranslateIcon,
         },
         plugins: [i18n, router, createTestingPinia(options)],
-      },
-      stubs: {
-        RouterLink: RouterLinkStub,
+        stubs: {
+          RouterLink: RouterLinkStub,
+        },
       },
     });
 

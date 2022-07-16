@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TheHeader from '@organisms/TheHeader.vue';
-import ToastContainer from '@molecules/ToastContainer.vue';
+import ToastContainer from '@organisms/ToastContainer.vue';
 </script>
 
 <template>
