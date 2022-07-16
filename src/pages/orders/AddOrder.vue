@@ -3,12 +3,19 @@ import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import type { BaseSelectItem } from '@app/models';
-import { currencies, orderTypes, type Currency } from '@stores/models';
+import {
+  currencies,
+  orderTypes,
+  TypeToast,
+  type Currency,
+} from '@stores/models';
 import { useCategoryStore } from '@stores/categoryStore';
 import { useEntityStore } from '@stores/entityStore';
+import { useToastStore } from '@stores/toastStore';
 
-const entityStore = useEntityStore();
 const categoryStore = useCategoryStore();
+const entityStore = useEntityStore();
+const toastStore = useToastStore();
 const { t } = useI18n();
 const title = ref('');
 const description = ref('');
@@ -48,6 +55,15 @@ watch(
   }
 );
 
+const displayError = (error: string) => {
+  toastStore.addToast({
+    id: 0,
+    title: t('error'),
+    type: TypeToast.ERROR,
+    message: error,
+  });
+};
+
 const loadEntities = async () => {
   try {
     const errorMessage = t('errorLoadingEntity', {
@@ -55,7 +71,7 @@ const loadEntities = async () => {
     });
     await entityStore.loadEntities(errorMessage);
   } catch (error: any) {
-    // errorMessage.value = error || errorMessage;
+    displayError(error);
   }
 };
 const loadCategories = async () => {
@@ -65,12 +81,13 @@ const loadCategories = async () => {
     });
     await categoryStore.loadCategories(errorMessage);
   } catch (error: any) {
-    // errorMessage.value = error || errorMessage;
+    displayError(error);
   }
 };
 
 loadEntities();
 loadCategories();
+displayError('Testing toast');
 
 const addNewOrder = () => {
   console.log(

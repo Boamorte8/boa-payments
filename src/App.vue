@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import TheHeader from '@organisms/TheHeader.vue';
+import ToastContainer from '@molecules/ToastContainer.vue';
 </script>
 
 <template>
   <div class="body dark:bg-background-700 min-h-screen h-full">
-    <the-header></the-header>
+    <TheHeader />
+    <ToastContainer />
     <router-view v-slot="slotProps">
       <transition name="route" mode="out-in">
         <component :is="slotProps.Component"></component>

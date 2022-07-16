@@ -41,29 +41,23 @@ const props = defineProps({
 
 <template>
   <button
-    v-if="!props.link && !props.menu"
+    v-if="!link && !menu"
     class="button"
-    :class="props.mode"
-    :type="props.type"
-    :disabled="props.disabled"
+    :class="mode"
+    :type="type"
+    :disabled="disabled"
   >
     <slot></slot>
   </button>
   <MenuButton
-    v-else-if="props.menu"
+    v-else-if="menu"
     class="button"
-    :class="props.mode"
-    :disabled="props.disabled"
+    :class="mode"
+    :disabled="disabled"
   >
     <slot></slot>
   </MenuButton>
-  <router-link
-    v-else
-    class="link"
-    :to="props.to"
-    :class="props.mode"
-    :disabled="props.disabled"
-  >
+  <router-link v-else class="link" :to="to" :class="mode" :disabled="disabled">
     <slot></slot>
   </router-link>
 </template>

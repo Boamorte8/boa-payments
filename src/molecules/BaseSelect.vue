@@ -5,7 +5,7 @@ import {
   ListboxOptions,
   ListboxOption,
 } from '@headlessui/vue';
-import { ref } from 'vue';
+import { ref, type PropType } from 'vue';
 
 import type { SelectType } from '@app/models';
 
@@ -20,11 +20,11 @@ const props = defineProps({
     required: true,
   },
   items: {
-    type: Array,
+    type: Array as PropType<SelectType[]>,
     required: true,
   },
   modelValue: {
-    type: String,
+    type: Object as PropType<SelectType>,
     default: null,
   },
   defaultValueIndex: {
@@ -53,7 +53,7 @@ const emit = defineEmits(['update:modelValue']);
 
 const defaultValue =
   props.defaultValueIndex >= 0
-    ? (props.items as unknown[] as SelectType[])[props.defaultValueIndex]
+    ? props.items[props.defaultValueIndex]
     : undefined;
 const selectedItem = ref(defaultValue);
 
@@ -101,7 +101,7 @@ const handleDate = (modelData: unknown) => {
             {{ props.noItemsMessage }}
           </div>
           <ListboxOption
-            v-for="item in (props.items as SelectType[])"
+            v-for="item in props.items"
             v-slot="{ active, selected }"
             :key="item[props.itemKey]"
             :value="item"

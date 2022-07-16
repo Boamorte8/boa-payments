@@ -10,13 +10,16 @@ const es = {
   currency: 'Moneda',
   date: 'Fecha',
   debt: 'Deuda',
+  default: 'Default',
   description: 'Descripción',
   email: 'Correo',
   emptyEntityMessage: (ctx: any) =>
     `No hay ${ctx.named('entity')} para mostrar aún. `,
   entity: 'Entidad | Entidades',
+  error: 'Error',
   errorLoadingEntity: (ctx: any) => `Problema al cargar ${ctx.named('entity')}`,
   fieldsRequired: '*Campos requeridos',
+  info: 'Info',
   loan: 'Préstamo',
   login: 'Autenticar',
   loginError: 'Fallo al autenticar. Verifica tus datos de acceso',
@@ -38,9 +41,11 @@ const es = {
   signSwitch: 'Autenticarse',
   signup: 'Registrar',
   startDate: 'Fecha de Inicio',
+  success: 'Éxito',
   title: 'Titulo',
   tryAgain: 'Intentar de nuevo',
   type: 'Tipo',
+  warning: 'Advertencia',
   pageNotFound: {
     title: 'Página no encontrada',
     description:
