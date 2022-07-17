@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed } from '@vue/reactivity';
-import { toRefs } from 'vue';
+import { computed, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
@@ -62,9 +61,9 @@ const tryClose = () => {
         <section class="p-4">
           <slot></slot>
         </section>
-        <menu v-if="!fixed" class="flex justify-end m-0 p-4">
+        <menu v-if="!fixed" class="flex gap-4 justify-end m-0 p-4">
           <slot name="actions">
-            <base-button @click="tryClose">{{ t('close') }}</base-button>
+            <BaseButton @click="tryClose">{{ t('close') }}</BaseButton>
           </slot>
         </menu>
       </dialog>

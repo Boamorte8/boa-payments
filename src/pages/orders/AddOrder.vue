@@ -2,6 +2,7 @@
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import AddEntity from '@organisms/AddEntity.vue';
 import type { BaseSelectItem } from '@app/models';
 import {
   currencies,
@@ -35,7 +36,9 @@ const currencyModel = ref(null);
 const type = ref(null);
 const categories = computed(() => categoryStore.categories);
 const entities = computed(() => entityStore.entities);
-const isLoading = computed(() => entityStore.loading || categoryStore.loading);
+const isLoading = computed(
+  () => entityStore.isLoading || categoryStore.loading
+);
 const startDateLabel = computed(() => t('startDate') + '*');
 const nextDateLabel = computed(() => t('nextDate') + '*');
 const titleLabel = computed(() => t('title') + '*');
@@ -100,23 +103,23 @@ const addNewOrder = () => {
 };
 
 const addNewEntity = () => {
-  console.log('addNewEntity');
-  displayError('Testing toast');
+  entityStore.toggleModal(true);
 };
 
 const addNewCategory = () => {
   console.log('addNewCategory');
+  displayError('Testing toast');
 };
 
-// TODO - 1 Create toast component
-// TODO - 2 Add 'Add Entity' modal
-// TODO - 3 Add 'Add Categories' modal
-// TODO - 4 Add create order action
+// TODO - 1 Create 'Add Entity' state
+// TODO - 2 Add 'Add Categories' modal
+// TODO - 3 Add create order action
 </script>
 
 <template>
   <div>
     <BaseLoader :loading="isLoading" />
+    <AddEntity />
 
     <form class="p-4" @submit.prevent="addNewOrder">
       <BaseCard>
@@ -274,7 +277,6 @@ const addNewCategory = () => {
               class="outline-none"
               type="reset"
               link
-              :disabled="disabled"
               :to="{ name: 'orders' }"
             >
               {{ t('cancel') }}

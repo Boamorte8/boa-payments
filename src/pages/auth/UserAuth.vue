@@ -69,7 +69,7 @@ const handleError = () => {
   <div class="p-2 md:p-4">
     <BaseDialog
       :show="!!errorMessage"
-      title="An error ocurred"
+      :title="t('defaultError')"
       @close="handleError"
     >
       <p class="dark:text-white">{{ errorMessage }}</p>
