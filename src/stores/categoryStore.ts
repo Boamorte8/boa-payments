@@ -9,6 +9,8 @@ export const useCategoryStore = defineStore('category', {
     categories: [],
     loaded: false,
     loading: false,
+    openModal: false,
+    saving: false,
   }),
   getters: {
     areCategoriesLoaded: ({ categories, loaded }) =>
@@ -42,6 +44,9 @@ export const useCategoryStore = defineStore('category', {
       this.categories = categories;
       this.loaded = true;
       this.loading = false;
+    },
+    toggleModal(openModal: boolean) {
+      this.openModal = openModal;
     },
   },
 });

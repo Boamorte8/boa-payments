@@ -42,4 +42,23 @@ describe('CategortyStore', () => {
       expect(categoryStore.loading).toBeFalsy();
     });
   });
+
+
+  describe('categoryStore.toggleModal', () => {
+    test('should set to true to openModal', () => {
+      const categoryStore = useCategoryStore();
+
+      categoryStore.toggleModal(true);
+
+      expect(categoryStore.openModal).toBeTruthy();
+    });
+
+    test('should set to false to openModal', () => {
+      const categoryStore = useCategoryStore();
+
+      categoryStore.toggleModal(false);
+
+      expect(categoryStore.openModal).toBeFalsy();
+    });
+  });
 });

@@ -13,6 +13,7 @@ const es = {
   default: 'Default',
   defaultError: 'Un error ha ocurrido',
   description: 'Descripción',
+  duplicatedError: (ctx: any) => `Ya existe ${ctx.named('entity')}`,
   email: 'Correo',
   emptyEntityMessage: (ctx: any) =>
     `No hay ${ctx.named('entity')} para mostrar aún. `,

@@ -1,57 +1,52 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { watchDebounced } from '@vueuse/core';
 
 import { generateId } from '@app/utils';
-import { TypeToast, type Entity } from '@stores/models';
-import { useEntityStore } from '@stores/entityStore';
+import { TypeToast, type Category } from '@stores/models';
+import { useCategoryStore } from '@stores/categoryStore';
 import { useToastStore } from '@stores/toastStore';
+import { watchDebounced } from '@vueuse/core';
 
 const { t } = useI18n();
-const entityStore = useEntityStore();
+const categoryStore = useCategoryStore();
 const toastStore = useToastStore();
 
 const name = ref('');
-const description = ref('');
-const isDuplicated = ref(false);
-const errorMessage = computed(() =>
-  t('duplicatedError', { entity: t('entity').toLowerCase() })
-);
+const isDuplicated = ref(true);
 const nameLabel = computed(() => t('name') + '*');
-const descriptionLabel = computed(() => t('description') + '*');
-const openModal = computed(() => entityStore.openModal);
-const disabled = computed(
-  () => !name.value || !description.value || isDuplicated.value
+const openModal = computed(() => categoryStore.openModal);
+const disabled = computed(() => !name.value);
+const errorMessage = computed(() =>
+  t('duplicatedError', { entity: t('category').toLowerCase() })
 );
 
 watchDebounced(
   name,
   () => {
-    isDuplicated.value = entityStore.entities.some(
-      (entity) => entity.name === name.value
+    isDuplicated.value = categoryStore.categories.some(
+      (category) => category.name === name.value
     );
   },
   { debounce: 500 }
 );
 
 const onCloseModal = () => {
-  entityStore.toggleModal(false);
+  categoryStore.toggleModal(false);
 };
 
-const onAddNewEntity = async () => {
+const onAddNewCategory = async () => {
   onCloseModal();
-  const newEntity: Entity = {
+  const newCategory: Category = {
     id: generateId().toString(),
     name: name.value,
-    description: description.value,
     userId: '',
   };
   try {
     const errorMessage = t('errorLoadingEntity', {
-      entity: t('entity', 2).toLowerCase(),
+      entity: t('category', 2).toLowerCase(),
     });
-    await entityStore.createEntity(newEntity, errorMessage);
+    // await categoryStore.createEntity(newCategory, errorMessage);
   } catch (error: any) {
     toastStore.addToast({
       id: 0,
@@ -66,7 +61,7 @@ const onAddNewEntity = async () => {
 <template>
   <BaseDialog
     :show="openModal"
-    :title="t('addNewEntity', { entity: t('entity').toLowerCase() })"
+    :title="t('addNewEntity', { entity: t('category').toLowerCase() })"
   >
     <div class="flex justify-end w-full">
       <p class="text-sm dark:text-white">{{ t('fieldsRequired') }}</p>
@@ -83,17 +78,6 @@ const onAddNewEntity = async () => {
         :has-error="isDuplicated"
         :error-message="errorMessage"
       />
-
-      <BaseInput
-        id="description"
-        v-model="description"
-        type="text"
-        name="description"
-        :label="descriptionLabel"
-        :placeholder="
-          t('addEntity', { entity: t('description').toLowerCase() })
-        "
-      />
     </div>
 
     <template #actions>
@@ -106,7 +90,7 @@ const onAddNewEntity = async () => {
         {{ t('cancel') }}
       </BaseButton>
 
-      <BaseButton :disabled="disabled" @click="onAddNewEntity">
+      <BaseButton :disabled="disabled" @click="onAddNewCategory">
         {{ t('add') }}
       </BaseButton>
     </template>

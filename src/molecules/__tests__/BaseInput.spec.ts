@@ -40,9 +40,11 @@ describe('BaseInput', () => {
 
     const input = wrapper.find('input');
     const label = wrapper.find('label');
+    const error = wrapper.find('p');
 
     expect(input.exists()).toBeTruthy();
     expect(label.exists()).toBeFalsy();
+    expect(error.exists()).toBeFalsy();
   });
 
   test('should create component with label', async () => {
@@ -78,5 +80,24 @@ describe('BaseInput', () => {
     expect(label.text()).toBe('Test');
     expect(input.element.value).toBe('inputTest');
     expect(testModel.value).toBe('inputTest');
+  });
+
+  test('should display error message when hasError is true', async () => {
+    const template = `
+    <BaseInput v-model="test" label="Test" errorMessage="Text error message" :hasError="true" />
+  `;
+    const { wrapper } = factory(template, {
+      createSpy: vi.fn,
+    });
+
+    const input = wrapper.find('input');
+    const label = wrapper.find('label');
+    const error = wrapper.find('p');
+
+    expect(input.exists()).toBeTruthy();
+    expect(label.exists()).toBeTruthy();
+    expect(label.text()).toBe('Test');
+    expect(error.exists()).toBeTruthy();
+    expect(error.text()).toBe('Text error message');
   });
 });

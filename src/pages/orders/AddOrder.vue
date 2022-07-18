@@ -2,6 +2,7 @@
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import AddCategory from '@organisms/AddCategory.vue';
 import AddEntity from '@organisms/AddEntity.vue';
 import type { BaseSelectItem } from '@app/models';
 import {
@@ -100,6 +101,7 @@ const addNewOrder = () => {
     isSubscription.value
   );
   console.log('addNewOrder', startDate.value, nextDate.value);
+  displayError('Testing toast');
 };
 
 const addNewEntity = () => {
@@ -107,12 +109,11 @@ const addNewEntity = () => {
 };
 
 const addNewCategory = () => {
-  console.log('addNewCategory');
-  displayError('Testing toast');
+  categoryStore.toggleModal(true);
 };
 
-// TODO - 1 Create 'Add Entity' state
-// TODO - 2 Add 'Add Categories' modal
+// TODO - 1 Implement 'Add Categories' logic
+// TODO - 2 Add pills component for display selected categories
 // TODO - 3 Add create order action
 </script>
 
@@ -120,6 +121,7 @@ const addNewCategory = () => {
   <div>
     <BaseLoader :loading="isLoading" />
     <AddEntity />
+    <AddCategory />
 
     <form class="p-4" @submit.prevent="addNewOrder">
       <BaseCard>
