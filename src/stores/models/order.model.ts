@@ -1,5 +1,6 @@
 import type { BaseSelectItem } from '@app/models';
 import type { Category } from './category.model';
+import type { CurrencyValue } from './currency.model';
 import type { Entity } from './entity.model';
 
 export enum OrderType {
@@ -17,9 +18,10 @@ export interface Order {
   title: string;
   description: string;
   amount: number;
+  currency: CurrencyValue;
   entity: Entity;
   type: OrderType;
-  category: Category[];
+  category: Category[] | { [key: string]: Category };
   finished: boolean;
   subscription: boolean;
   startDate: string;
@@ -30,4 +32,5 @@ export interface OrderState {
   orders: Order[];
   loaded: boolean;
   loading: boolean;
+  saving: boolean;
 }

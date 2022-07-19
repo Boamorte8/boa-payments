@@ -43,8 +43,8 @@ const onAddNewCategory = async () => {
     userId: '',
   };
   try {
-    const errorMessage = t('errorLoadingEntity', {
-      entity: t('category', 2).toLowerCase(),
+    const errorMessage = t('errorCreatingEntity', {
+      entity: t('category').toLowerCase(),
     });
     await categoryStore.createCategory(newCategory, errorMessage);
   } catch (error: any) {

@@ -2,17 +2,18 @@ import { defineStore } from 'pinia';
 
 import { endpoints } from '@app/config';
 import { useAuthUserStore } from './authStore';
-import type { OrderState } from './models';
+import type { Order, OrderState } from './models';
 
 export const useOrderStore = defineStore('order', {
   state: (): OrderState => ({
     orders: [],
     loaded: false,
     loading: false,
+    saving: false,
   }),
   getters: {
     areOrdersLoaded: ({ orders, loaded }) => loaded && !!orders.length,
-    isLoading: ({ loading }) => loading,
+    isLoading: ({ loading, saving }) => loading || saving,
   },
   actions: {
     async loadOrders(errorMessage: string) {
@@ -45,6 +46,25 @@ export const useOrderStore = defineStore('order', {
       this.orders = orders;
       this.loaded = true;
       this.loading = false;
+    },
+    async createOrder(order: Order, errorMessage: string) {
+      this.saving = true;
+      let { userId, token } = useAuthUserStore();
+      userId = userId || '';
+      token = token || '';
+      const response = await fetch(endpoints.getOrders(userId, token), {
+        method: 'POST',
+        body: JSON.stringify(order),
+      });
+      const responseData = await response.json();
+      if (!response.ok) {
+        const error = new Error(responseData.message || errorMessage);
+        this.saving = false;
+        throw error;
+      }
+      this.orders.push(order);
+
+      this.saving = false;
     },
   },
 });

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch, type Ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 
 import AddCategory from '@organisms/AddCategory.vue';
@@ -7,27 +8,35 @@ import AddEntity from '@organisms/AddEntity.vue';
 import type { BaseSelectItem } from '@app/models';
 import {
   currencies,
+  OrderType,
   orderTypes,
   TypeToast,
   type Category,
   type Currency,
+  type CurrencyValue,
+  type Order,
 } from '@stores/models';
+import { generateId } from '@app/utils';
 import { useCategoryStore } from '@stores/categoryStore';
 import { useEntityStore } from '@stores/entityStore';
+import { useOrderStore } from '@stores/orderStore';
 import { useToastStore } from '@stores/toastStore';
 
 const categoryStore = useCategoryStore();
 const entityStore = useEntityStore();
+const orderStore = useOrderStore();
+const toastStore = useToastStore();
+const router = useRouter();
 const { t } = useI18n();
 const title = ref('');
 const description = ref('');
 const amount = ref(0);
-const currency = ref('COP');
+const currency: Ref<CurrencyValue> = ref('COP');
 const isSubscription = ref(false);
 const startDate = ref(new Date());
 const nextDate = ref();
 const category = ref();
-const selectedCategories = ref([]);
+const selectedCategories: Ref<Category[]> = ref([]);
 const entity = ref();
 const categoryKey = ref(0);
 const currencyList = currencies;
@@ -36,7 +45,7 @@ const orderTypeList: BaseSelectItem[] = orderTypes.map((type) => ({
   text: t(type.text),
 }));
 const currencyModel = ref(null);
-const type = ref(null);
+const type: Ref<OrderType | null> = ref(null);
 const categoryList = computed(() =>
   categoryStore.categories.filter(
     (category) =>
@@ -47,7 +56,7 @@ const categoryList = computed(() =>
 );
 const entities = computed(() => entityStore.entities);
 const isLoading = computed(
-  () => entityStore.isLoading || categoryStore.isLoading
+  () => entityStore.isLoading || categoryStore.isLoading || orderStore.isLoading
 );
 const startDateLabel = computed(() => t('startDate') + '*');
 const nextDateLabel = computed(() => t('nextDate') + '*');
@@ -56,15 +65,22 @@ const descriptionLabel = computed(() => t('description') + '*');
 const entityLabel = computed(() => t('entity') + '*');
 const categoryLabel = computed(() => t('category', 2) + '*');
 const disabled = computed(() => {
-  return !title.value || !description.value || amount.value <= 0 || !startDate.value || !nextDate.value  ||
-    !entity.value || !selectedCategories.value.length;
+  return (
+    !title.value ||
+    !description.value ||
+    amount.value <= 0 ||
+    !startDate.value ||
+    !nextDate.value ||
+    !entity.value ||
+    !selectedCategories.value.length
+  );
 });
 
 watch(
   () => currencyModel.value,
   (value) => {
     if (value) {
-      currency.value = (value as Currency).value;
+      currency.value = (value as Currency).value as CurrencyValue;
     }
   }
 );
@@ -80,16 +96,35 @@ watch(
   }
 );
 
-const addNewOrder = () => {
-  console.log(
-    'addNewOrder',
-    amount.value,
-    title.value,
-    description.value,
-    isSubscription.value
-  );
-  console.log('addNewOrder', startDate.value, nextDate.value);
-  console.log('addNewOrder', entity.value, selectedCategories.value);
+const addNewOrder = async () => {
+  const newOrder: Order = {
+    id: generateId().toString(),
+    title: title.value,
+    description: description.value,
+    amount: amount.value,
+    entity: entity.value,
+    currency: currency.value,
+    type: type.value as OrderType,
+    category: selectedCategories.value,
+    finished: false,
+    subscription: isSubscription.value,
+    startDate: startDate.value.toISOString(),
+    nextDate: nextDate.value.toISOString(),
+  };
+  try {
+    const errorMessage = t('errorCreatingEntity', {
+      entity: t('orders').toLowerCase(),
+    });
+    await orderStore.createOrder(newOrder, errorMessage);
+    router.push('/orders');
+  } catch (error: any) {
+    toastStore.addToast({
+      id: 0,
+      title: t('error'),
+      type: TypeToast.ERROR,
+      message: error,
+    });
+  }
 };
 
 const addNewEntity = () => {
@@ -105,8 +140,6 @@ const onDelete = (category: Category) => {
     (selected: Category) => selected.id !== category.id
   );
 };
-
-// TODO - 1 Add create order action
 </script>
 
 <template>

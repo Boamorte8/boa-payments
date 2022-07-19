@@ -55,6 +55,18 @@ const handlers = [
       })
     );
   }),
+  rest.post(getOrdersEndpoint, (req, res, ctx) => {
+    const isWorking = sessionStorage.getItem('is-working');
+    if (!isWorking) {
+      return res(
+        ctx.status(403),
+        ctx.json({
+          errorMessage: 'Error saving entity',
+        })
+      );
+    }
+    return res(ctx.status(200), ctx.json({ name: '12345' }));
+  }),
   rest.get(getEntitiesEndpoint, (req, res, ctx) => {
     const isWorking = sessionStorage.getItem('is-working');
     if (!isWorking) {

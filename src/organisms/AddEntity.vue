@@ -48,8 +48,8 @@ const onAddNewEntity = async () => {
     userId: '',
   };
   try {
-    const errorMessage = t('errorLoadingEntity', {
-      entity: t('entity', 2).toLowerCase(),
+    const errorMessage = t('errorCreatingEntity', {
+      entity: t('entity').toLowerCase(),
     });
     await entityStore.createEntity(newEntity, errorMessage);
   } catch (error: any) {
