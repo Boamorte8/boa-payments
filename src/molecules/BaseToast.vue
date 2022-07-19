@@ -32,7 +32,7 @@ if (!props.toast.stopAutoDismiss) {
       <h3 class="font-semibold text-base">{{ toast.title }}</h3>
 
       <button class="rounded-[50%]" @click="dismissToast">
-        <PlusIcon class="rotate-45" />
+        <PlusIcon class="h-6 w-6 rotate-45" />
       </button>
     </div>
 

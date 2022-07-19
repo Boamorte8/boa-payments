@@ -13,7 +13,7 @@ const categoryStore = useCategoryStore();
 const toastStore = useToastStore();
 
 const name = ref('');
-const isDuplicated = ref(true);
+const isDuplicated = ref(false);
 const nameLabel = computed(() => t('name') + '*');
 const openModal = computed(() => categoryStore.openModal);
 const disabled = computed(() => !name.value);
@@ -46,7 +46,7 @@ const onAddNewCategory = async () => {
     const errorMessage = t('errorLoadingEntity', {
       entity: t('category', 2).toLowerCase(),
     });
-    // await categoryStore.createEntity(newCategory, errorMessage);
+    await categoryStore.createCategory(newCategory, errorMessage);
   } catch (error: any) {
     toastStore.addToast({
       id: 0,
@@ -70,7 +70,7 @@ const onAddNewCategory = async () => {
     <div class="flex flex-col align-center gap-4 w-full">
       <BaseInput
         id="name"
-        v-model="name"
+        v-model.trim="name"
         type="text"
         name="name"
         :label="nameLabel"

@@ -10,7 +10,7 @@ import i18n from '../../i18n';
 describe('BaseCalendar', () => {
   const defaultTemplate = `
     <div id="testDiv">
-      <BaseCalendar v-model="test" />
+      <BaseCalendar v-model="test" teleport="#testDiv" />
     </div>
   `;
   function factory(template = defaultTemplate, options?: TestingOptions) {

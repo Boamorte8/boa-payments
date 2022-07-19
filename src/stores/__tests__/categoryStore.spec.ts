@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 import { createPinia, setActivePinia } from 'pinia';
 
+import { mockCategories } from '../../tests/category-test.utils';
 import { useAuthUserStore } from '../authStore';
 import { useCategoryStore } from '../categoryStore';
 
@@ -43,6 +44,36 @@ describe('CategortyStore', () => {
     });
   });
 
+  describe('categoryStore.createCategory', () => {
+    test('should do an http request and return an error', async () => {
+      const authStore = useAuthUserStore();
+      const categoryStore = useCategoryStore();
+      const errorMessage = 'Test Error';
+      authStore.userId = 'userIdTest';
+      authStore.token = 'tokenTest';
+
+      try {
+        await categoryStore.createCategory(mockCategories[0], errorMessage);
+      } catch (err) {
+        expect(err).toStrictEqual(new Error(errorMessage));
+        expect(categoryStore.categories.length).toBeFalsy();
+        expect(categoryStore.saving).toBeFalsy();
+      }
+    });
+
+    test('should do an http request and return data', async () => {
+      const authStore = useAuthUserStore();
+      const categoryStore = useCategoryStore();
+      authStore.userId = 'userIdTest';
+      authStore.token = 'tokenTest';
+      sessionStorage.setItem('is-working', 'true');
+
+      await categoryStore.createCategory(mockCategories[0], '');
+
+      expect(categoryStore.categories.length).toBeTruthy();
+      expect(categoryStore.saving).toBeFalsy();
+    });
+  });
 
   describe('categoryStore.toggleModal', () => {
     test('should set to true to openModal', () => {

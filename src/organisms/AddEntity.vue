@@ -75,7 +75,7 @@ const onAddNewEntity = async () => {
     <div class="flex flex-col align-center gap-4 w-full">
       <BaseInput
         id="name"
-        v-model="name"
+        v-model.trim="name"
         type="text"
         name="name"
         :label="nameLabel"
@@ -86,7 +86,7 @@ const onAddNewEntity = async () => {
 
       <BaseInput
         id="description"
-        v-model="description"
+        v-model.trim="description"
         type="text"
         name="description"
         :label="descriptionLabel"

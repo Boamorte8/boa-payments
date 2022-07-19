@@ -1,6 +1,6 @@
-export interface Category {
-  id: string;
-  name: string;
+import type { BaseItem } from '@app/models';
+
+export interface Category extends BaseItem {
   userId: string;
 }
 

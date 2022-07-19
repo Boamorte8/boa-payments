@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
@@ -46,6 +46,17 @@ const props = defineProps({
     required: false,
     default: null,
   },
+  teleport: {
+    type: String,
+    required: false,
+    default: 'body',
+  },
+});
+
+onMounted(() => {
+  if (props.modelValue) {
+    date.value = props.modelValue;
+  }
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -57,8 +68,8 @@ const handleDate = (modelData: Date) => {
 
 <template>
   <div>
-    <BaseLabel v-if="!!props.label" class="mb-2">
-      {{ props.label }}
+    <BaseLabel v-if="!!label" class="mb-2">
+      {{ label }}
     </BaseLabel>
     <Datepicker
       v-model="date"
@@ -67,12 +78,12 @@ const handleDate = (modelData: Date) => {
       input-class-name="dp-custom-input"
       menu-class-name="dp-custom-menu"
       :dark="isDark"
-      :format="props.formatInput"
-      :placeholder="props.placeholder"
-      :min-date="props.minDate"
-      :name="props.name"
-      :enable-time-picker="props.enableTimePicker"
-      teleport="#testDiv"
+      :format="formatInput"
+      :placeholder="placeholder"
+      :min-date="minDate"
+      :name="name"
+      :enable-time-picker="enableTimePicker"
+      :teleport="teleport"
       @update:model-value="handleDate"
     />
   </div>

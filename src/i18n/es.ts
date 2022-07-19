@@ -41,6 +41,7 @@ const es = {
   payments: 'Pagos',
   profile: 'Perfil',
   selectEntity: (ctx: any) => `Selecciona ${ctx.named('entity')}`,
+  selectedEntity: (ctx: any) => `${ctx.named('entity')} seleccionadas`,
   signError: 'Fallo al registrarse. Verifica tus datos de registro',
   signSwitch: 'Autenticarse',
   signup: 'Registrar',

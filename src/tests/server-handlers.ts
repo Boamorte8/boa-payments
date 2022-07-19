@@ -103,6 +103,18 @@ const handlers = [
       })
     );
   }),
+  rest.post(getCategoriesEndpoint, (req, res, ctx) => {
+    const isWorking = sessionStorage.getItem('is-working');
+    if (!isWorking) {
+      return res(
+        ctx.status(403),
+        ctx.json({
+          errorMessage: 'Error saving category',
+        })
+      );
+    }
+    return res(ctx.status(200), ctx.json({ name: '12345' }));
+  }),
 ];
 
 export { handlers };

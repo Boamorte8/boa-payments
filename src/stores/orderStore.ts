@@ -12,6 +12,7 @@ export const useOrderStore = defineStore('order', {
   }),
   getters: {
     areOrdersLoaded: ({ orders, loaded }) => loaded && !!orders.length,
+    isLoading: ({ loading }) => loading,
   },
   actions: {
     async loadOrders(errorMessage: string) {

@@ -1,6 +1,6 @@
-export interface Entity {
-  id: string;
-  name: string;
+import type { BaseItem } from '@app/models';
+
+export interface Entity extends BaseItem {
   description: string;
   userId: string;
 }

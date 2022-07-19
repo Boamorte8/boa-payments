@@ -63,24 +63,22 @@ const handleDate = (modelData: unknown) => {
 </script>
 
 <template>
-  <Listbox
-    v-model="selectedItem"
-    :name="props.name"
-    @update:model-value="handleDate"
-  >
+  <Listbox v-model="selectedItem" :name="name" @update:model-value="handleDate">
     <div class="relative">
-      <BaseLabel v-if="!!props.label">{{ props.label }}</BaseLabel>
+      <BaseLabel v-if="!!label">{{ label }}</BaseLabel>
       <ListboxButton
         class="flex justify-between gap-4 h-10 w-full min-w-[100px] cursor-default rounded-md bg-white py-2 pl-4 pr-2 text-left border border-transparent focus:outline-none focus-visible:border-primary-700 dark:bg-background-300 dark:text-white"
       >
         <span class="block truncate">
           <template v-if="!!selectedItem">
-            {{ selectedItem[props.itemKey] }}
+            {{ selectedItem[itemKey] }}
           </template>
+
           <span v-else class="font-normal text-gray-400">
-            {{ props.placeholder }}
+            {{ placeholder }}
           </span>
         </span>
+
         <span class="pointer-events-none flex items-center">
           <SelectIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
         </span>
@@ -95,15 +93,15 @@ const handleDate = (modelData: unknown) => {
           class="absolute mt-2 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-background-300"
         >
           <div
-            v-if="!props.items || !props.items.length"
+            v-if="!items || !items.length"
             class="p-4 font-normal text-gray-400"
           >
-            {{ props.noItemsMessage }}
+            {{ noItemsMessage }}
           </div>
           <ListboxOption
-            v-for="item in props.items"
+            v-for="item in items"
             v-slot="{ active, selected }"
-            :key="item[props.itemKey]"
+            :key="item[itemKey]"
             :value="item"
             as="template"
           >
@@ -118,7 +116,7 @@ const handleDate = (modelData: unknown) => {
                   selected ? 'font-medium' : 'font-normal',
                   'block truncate',
                 ]"
-                >{{ item[props.itemKey] }}</span
+                >{{ item[itemKey] }}</span
               >
               <span
                 v-if="selected"

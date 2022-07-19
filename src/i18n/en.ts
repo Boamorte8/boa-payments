@@ -41,6 +41,7 @@ const en = {
   payments: 'Payment | Payments',
   profile: 'Profile',
   selectEntity: (ctx: any) => `Select ${ctx.named('entity')}`,
+  selectedEntity: (ctx: any) => `Selected ${ctx.named('entity')}`,
   signError: 'Failed sign up. Check your signup data',
   signSwitch: 'Login instead',
   signup: 'Signup',

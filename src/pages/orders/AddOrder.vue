@@ -9,6 +9,7 @@ import {
   currencies,
   orderTypes,
   TypeToast,
+  type Category,
   type Currency,
 } from '@stores/models';
 import { useCategoryStore } from '@stores/categoryStore';
@@ -17,17 +18,18 @@ import { useToastStore } from '@stores/toastStore';
 
 const categoryStore = useCategoryStore();
 const entityStore = useEntityStore();
-const toastStore = useToastStore();
 const { t } = useI18n();
 const title = ref('');
 const description = ref('');
 const amount = ref(0);
 const currency = ref('COP');
 const isSubscription = ref(false);
-const startDate = ref();
+const startDate = ref(new Date());
 const nextDate = ref();
 const category = ref();
+const selectedCategories = ref([]);
 const entity = ref();
+const categoryKey = ref(0);
 const currencyList = currencies;
 const orderTypeList: BaseSelectItem[] = orderTypes.map((type) => ({
   ...type,
@@ -35,10 +37,17 @@ const orderTypeList: BaseSelectItem[] = orderTypes.map((type) => ({
 }));
 const currencyModel = ref(null);
 const type = ref(null);
-const categories = computed(() => categoryStore.categories);
+const categoryList = computed(() =>
+  categoryStore.categories.filter(
+    (category) =>
+      !selectedCategories.value.some(
+        (selected: Category) => selected.id === category.id
+      )
+  )
+);
 const entities = computed(() => entityStore.entities);
 const isLoading = computed(
-  () => entityStore.isLoading || categoryStore.loading
+  () => entityStore.isLoading || categoryStore.isLoading
 );
 const startDateLabel = computed(() => t('startDate') + '*');
 const nextDateLabel = computed(() => t('nextDate') + '*');
@@ -47,7 +56,8 @@ const descriptionLabel = computed(() => t('description') + '*');
 const entityLabel = computed(() => t('entity') + '*');
 const categoryLabel = computed(() => t('category', 2) + '*');
 const disabled = computed(() => {
-  return !title.value || amount.value <= 0;
+  return !title.value || !description.value || amount.value <= 0 || !startDate.value || !nextDate.value  ||
+    !entity.value || !selectedCategories.value.length;
 });
 
 watch(
@@ -59,38 +69,16 @@ watch(
   }
 );
 
-const displayError = (error: string) => {
-  toastStore.addToast({
-    id: 0,
-    title: t('error'),
-    type: TypeToast.WARNING,
-    message: error,
-  });
-};
-
-const loadEntities = async () => {
-  try {
-    const errorMessage = t('errorLoadingEntity', {
-      entity: t('entity', 2).toLowerCase(),
-    });
-    await entityStore.loadEntities(errorMessage);
-  } catch (error: any) {
-    displayError(error);
+watch(
+  () => category.value,
+  (value: Category) => {
+    if (value) {
+      selectedCategories.value.push(value);
+      category.value = null;
+      categoryKey.value += 1;
+    }
   }
-};
-const loadCategories = async () => {
-  try {
-    const errorMessage = t('errorLoadingEntity', {
-      entity: t('category', 2).toLowerCase(),
-    });
-    await categoryStore.loadCategories(errorMessage);
-  } catch (error: any) {
-    displayError(error);
-  }
-};
-
-loadEntities();
-loadCategories();
+);
 
 const addNewOrder = () => {
   console.log(
@@ -101,7 +89,7 @@ const addNewOrder = () => {
     isSubscription.value
   );
   console.log('addNewOrder', startDate.value, nextDate.value);
-  displayError('Testing toast');
+  console.log('addNewOrder', entity.value, selectedCategories.value);
 };
 
 const addNewEntity = () => {
@@ -112,9 +100,13 @@ const addNewCategory = () => {
   categoryStore.toggleModal(true);
 };
 
-// TODO - 1 Implement 'Add Categories' logic
-// TODO - 2 Add pills component for display selected categories
-// TODO - 3 Add create order action
+const onDelete = (category: Category) => {
+  selectedCategories.value = selectedCategories.value.filter(
+    (selected: Category) => selected.id !== category.id
+  );
+};
+
+// TODO - 1 Add create order action
 </script>
 
 <template>
@@ -138,10 +130,10 @@ const addNewCategory = () => {
             <p class="text-sm dark:text-white">{{ t('fieldsRequired') }}</p>
           </div>
 
-          <div class="flex gap-4 flex-wrap">
+          <div class="flex gap-4 md:gap-5 flex-wrap">
             <BaseInput
               id="title"
-              v-model="title"
+              v-model.trim="title"
               type="text"
               name="title"
               :label="titleLabel"
@@ -152,7 +144,7 @@ const addNewCategory = () => {
 
             <BaseInput
               id="description"
-              v-model="description"
+              v-model.trim="description"
               type="text"
               name="description"
               :label="descriptionLabel"
@@ -163,7 +155,7 @@ const addNewCategory = () => {
 
             <CurrencyInput
               id="amount"
-              v-model="amount"
+              v-model.lazy="amount"
               name="amount"
               :label="t('amount') + '*'"
               :options="{ currency }"
@@ -247,11 +239,11 @@ const addNewCategory = () => {
               <div class="flex gap-4 items-center">
                 <BaseSelect
                   id="category"
+                  :key="categoryKey"
                   v-model="category"
                   item-key="name"
                   name="category"
-                  :default-value-index="0"
-                  :items="categories"
+                  :items="categoryList"
                   :placeholder="
                     t('addEntity', { entity: t('category', 2).toLowerCase() })
                   "
@@ -272,6 +264,15 @@ const addNewCategory = () => {
               </div>
             </div>
           </div>
+
+          <PillList
+            v-if="!!selectedCategories.length"
+            :label="
+              t('selectedEntity', { entity: t('category', 2).toLowerCase() })
+            "
+            :items="selectedCategories"
+            @delete="onDelete($event)"
+          />
 
           <div class="flex justify-end gap-4">
             <BaseButton
