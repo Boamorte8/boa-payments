@@ -1,5 +1,6 @@
 .gitignore
 src/env.d.ts
+dist
 stories/**/*
 examplestories/**/*
 tailwind.config.js

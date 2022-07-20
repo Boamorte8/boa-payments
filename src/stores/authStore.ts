@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import type { AuthPayload, AuthState, LoginPayload } from './models';
 import i18n from '../i18n';
 
-let timer: NodeJS.Timeout;
+let timer: number;
 const { t } = i18n.global;
 
 export const useAuthUserStore = defineStore('auth/user', {
