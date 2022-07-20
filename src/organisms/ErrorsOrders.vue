@@ -20,7 +20,7 @@ const errorLoadingMessage = computed(
 const isLoading = computed(
   () => store.isLoading || categoryStore.isLoading || entityStore.isLoading
 );
-const orders = ref(null);
+const noOrders = computed(() => store.noOrders);
 
 const displayError = (error: string) => {
   toastStore.addToast({
@@ -82,7 +82,7 @@ loadCategories();
       </p>
     </ErrorMessage>
 
-    <EmptyMessage v-if="!orders && !errorLoadingMessage" class="pt-5">
+    <EmptyMessage v-if="noOrders && !errorLoadingMessage" class="pt-5">
       <p class="dark:text-white">
         {{
           t('emptyEntityMessage', {

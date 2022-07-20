@@ -9,7 +9,7 @@ import DropdownItem from '@atoms/DropdownItem.vue';
 import DropdownOptions from '../DropdownOptions.vue';
 import i18n from '../../i18n';
 import LogoutIcon from '@atoms/LogoutIcon.vue';
-import router from '../../router';
+import { router } from '../../router';
 import TranslateIcon from '@atoms/TranslateIcon.vue';
 
 describe('DropdownOptions', () => {

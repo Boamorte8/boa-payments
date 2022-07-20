@@ -7,7 +7,7 @@ import BaseDialog from '../BaseDialog.vue';
 import BaseLoader from '../BaseLoader.vue';
 import BaseSpinner from '@atoms/BaseSpinner.vue';
 import i18n from '../../i18n';
-import router from '../../router';
+import { router } from '../../router';
 
 describe('BaseLoader', () => {
   function factory(options?: TestingOptions) {

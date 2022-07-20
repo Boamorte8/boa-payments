@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue';
 import { MenuButton } from '@headlessui/vue';
+import type { RouteLocationRaw } from 'vue-router';
 
-type LinkType = string | { name: string };
 type ButtonType = 'button' | 'reset' | 'submit';
 
 const props = defineProps({
@@ -32,7 +32,7 @@ const props = defineProps({
     default: 'button',
   },
   to: {
-    type: Object as PropType<LinkType>,
+    type: Object as PropType<RouteLocationRaw>,
     required: false,
     default: () => ({ name: '/' }),
   },

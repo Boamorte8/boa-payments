@@ -4,7 +4,7 @@ import { mount, RouterLinkStub } from '@vue/test-utils';
 
 import DropdownItem from '../DropdownItem.vue';
 import i18n from '../../i18n';
-import router from '../../router';
+import { router } from '../../router';
 
 describe('DropdownItem', () => {
   function factory(options?: TestingOptions) {

@@ -6,7 +6,7 @@ import { Menu, MenuButton } from '@headlessui/vue';
 
 import BaseButton from '@atoms/BaseButton.vue';
 import i18n from '../../i18n';
-import router from '../../router';
+import { router } from '../../router';
 
 describe('BaseButton', () => {
   function factory(optionsMount = {}, optionsPinia?: TestingOptions) {

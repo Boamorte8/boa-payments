@@ -45,7 +45,7 @@ const orderTypeList: BaseSelectItem[] = orderTypes.map((type) => ({
   text: t(type.text),
 }));
 const currencyModel = ref(null);
-const type: Ref<OrderType | null> = ref(null);
+const type: Ref<BaseSelectItem | null> = ref(null);
 const categoryList = computed(() =>
   categoryStore.categories.filter(
     (category) =>
@@ -69,6 +69,7 @@ const disabled = computed(() => {
     !title.value ||
     !description.value ||
     amount.value <= 0 ||
+    !type.value ||
     !startDate.value ||
     !nextDate.value ||
     !entity.value ||
@@ -104,7 +105,7 @@ const addNewOrder = async () => {
     amount: amount.value,
     entity: entity.value,
     currency: currency.value,
-    type: type.value as OrderType,
+    type: (type.value as BaseSelectItem).value as OrderType,
     category: selectedCategories.value,
     finished: false,
     subscription: isSubscription.value,

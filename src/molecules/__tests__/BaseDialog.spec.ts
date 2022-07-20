@@ -5,7 +5,7 @@ import { mount, RouterLinkStub } from '@vue/test-utils';
 import BaseButton from '@atoms/BaseButton.vue';
 import BaseDialog from '../BaseDialog.vue';
 import i18n from '../../i18n';
-import router from '../../router';
+import { router } from '../../router';
 
 describe('BaseDialog', () => {
   const defaultTemplate = `

@@ -2,14 +2,14 @@ import { createTestingPinia, type TestingOptions } from '@pinia/testing';
 import { describe, expect, test, vi } from 'vitest';
 import { mount, RouterLinkStub } from '@vue/test-utils';
 
-import i18n from '../../i18n';
-import router from '../../router';
-import TheHeader from '../TheHeader.vue';
 import BaseButton from '@atoms/BaseButton.vue';
 import DropdownItem from '@atoms/DropdownItem.vue';
+import i18n from '../../i18n';
 import LogoApp from '@atoms/LogoApp.vue';
 import LogoutIcon from '@atoms/LogoutIcon.vue';
 import OptionsIcon from '@atoms/OptionsIcon.vue';
+import { router } from '../../router';
+import TheHeader from '../TheHeader.vue';
 import TranslateIcon from '@atoms/TranslateIcon.vue';
 import { useAuthUserStore } from '../../stores';
 

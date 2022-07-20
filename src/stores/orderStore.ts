@@ -14,6 +14,8 @@ export const useOrderStore = defineStore('order', {
   getters: {
     areOrdersLoaded: ({ orders, loaded }) => loaded && !!orders.length,
     isLoading: ({ loading, saving }) => loading || saving,
+    filteredOrders: ({ orders }) => orders,
+    noOrders: ({ orders, loaded }) => loaded && !orders.length,
   },
   actions: {
     async loadOrders(errorMessage: string) {
