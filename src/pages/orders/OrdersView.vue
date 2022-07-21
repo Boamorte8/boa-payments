@@ -22,7 +22,7 @@ const onAddNewOrder = () => {
   <div class="p-2 md:p-4">
     <ErrorsOrders />
 
-    <div v-if="ordersLoaded" class="flex gap-4">
+    <div v-if="ordersLoaded" class="flex flex-wrap gap-4">
       <OrderCard v-for="order in orders" :key="order.id" :order="order" />
     </div>
 

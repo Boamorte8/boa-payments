@@ -35,6 +35,7 @@ const es = {
   newF: 'Nueva',
   newM: 'Nuevo',
   nextDate: 'Próxima fecha',
+  no: 'No',
   noEntities: (ctx: any) => `No hay ${ctx.named('entities')} disponibles`,
   orders: 'Ordenes',
   password: 'Contraseña',
@@ -46,11 +47,14 @@ const es = {
   signSwitch: 'Autenticarse',
   signup: 'Registrar',
   startDate: 'Fecha de Inicio',
+  subscription: 'Subscripción',
   success: 'Éxito',
   title: 'Titulo',
+  totalAmount: 'Monto total',
   tryAgain: 'Intentar de nuevo',
   type: 'Tipo',
   warning: 'Advertencia',
+  yes: 'Si',
   pageNotFound: {
     title: 'Página no encontrada',
     description:

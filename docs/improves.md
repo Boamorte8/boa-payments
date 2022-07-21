@@ -1,10 +1,11 @@
 # Next work to improve
 
-- Check a pattern like atomic design
-- Study figma to do a general design OK
-- Choose a tool or tools to do deploy of the app OK
+- Study more about design systems
+- Study about a11y
+- Review concepts from javascrip weird parts
+- Review concepts from angular
+- Study about google javascript style guide
 - To do other features of the app
-- Use commitlint to do commits with linter on windows too OK
 
 ## Questions
 
