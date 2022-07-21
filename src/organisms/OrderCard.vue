@@ -36,7 +36,7 @@ const isLoan = computed(() => props.order.type === OrderType.LOAN);
 </script>
 
 <template>
-  <BaseCard class="block min-w-[300px]">
+  <BaseCard class="block min-w-[310px] md:min-w-[325px] lg:min-w-[350px]">
     <div class="w-full">
       <header class="flex w-full gap-4 justify-between mb-4">
         <div
@@ -45,7 +45,7 @@ const isLoan = computed(() => props.order.type === OrderType.LOAN);
           <UserIcon class="h-6 w-6" />
         </div>
 
-        <div class="w-[50%] dark:text-white">
+        <div class="w-[53%] dark:text-white">
           <h3 class="font-bold text-xl">{{ order.title }}</h3>
           <p class="text-sm">{{ order.entity.name }}</p>
         </div>

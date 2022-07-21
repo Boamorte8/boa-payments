@@ -5,7 +5,7 @@ import {
   ListboxOptions,
   ListboxOption,
 } from '@headlessui/vue';
-import { ref, type PropType } from 'vue';
+import { onMounted, ref, type PropType } from 'vue';
 
 import type { SelectType } from '@app/models';
 
@@ -48,18 +48,22 @@ const props = defineProps({
     default: null,
   },
 });
+const selectedItem = ref();
 
 const emit = defineEmits(['update:modelValue']);
-
-const defaultValue =
-  props.defaultValueIndex >= 0
-    ? props.items[props.defaultValueIndex]
-    : undefined;
-const selectedItem = ref(defaultValue);
 
 const handleDate = (modelData: unknown) => {
   emit('update:modelValue', modelData);
 };
+
+onMounted(() => {
+  const defaultValue =
+    props.defaultValueIndex >= 0
+      ? props.items[props.defaultValueIndex]
+      : undefined;
+  selectedItem.value = defaultValue;
+  handleDate(defaultValue);
+});
 </script>
 
 <template>

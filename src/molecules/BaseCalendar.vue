@@ -53,17 +53,19 @@ const props = defineProps({
   },
 });
 
-onMounted(() => {
-  if (props.modelValue) {
-    date.value = props.modelValue;
-  }
-});
-
 const emit = defineEmits(['update:modelValue']);
 
 const handleDate = (modelData: Date) => {
   emit('update:modelValue', modelData);
 };
+
+onMounted(() => {
+  const { modelValue } = props;
+  if (modelValue) {
+    date.value = modelValue;
+    handleDate(modelValue);
+  }
+});
 </script>
 
 <template>

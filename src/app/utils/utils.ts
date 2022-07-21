@@ -8,7 +8,7 @@ export const formatCurrency = (
     style: 'currency',
     currency,
     currencyDisplay: 'narrowSymbol',
-  }).format(value);
+  }).format(+value);
 
 export const formatDate = (value: Date): string =>
   new Intl.DateTimeFormat('en-US').format(value);

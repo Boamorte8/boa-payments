@@ -21,7 +21,7 @@ describe('BaseSelect', () => {
     { value: 'test2' },
   ];
   function factory(template = defaultTemplate, options?: TestingOptions) {
-    const testModel = ref(null);
+    const testModel = ref();
     const App = {
       components: {
         BaseSelect,
@@ -59,7 +59,7 @@ describe('BaseSelect', () => {
     expect(button.exists()).toBeTruthy();
     expect(label.exists()).toBeFalsy();
     expect(list.exists()).toBeFalsy();
-    expect(testModel.value).toBeNull();
+    expect(testModel.value).toBeUndefined();
   });
 
   test('should create component with label', async () => {
@@ -81,7 +81,7 @@ describe('BaseSelect', () => {
     expect(label.exists()).toBeTruthy();
     expect(label.text()).toBe('Test');
     expect(list.exists()).toBeFalsy();
-    expect(testModel.value).toBeNull();
+    expect(testModel.value).toBeUndefined();
   });
 
   test('should create component with label and options after click', async () => {
@@ -106,7 +106,7 @@ describe('BaseSelect', () => {
     expect(label.text()).toBe('Test');
     expect(list.exists()).toBeTruthy();
     expect(options.length).toBe(3);
-    expect(testModel.value).toBeNull();
+    expect(testModel.value).toBeUndefined();
   });
 
   test('should set value to model after click option', async () => {
