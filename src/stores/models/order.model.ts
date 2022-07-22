@@ -29,6 +29,7 @@ export interface Order {
 }
 
 export interface OrderState {
+  allOrders: Order[];
   orders: Order[];
   loaded: boolean;
   loading: boolean;

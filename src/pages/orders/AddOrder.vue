@@ -153,13 +153,13 @@ const onDelete = (category: Category) => {
       <BaseCard>
         <div class="w-full flex flex-col gap-4">
           <div class="flex justify-between pb-4 w-full">
-            <h2 class="text-xl dark:text-white font-bold">
+            <h1 class="text-xl dark:text-white font-bold">
               {{
                 t('addNewEntity', {
                   entity: t('orders').toLowerCase(),
                 })
               }}
-            </h2>
+            </h1>
 
             <p class="text-sm dark:text-white">{{ t('fieldsRequired') }}</p>
           </div>
@@ -200,6 +200,7 @@ const onDelete = (category: Category) => {
               v-model="currencyModel"
               item-key="value"
               name="currency"
+              class="min-w-[110px]"
               :default-value-index="1"
               :items="currencyList"
               :label="t('currency')"
@@ -210,6 +211,7 @@ const onDelete = (category: Category) => {
               v-model="type"
               item-key="text"
               name="type"
+              class="min-w-[110px]"
               :default-value-index="0"
               :items="orderTypeList"
               :label="t('type')"
@@ -241,12 +243,13 @@ const onDelete = (category: Category) => {
             <div>
               <BaseLabel class="mb-2">{{ entityLabel }}</BaseLabel>
 
-              <div class="flex gap-4 items-center">
+              <div class="flex flex-wrap gap-4 items-center">
                 <BaseSelect
                   id="entity"
                   v-model="entity"
                   item-key="name"
                   name="entity"
+                  class="min-w-[220px]"
                   :default-value-index="0"
                   :items="entities"
                   :placeholder="
@@ -270,13 +273,14 @@ const onDelete = (category: Category) => {
             <div>
               <BaseLabel class="mb-2">{{ categoryLabel }}</BaseLabel>
 
-              <div class="flex gap-4 items-center">
+              <div class="flex flex-wrap gap-4 items-center">
                 <BaseSelect
                   id="category"
                   :key="categoryKey"
                   v-model="category"
                   item-key="name"
                   name="category"
+                  class="min-w-[220px]"
                   :items="categoryList"
                   :placeholder="
                     t('addEntity', { entity: t('category', 2).toLowerCase() })

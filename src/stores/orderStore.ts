@@ -2,10 +2,11 @@ import { defineStore } from 'pinia';
 
 import { endpoints } from '@app/config';
 import { useAuthUserStore } from './authStore';
-import type { Order, OrderState } from './models';
+import type { Category, Order, OrderState } from './models';
 
 export const useOrderStore = defineStore('order', {
   state: (): OrderState => ({
+    allOrders: [],
     orders: [],
     loaded: false,
     loading: false,
@@ -46,6 +47,7 @@ export const useOrderStore = defineStore('order', {
       }
 
       this.orders = orders;
+      this.allOrders = orders;
       this.loaded = true;
       this.loading = false;
     },
@@ -65,8 +67,31 @@ export const useOrderStore = defineStore('order', {
         throw error;
       }
       this.orders.push(order);
+      this.allOrders.push(order);
 
       this.saving = false;
+    },
+    filter(search: string, property: string) {
+      if (search === '' || search === null) {
+        this.orders = this.allOrders;
+        return;
+      }
+      this.orders = this.allOrders.filter((order: Order) => {
+        let value = order[property];
+        if (typeof value === 'number') {
+          value = value.toString();
+        }
+        return value.includes(search);
+      });
+    },
+    filterByCategory(categories: Category[]) {
+      this.orders = this.allOrders.filter((order: Order) =>
+        categories.some((category: Category) =>
+          order.category.some(
+            (orderCategory: Category) => category.id === orderCategory.id
+          )
+        )
+      );
     },
   },
 });
