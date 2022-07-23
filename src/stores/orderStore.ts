@@ -4,6 +4,8 @@ import { endpoints } from '@app/config';
 import { useAuthUserStore } from './authStore';
 import type { Category, Order, OrderState } from './models';
 
+type OrderKey = keyof typeof Order;
+
 export const useOrderStore = defineStore('order', {
   state: (): OrderState => ({
     allOrders: [],
@@ -100,7 +102,7 @@ export const useOrderStore = defineStore('order', {
 
       this.saving = false;
     },
-    filter(search: string, property: string) {
+    filter(search: string, property: OrderKey) {
       if (search === '' || search === null) {
         this.orders = this.allOrders;
         return;
