@@ -6,5 +6,14 @@ export interface Payment {
   description: string;
   amount: number;
   order: Order;
-  date: string;
+  payDate: string;
+  nextDate: string;
+}
+
+export interface PaymentState {
+  allPayments: Payment[];
+  payments: Payment[];
+  loaded: boolean;
+  loading: boolean;
+  saving: boolean;
 }

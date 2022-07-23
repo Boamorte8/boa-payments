@@ -21,8 +21,17 @@ const totalAmount = computed(
     )}/${props.order.currency.toLowerCase()}`
 );
 
+const currentAmount = computed(
+  () =>
+    `${formatCurrency(
+      props.order.currentAmount,
+      props.order.currency
+    )}/${props.order.currency.toLowerCase()}`
+);
+
 const nextDate = computed(() => formatDate(new Date(props.order.nextDate)));
 const startDate = computed(() => formatDate(new Date(props.order.startDate)));
+const finishedText = computed(() => (props.order.finished ? 'yes' : 'no'));
 const subscriptionText = computed(() =>
   props.order.subscription ? 'yes' : 'no'
 );
@@ -58,10 +67,17 @@ const isLoan = computed(() => props.order.type === OrderType.LOAN);
 
       <section>
         <DisplayInfo :label="t('totalAmount')" :value="totalAmount" />
+        <DisplayInfo :label="t('currentAmount')" :value="currentAmount" />
         <DisplayInfo :label="t('nextDate')" :value="nextDate" />
         <DisplayInfo :label="t('startDate')" :value="startDate" />
         <DisplayInfo :label="t('subscription')" :value="t(subscriptionText)" />
         <DisplayInfo
+          class="mb-2"
+          :label="t('finished')"
+          :value="t(finishedText)"
+        />
+        <DisplayInfo
+          class="pb-2"
           :label="t('description')"
           :value="order.description"
           mode="vertical"

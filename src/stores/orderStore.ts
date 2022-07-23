@@ -11,12 +11,14 @@ export const useOrderStore = defineStore('order', {
     loaded: false,
     loading: false,
     saving: false,
+    updating: false,
   }),
   getters: {
     areOrdersLoaded: ({ orders, loaded }) => loaded && !!orders.length,
-    isLoading: ({ loading, saving }) => loading || saving,
+    isLoading: ({ loading, saving, updating }) => loading || saving || updating,
     filteredOrders: ({ orders }) => orders,
     noOrders: ({ orders, loaded }) => loaded && !orders.length,
+    unfinishedOrders: ({ orders }) => orders.filter((order) => !order.finished),
   },
   actions: {
     async loadOrders(errorMessage: string) {
@@ -68,6 +70,33 @@ export const useOrderStore = defineStore('order', {
       }
       this.orders.push(order);
       this.allOrders.push(order);
+
+      this.saving = false;
+    },
+    async updateOrder(order: Order, errorMessage: string) {
+      this.saving = true;
+      let { userId, token } = useAuthUserStore();
+      userId = userId || '';
+      token = token || '';
+      const response = await fetch(
+        endpoints.updateOrder(userId, token, order.id),
+        {
+          method: 'PUT',
+          body: JSON.stringify(order),
+        }
+      );
+      const responseData = await response.json();
+      if (!response.ok) {
+        const error = new Error(responseData.message || errorMessage);
+        this.saving = false;
+        throw error;
+      }
+      const index = this.allOrders.findIndex(
+        (orderFind) => orderFind.id === order.id
+      );
+      console.log(index);
+      this.allOrders[index] = order;
+      this.orders = this.allOrders;
 
       this.saving = false;
     },

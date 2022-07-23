@@ -103,6 +103,7 @@ const addNewOrder = async () => {
     title: title.value,
     description: description.value,
     amount: amount.value,
+    currentAmount: amount.value,
     entity: entity.value,
     currency: currency.value,
     type: (type.value as BaseSelectItem).value as OrderType,

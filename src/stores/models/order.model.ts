@@ -18,10 +18,11 @@ export interface Order {
   title: string;
   description: string;
   amount: number;
+  currentAmount: number;
   currency: CurrencyValue;
   entity: Entity;
   type: OrderType;
-  category: Category[] | { [key: string]: Category };
+  category: Category[];
   finished: boolean;
   subscription: boolean;
   startDate: string;
@@ -34,4 +35,5 @@ export interface OrderState {
   loaded: boolean;
   loading: boolean;
   saving: boolean;
+  updating: boolean;
 }
