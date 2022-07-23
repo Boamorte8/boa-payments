@@ -2,9 +2,7 @@ import { defineStore } from 'pinia';
 
 import { endpoints } from '@app/config';
 import { useAuthUserStore } from './authStore';
-import type { Category, Order, OrderState } from './models';
-
-type OrderKey = keyof typeof Order;
+import type { Category, Order, OrderKey, OrderState } from './models';
 
 export const useOrderStore = defineStore('order', {
   state: (): OrderState => ({
@@ -112,7 +110,7 @@ export const useOrderStore = defineStore('order', {
         if (typeof value === 'number') {
           value = value.toString();
         }
-        return value.includes(search);
+        return (value as string).includes(search);
       });
     },
     filterByCategory(categories: Category[]) {

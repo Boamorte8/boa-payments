@@ -29,6 +29,8 @@ export interface Order {
   nextDate: string;
 }
 
+export type OrderKey = keyof Order;
+
 export interface OrderState {
   allOrders: Order[];
   orders: Order[];

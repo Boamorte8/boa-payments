@@ -3,7 +3,7 @@ import { computed, ref, watch, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { watchDebounced } from '@vueuse/core';
 
-import type { Category } from '@stores/models';
+import type { Category, OrderKey } from '@stores/models';
 import { useCategoryStore } from '@stores/categoryStore';
 import { useOrderStore } from '@stores/orderStore';
 
@@ -62,7 +62,7 @@ watch(
 
 watchDebounced(
   search,
-  (value) => orderStore.filter(value, by.value.value.toLowerCase()),
+  (value) => orderStore.filter(value, by.value.value.toLowerCase() as OrderKey),
   { debounce: 1000 }
 );
 
@@ -70,7 +70,7 @@ watchDebounced(
   by,
   (value) => {
     if (value) {
-      orderStore.filter(search.value, value.value);
+      orderStore.filter(search.value, value.value as OrderKey);
     }
   },
   { debounce: 1000 }

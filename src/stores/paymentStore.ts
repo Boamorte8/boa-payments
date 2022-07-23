@@ -36,7 +36,7 @@ export const usePaymentStore = defineStore('payment', {
         this.loading = false;
         throw error;
       }
-      const payments = [];
+      const payments: Payment[] = [];
 
       for (const paymentId in responseData) {
         const payment = {
