@@ -1,4 +1,4 @@
-import type { BaseSelectItem } from '@app/models';
+import type { BaseSelectItem, SortValue } from '@app/models';
 import type { Category } from './category.model';
 import type { CurrencyValue } from './currency.model';
 import type { Entity } from './entity.model';
@@ -38,4 +38,5 @@ export interface OrderState {
   loading: boolean;
   saving: boolean;
   updating: boolean;
+  sortBy: SortValue;
 }

@@ -1,4 +1,4 @@
-import BaseSpinner from "../../src/components/ui/BaseSpinner.vue";
+import BaseSpinner from "../../src/atoms/BaseSpinner.vue";
 
 export default {
   title: "Atoms/BaseSpinner",

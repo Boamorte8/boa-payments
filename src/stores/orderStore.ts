@@ -2,6 +2,8 @@ import { defineStore } from 'pinia';
 
 import { endpoints } from '@app/config';
 import { useAuthUserStore } from './authStore';
+import { sortOrders } from '@app/utils';
+import { SortValue } from '@app/models';
 import type { Category, Order, OrderKey, OrderState } from './models';
 
 export const useOrderStore = defineStore('order', {
@@ -12,11 +14,12 @@ export const useOrderStore = defineStore('order', {
     loading: false,
     saving: false,
     updating: false,
+    sortBy: SortValue.OldFirst,
   }),
   getters: {
     areOrdersLoaded: ({ orders, loaded }) => loaded && !!orders.length,
     isLoading: ({ loading, saving, updating }) => loading || saving || updating,
-    filteredOrders: ({ orders }) => orders,
+    filteredOrders: ({ orders, sortBy }) => sortOrders(orders, sortBy),
     noOrders: ({ orders, loaded }) => loaded && !orders.length,
     unfinishedOrders: ({ orders }) => orders.filter((order) => !order.finished),
   },

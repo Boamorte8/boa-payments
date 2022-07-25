@@ -21,6 +21,7 @@ const es = {
   emptyEntityMessage: (ctx: any) =>
     `No hay ${ctx.named('entity')} para mostrar aún. `,
   entity: 'Entidad | Entidades',
+  entityRange: (ctx: any) => `Rango por ${ctx.named('entity')}`,
   error: 'Error',
   errorCreatingEntity: (ctx: any) => `Problema al crear ${ctx.named('entity')}`,
   errorLoadingEntity: (ctx: any) => `Problema al cargar ${ctx.named('entity')}`,
@@ -29,6 +30,7 @@ const es = {
   fieldsRequired: '*Campos requeridos',
   finished: 'Terminada',
   info: 'Info',
+  largeAmounts: 'Grandes montos',
   loan: 'Préstamo',
   login: 'Autenticar',
   loginError: 'Fallo al autenticar. Verifica tus datos de acceso',
@@ -57,6 +59,7 @@ const es = {
   signError: 'Fallo al registrarse. Verifica tus datos de registro',
   signSwitch: 'Autenticarse',
   signup: 'Registrar',
+  smallestAmounts: 'Pequeños montos',
   sortBy: 'Ordenar por',
   startDate: 'Fecha de Inicio',
   subscription: 'Subscripción',

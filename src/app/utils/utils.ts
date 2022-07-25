@@ -1,3 +1,6 @@
+import type { SortValue } from '@app/models';
+import type { Order } from '@stores/models';
+
 export const generateId = (): number => Math.random() * Date.now();
 
 export const formatCurrency = (
@@ -14,3 +17,8 @@ export const formatCurrency = (
 
 export const formatDate = (value: Date): string =>
   new Intl.DateTimeFormat('en-US').format(value);
+
+export const sortOrders = (orders: Order[], by: SortValue) => {
+  console.log(by);
+  return orders;
+};

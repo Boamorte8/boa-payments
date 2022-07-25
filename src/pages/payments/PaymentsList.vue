@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
 import ErrorsPayments from '@organisms/ErrorsPayments.vue';
-import FilterOrders from '@organisms/FilterOrders.vue';
+import FilterPayments from '@organisms/FilterPayments.vue';
 import OrderCard from '@organisms/OrderCard.vue';
 import { usePaymentStore } from '@stores/paymentStore';
 
@@ -28,7 +28,7 @@ const onAddNewPayment = () => {
         {{ t('payments', 2) }}
       </h1>
 
-      <!-- <FilterOrders class="mb-7" /> -->
+      <FilterPayments class="mb-7" />
 
       <div class="flex flex-wrap gap-4">
         <!-- <OrderCard v-for="order in orders" :key="order.id" :order="order" /> -->
