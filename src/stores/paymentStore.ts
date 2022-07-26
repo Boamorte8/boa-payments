@@ -78,7 +78,11 @@ export const usePaymentStore = defineStore('payment', {
         this.payments = this.allPayments;
         return;
       }
-      this.payments = filterByProperty(this.allPayments, property, search);
+      this.payments = filterByProperty<Payment>(
+        this.allPayments,
+        property,
+        search
+      );
     },
   },
 });

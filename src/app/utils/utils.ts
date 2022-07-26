@@ -1,7 +1,5 @@
-import type { SortValue } from '@app/models';
-import type { Order, Payment } from '@stores/models';
-
-type Collection = Order[] | Payment[];
+import type { GeneralObject, SortValue } from '@app/models';
+import type { Order } from '@stores/models';
 
 export const generateId = (): number => Math.random() * Date.now();
 
@@ -25,13 +23,13 @@ export const sortOrders = (orders: Order[], by: SortValue) => {
   return orders;
 };
 
-export const filterByProperty = (
-  collection: Collection,
+export const filterByProperty = <T>(
+  collection: T[],
   property: string,
   search: string
-) => {
-  return collection.filter((item) => {
-    let value = item[property];
+): T[] => {
+  return collection.filter((item: T) => {
+    let value = (item as unknown as GeneralObject)[property];
     if (typeof value === 'number') {
       value = value.toString();
     }

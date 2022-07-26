@@ -1,3 +1,7 @@
+export interface GeneralObject {
+  [key: string]: string | number;
+}
+
 export interface SelectType {
   [key: string]: string;
 }

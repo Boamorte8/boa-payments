@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import { endpoints } from '@app/config';
 import { useAuthUserStore } from './authStore';
 import { filterByProperty, sortOrders } from '@app/utils';
-import { SortValue } from '@app/models';
+import { type GeneralObject, SortValue } from '@app/models';
 import type { Category, Order, OrderKey, OrderState } from './models';
 
 export const useOrderStore = defineStore('order', {
@@ -108,7 +108,7 @@ export const useOrderStore = defineStore('order', {
         this.orders = this.allOrders;
         return;
       }
-      this.orders = filterByProperty(this.allOrders, property, search);
+      this.orders = filterByProperty<Order>(this.allOrders, property, search);
     },
     filterByCategory(categories: Category[]) {
       this.orders = this.allOrders.filter((order: Order) =>
