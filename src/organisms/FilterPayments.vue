@@ -3,9 +3,11 @@ import { computed, ref, watch, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { watchDebounced } from '@vueuse/core';
 
-import type { PaymentKey } from '@stores/models';
+import type { Order, PaymentKey } from '@stores/models';
+import { useOrderStore } from '@stores/orderStore';
 import { usePaymentStore } from '@stores/paymentStore';
 
+const orderStore = useOrderStore();
 const paymentStore = usePaymentStore();
 const { t } = useI18n();
 const isSearch = ref(true);
@@ -27,22 +29,21 @@ const search = ref();
 const by: Ref<{ id: string; value: string }> = ref(entities[0]);
 const sortBy = ref();
 const order = ref();
+const orders = computed(() => orderStore.allOrders);
 
 const clearFilters = () => {
   search.value = null;
+  order.value = null;
 };
 
-// watch(
-//   () => category.value,
-//   (value: Category) => {
-//     if (value) {
-//       selectedCategories.value.push(value);
-//       category.value = null;
-//       categoryKey.value += 1;
-//       orderStore.filterByCategory(selectedCategories.value);
-//     }
-//   }
-// );
+watch(
+  () => order.value,
+  (value: Order) => {
+    if (value) {
+      paymentStore.filterByOrder(value);
+    }
+  }
+);
 
 watchDebounced(
   search,
@@ -94,24 +95,23 @@ watchDebounced(
           :items="entities"
         />
 
-        <!-- <BaseSelect
-          id="category"
-          :key="categoryKey"
-          v-model="category"
-          item-key="name"
-          name="category"
+        <BaseSelect
+          id="order"
+          v-model="order"
+          item-key="title"
+          name="order"
           class="min-w-[220px]"
-          :label="t('category')"
-          :items="categoryList"
+          :label="t('orders')"
+          :items="orders"
           :placeholder="
-            t('selectEntity', { entity: t('category').toLowerCase() })
+            t('selectEntity', { entity: t('orders').toLowerCase() })
           "
           :no-items-message="
             t('noEntities', {
-              entities: t('category', 2).toLowerCase(),
+              entities: t('orders', 2).toLowerCase(),
             })
           "
-        /> -->
+        />
 
         <BaseSelect
           id="sortBy"

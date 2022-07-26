@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import { endpoints } from '@app/config';
 import { useAuthUserStore } from './authStore';
 import { filterByProperty, sortOrders } from '@app/utils';
-import { type GeneralObject, SortValue } from '@app/models';
+import { SortValue } from '@app/models';
 import type { Category, Order, OrderKey, OrderState } from './models';
 
 export const useOrderStore = defineStore('order', {
@@ -97,7 +97,6 @@ export const useOrderStore = defineStore('order', {
       const index = this.allOrders.findIndex(
         (orderFind) => orderFind.id === order.id
       );
-      console.log(index);
       this.allOrders[index] = order;
       this.orders = this.allOrders;
 

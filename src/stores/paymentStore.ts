@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import { endpoints } from '@app/config';
 import { filterByProperty } from '@app/utils';
 import { useAuthUserStore } from './authStore';
-import type { Payment, PaymentKey, PaymentState } from './models';
+import type { Order, Payment, PaymentKey, PaymentState } from './models';
 
 export const usePaymentStore = defineStore('payment', {
   state: (): PaymentState => ({
@@ -82,6 +82,11 @@ export const usePaymentStore = defineStore('payment', {
         this.allPayments,
         property,
         search
+      );
+    },
+    filterByOrder(searchOrder: Order) {
+      this.payments = this.allPayments.filter(
+        (payment: Payment) => payment.order.id === searchOrder.id
       );
     },
   },
