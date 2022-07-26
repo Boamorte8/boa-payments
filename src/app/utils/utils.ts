@@ -1,7 +1,7 @@
 import type { SortValue } from '@app/models';
 import type { Order, Payment } from '@stores/models';
 
-type Collection = Order | Payment;
+type Collection = Order[] | Payment[];
 
 export const generateId = (): number => Math.random() * Date.now();
 
