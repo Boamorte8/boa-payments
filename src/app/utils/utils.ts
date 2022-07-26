@@ -1,5 +1,7 @@
 import type { SortValue } from '@app/models';
-import type { Order } from '@stores/models';
+import type { Order, Payment } from '@stores/models';
+
+type Collection = Order | Payment;
 
 export const generateId = (): number => Math.random() * Date.now();
 
@@ -24,7 +26,7 @@ export const sortOrders = (orders: Order[], by: SortValue) => {
 };
 
 export const filterByProperty = (
-  collection: { [key: string]: string | number }[],
+  collection: Collection[],
   property: string,
   search: string
 ) => {
