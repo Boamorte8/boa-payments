@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 
 import { endpoints } from '@app/config';
 import { useAuthUserStore } from './authStore';
-import { sortOrders } from '@app/utils';
+import { filterByProperty, sortOrders } from '@app/utils';
 import { SortValue } from '@app/models';
 import type { Category, Order, OrderKey, OrderState } from './models';
 
@@ -17,10 +17,10 @@ export const useOrderStore = defineStore('order', {
     sortBy: SortValue.OldFirst,
   }),
   getters: {
-    areOrdersLoaded: ({ orders, loaded }) => loaded && !!orders.length,
+    areOrdersLoaded: ({ allOrders, loaded }) => loaded && !!allOrders.length,
     isLoading: ({ loading, saving, updating }) => loading || saving || updating,
     filteredOrders: ({ orders, sortBy }) => sortOrders(orders, sortBy),
-    noOrders: ({ orders, loaded }) => loaded && !orders.length,
+    noOrders: ({ allOrders, loaded }) => loaded && !allOrders.length,
     unfinishedOrders: ({ orders }) => orders.filter((order) => !order.finished),
   },
   actions: {
@@ -108,13 +108,7 @@ export const useOrderStore = defineStore('order', {
         this.orders = this.allOrders;
         return;
       }
-      this.orders = this.allOrders.filter((order: Order) => {
-        let value = order[property];
-        if (typeof value === 'number') {
-          value = value.toString();
-        }
-        return (value as string).includes(search);
-      });
+      this.orders = filterByProperty(this.allOrders, property, search);
     },
     filterByCategory(categories: Category[]) {
       this.orders = this.allOrders.filter((order: Order) =>

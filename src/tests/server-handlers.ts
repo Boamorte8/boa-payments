@@ -14,6 +14,10 @@ const getCategoriesEndpoint = endpoints
   .getCategories('userIdTest', 'tokenTest')
   .split('?')[0];
 
+const getPaymentsEndpoint = endpoints
+  .getPayments('userIdTest', 'tokenTest')
+  .split('?')[0];
+
 const handlers = [
   rest.post(
     'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword',
@@ -61,7 +65,19 @@ const handlers = [
       return res(
         ctx.status(403),
         ctx.json({
-          errorMessage: 'Error saving entity',
+          errorMessage: 'Error saving order',
+        })
+      );
+    }
+    return res(ctx.status(200), ctx.json({ name: '12345' }));
+  }),
+  rest.put(getOrdersEndpoint, (req, res, ctx) => {
+    const isWorking = sessionStorage.getItem('is-working');
+    if (!isWorking) {
+      return res(
+        ctx.status(403),
+        ctx.json({
+          errorMessage: 'Error saving order',
         })
       );
     }
@@ -103,7 +119,7 @@ const handlers = [
       return res(
         ctx.status(403),
         ctx.json({
-          errorMessage: 'Error loading order list',
+          errorMessage: 'Error loading categories',
         })
       );
     }
@@ -122,6 +138,36 @@ const handlers = [
         ctx.status(403),
         ctx.json({
           errorMessage: 'Error saving category',
+        })
+      );
+    }
+    return res(ctx.status(200), ctx.json({ name: '12345' }));
+  }),
+  rest.get(getPaymentsEndpoint, (req, res, ctx) => {
+    const isWorking = sessionStorage.getItem('is-working');
+    if (!isWorking) {
+      return res(
+        ctx.status(403),
+        ctx.json({
+          errorMessage: 'Error loading payment list',
+        })
+      );
+    }
+    return res(
+      ctx.status(200),
+      ctx.json({
+        '0000': {},
+        '0001': {},
+      })
+    );
+  }),
+  rest.post(getPaymentsEndpoint, (req, res, ctx) => {
+    const isWorking = sessionStorage.getItem('is-working');
+    if (!isWorking) {
+      return res(
+        ctx.status(403),
+        ctx.json({
+          errorMessage: 'Error saving payment',
         })
       );
     }

@@ -30,9 +30,18 @@ const onAddNewOrder = () => {
 
       <FilterOrders class="mb-7" />
 
-      <div class="flex flex-wrap gap-4">
+      <div v-if="!!orders.length" class="flex flex-wrap gap-4">
         <OrderCard v-for="order in orders" :key="order.id" :order="order" />
       </div>
+      <EmptyMessage v-else class="pt-5">
+        <p class="dark:text-white">
+          {{
+            t('emptyEntityMessage', {
+              entity: t('orders', 2).toLowerCase(),
+            })
+          }}
+        </p>
+      </EmptyMessage>
     </div>
 
     <FloatButton @click="onAddNewOrder" />

@@ -10,6 +10,8 @@ export interface Payment {
   nextDate: string;
 }
 
+export type PaymentKey = keyof Payment;
+
 export interface PaymentState {
   allPayments: Payment[];
   payments: Payment[];

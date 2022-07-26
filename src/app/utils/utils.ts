@@ -22,3 +22,17 @@ export const sortOrders = (orders: Order[], by: SortValue) => {
   console.log(by);
   return orders;
 };
+
+export const filterByProperty = (
+  collection: { [key: string]: string | number }[],
+  property: string,
+  search: string
+) => {
+  return collection.filter((item) => {
+    let value = item[property];
+    if (typeof value === 'number') {
+      value = value.toString();
+    }
+    return (value as string).toLowerCase().includes(search);
+  });
+};

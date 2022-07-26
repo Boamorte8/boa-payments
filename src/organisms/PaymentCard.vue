@@ -39,8 +39,8 @@ const isLoan = computed(() => props.payment.order.type === OrderType.LOAN);
         <div
           class="flex justify-center items-center rounded-[50%] bg-primary-700 text-white h-12 w-12"
         >
-          <CashIcon v-if="isLoan" class="text-success-700" />
-          <LibraryIcon v-else class="text-error-700" />
+          <CashIcon v-if="isLoan" class="h-7 w-7 text-success-700" />
+          <LibraryIcon v-else class="h-7 w-7 text-error-700" />
         </div>
 
         <div class="w-[53%] dark:text-white">

@@ -69,7 +69,7 @@ watch(
 watchDebounced(
   search,
   (value) => orderStore.filter(value, by.value.id as OrderKey),
-  { debounce: 1000 }
+  { debounce: 400 }
 );
 
 watchDebounced(
@@ -85,7 +85,7 @@ watchDebounced(
       }
     }
   },
-  { debounce: 1000 }
+  { debounce: 400 }
 );
 </script>
 

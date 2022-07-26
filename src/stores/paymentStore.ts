@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia';
 
 import { endpoints } from '@app/config';
+import { filterByProperty } from '@app/utils';
 import { useAuthUserStore } from './authStore';
-import type { Payment, PaymentState } from './models';
+import type { Payment, PaymentKey, PaymentState } from './models';
 
 export const usePaymentStore = defineStore('payment', {
   state: (): PaymentState => ({
@@ -13,10 +14,11 @@ export const usePaymentStore = defineStore('payment', {
     saving: false,
   }),
   getters: {
-    arePaymentsLoaded: ({ payments, loaded }) => loaded && !!payments.length,
+    arePaymentsLoaded: ({ allPayments, loaded }) =>
+      loaded && !!allPayments.length,
     isLoading: ({ loading, saving }) => loading || saving,
     filteredPayments: ({ payments }) => payments,
-    noPayments: ({ payments, loaded }) => loaded && !payments.length,
+    noPayments: ({ allPayments, loaded }) => loaded && !allPayments.length,
   },
   actions: {
     async loadPayments(errorMessage: string) {
@@ -71,18 +73,12 @@ export const usePaymentStore = defineStore('payment', {
 
       this.saving = false;
     },
-    // filter(search: string, property: string) {
-    //   if (search === '' || search === null) {
-    //     this.orders = this.allOrders;
-    //     return;
-    //   }
-    //   this.orders = this.allOrders.filter((order: Order) => {
-    //     let value = order[property];
-    //     if (typeof value === 'number') {
-    //       value = value.toString();
-    //     }
-    //     return value.includes(search);
-    //   });
-    // },
+    filter(search: string, property: PaymentKey) {
+      if (search === '' || search === null) {
+        this.payments = this.allPayments;
+        return;
+      }
+      this.orders = filterByProperty(this.allPayments, property, search);
+    },
   },
 });

@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router';
 
 import ErrorsPayments from '@organisms/ErrorsPayments.vue';
 import FilterPayments from '@organisms/FilterPayments.vue';
-import OrderCard from '@organisms/OrderCard.vue';
+import PaymentCard from '@organisms/PaymentCard.vue';
 import { usePaymentStore } from '@stores/paymentStore';
 
 const { t } = useI18n();
@@ -30,9 +30,22 @@ const onAddNewPayment = () => {
 
       <FilterPayments class="mb-7" />
 
-      <div class="flex flex-wrap gap-4">
-        <!-- <OrderCard v-for="order in orders" :key="order.id" :order="order" /> -->
+      <div v-if="!!payments.length" class="flex flex-wrap gap-4">
+        <PaymentCard
+          v-for="payment in payments"
+          :key="payment.id"
+          :payment="payment"
+        />
       </div>
+      <EmptyMessage v-else class="pt-5">
+        <p class="dark:text-white">
+          {{
+            t('emptyEntityMessage', {
+              entity: t('payments', 2).toLowerCase(),
+            })
+          }}
+        </p>
+      </EmptyMessage>
     </div>
 
     <FloatButton @click="onAddNewPayment" />

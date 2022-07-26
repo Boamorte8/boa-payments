@@ -3,11 +3,12 @@ import { computed, ref, watch, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { watchDebounced } from '@vueuse/core';
 
-import type { OrderKey } from '@stores/models';
-import { useOrderStore } from '@stores/orderStore';
+import type { PaymentKey } from '@stores/models';
+import { usePaymentStore } from '@stores/paymentStore';
 
-const orderStore = useOrderStore();
+const paymentStore = usePaymentStore();
 const { t } = useI18n();
+const isSearch = ref(true);
 const entities = [
   { id: 'title', value: t('title') },
   { id: 'description', value: t('description') },
@@ -23,7 +24,7 @@ const sortValues = [
   { text: t('amount'), value: 'amount' },
 ];
 const search = ref();
-const by: Ref<{ value: string }> = ref(entities[0]);
+const by: Ref<{ id: string; value: string }> = ref(entities[0]);
 const sortBy = ref();
 const order = ref();
 
@@ -45,7 +46,8 @@ const clearFilters = () => {
 
 watchDebounced(
   search,
-  (value) => orderStore.filter(value, by.value.value.toLowerCase() as OrderKey),
+  (value) =>
+    paymentStore.filter(value, by.value.value.toLowerCase() as PaymentKey),
   { debounce: 1000 }
 );
 
@@ -53,7 +55,13 @@ watchDebounced(
   by,
   (value) => {
     if (value) {
-      orderStore.filter(search.value, value.value as OrderKey);
+      const { id } = value;
+      if (id !== 'dateRange' && id !== 'amountRange') {
+        paymentStore.filter(search.value, value.value as PaymentKey);
+        isSearch.value = true;
+      } else {
+        isSearch.value = false;
+      }
     }
   },
   { debounce: 1000 }
