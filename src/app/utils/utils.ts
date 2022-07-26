@@ -26,7 +26,7 @@ export const sortOrders = (orders: Order[], by: SortValue) => {
 };
 
 export const filterByProperty = (
-  collection: Collection[],
+  collection: Collection,
   property: string,
   search: string
 ) => {
