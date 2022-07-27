@@ -3,6 +3,7 @@ import { computed, ref, watch, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { watchDebounced } from '@vueuse/core';
 
+import { SortValue } from '@app/models';
 import type { Order, PaymentKey } from '@stores/models';
 import { useOrderStore } from '@stores/orderStore';
 import { usePaymentStore } from '@stores/paymentStore';
@@ -19,11 +20,12 @@ const entities = [
   { id: 'dateRange', value: t('entityRange', { entity: t('date') }) },
 ];
 const sortValues = [
-  { text: t('oldFirst'), value: 'oldFirst' },
-  { text: t('newFirst'), value: 'newFirst' },
-  { text: t('title'), value: 'title' },
-  { text: t('description'), value: 'description' },
-  { text: t('amount'), value: 'amount' },
+  { text: t('oldFirst'), value: SortValue.OldFirst },
+  { text: t('newFirst'), value: SortValue.NewFirst },
+  { text: t('title'), value: SortValue.Title },
+  { text: t('description'), value: SortValue.Description },
+  { text: t('smallestAmounts'), value: SortValue.SmallestAmounts },
+  { text: t('largeAmounts'), value: SortValue.LargeAmounts },
 ];
 const search = ref();
 const by: Ref<{ id: string; value: string }> = ref(entities[0]);
@@ -44,6 +46,10 @@ watch(
     }
   }
 );
+
+watchDebounced(sortBy, (value) => paymentStore.setSorting(value.value), {
+  debounce: 200,
+});
 
 watchDebounced(
   search,
