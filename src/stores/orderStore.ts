@@ -118,5 +118,8 @@ export const useOrderStore = defineStore('order', {
         )
       );
     },
+    setSorting(sorting: SortValue) {
+      this.sortBy = sorting;
+    },
   },
 });

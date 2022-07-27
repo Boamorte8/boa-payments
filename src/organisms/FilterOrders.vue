@@ -72,6 +72,10 @@ watchDebounced(
   { debounce: 400 }
 );
 
+watchDebounced(sortBy, (value) => orderStore.setSorting(value.value), {
+  debounce: 200,
+});
+
 watchDebounced(
   by,
   (value) => {

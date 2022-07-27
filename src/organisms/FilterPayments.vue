@@ -49,7 +49,7 @@ watchDebounced(
   search,
   (value) =>
     paymentStore.filter(value, by.value.value.toLowerCase() as PaymentKey),
-  { debounce: 1000 }
+  { debounce: 400 }
 );
 
 watchDebounced(
@@ -65,7 +65,7 @@ watchDebounced(
       }
     }
   },
-  { debounce: 1000 }
+  { debounce: 400 }
 );
 </script>
 
