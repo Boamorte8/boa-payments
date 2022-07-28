@@ -49,9 +49,9 @@ const isLoan = computed(() => props.payment.order.type === OrderType.LOAN);
         <DisplayInfo :label="t('payDate')" :value="payDate" />
         <DisplayInfo
           class="pb-2"
+          mode="vertical"
           :label="t('description')"
           :value="payment.description"
-          mode="vertical"
         />
       </section>
     </div>

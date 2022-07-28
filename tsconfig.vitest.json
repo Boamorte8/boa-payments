@@ -3,6 +3,9 @@
   "include": ["src/**/__tests__/*", "src/tests/*", "src/router.ts"],
   "compilerOptions": {
     "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
       "@stores": ["./src/stores/*"],

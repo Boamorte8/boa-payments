@@ -8,7 +8,7 @@ import i18n from '../../i18n';
 import LogoApp from '@atoms/LogoApp.vue';
 import LogoutIcon from '@atoms/LogoutIcon.vue';
 import OptionsIcon from '@atoms/OptionsIcon.vue';
-import { router } from '../../router';
+import router from '../../router';
 import TheHeader from '../TheHeader.vue';
 import TranslateIcon from '@atoms/TranslateIcon.vue';
 import { useAuthUserStore } from '../../stores';

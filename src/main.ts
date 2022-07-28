@@ -30,7 +30,7 @@ import SelectIcon from '@atoms/SelectIcon.vue';
 import TranslateIcon from '@atoms/TranslateIcon.vue';
 import UserIcon from '@atoms/UserIcon.vue';
 import i18n from './i18n';
-import { router } from './router';
+import router from './router';
 import './styles/index.css';
 
 const app = createApp(App);

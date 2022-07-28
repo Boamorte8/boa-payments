@@ -4,7 +4,7 @@ import {
   type RouteRecordRaw,
 } from 'vue-router';
 
-import { useAuthUserStore } from './stores';
+import { useAuthUserStore } from '../stores';
 import AddOrder from '@pages/orders/AddOrder.vue';
 import AddPayment from '@pages/payments/AddPayment.vue';
 import OrdersView from '@pages/orders/OrdersView.vue';
@@ -13,7 +13,7 @@ import NotFound from '@pages/NotFound.vue';
 import UserAuth from '@pages/auth/UserAuth.vue';
 import UserData from '@pages/UserData.vue';
 
-export const routes: RouteRecordRaw[] = [
+const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/auth' },
   {
     path: '/auth',
@@ -54,7 +54,7 @@ export const routes: RouteRecordRaw[] = [
   { path: '/:notFound(.*)', name: 'notFound', component: NotFound },
 ];
 
-export const router = createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes,
 });
@@ -70,3 +70,5 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
+export default router;
