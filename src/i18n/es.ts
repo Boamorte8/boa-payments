@@ -1,7 +1,10 @@
+import { ContextOptions } from './context.model';
+
 const es = {
   add: 'Añadir',
-  addEntity: (ctx: any) => `Añadir ${ctx.named('entity')}`,
-  addNewEntity: (ctx: any) => `Añadir nueva ${ctx.named('entity')}`,
+  addEntity: ({ named }: ContextOptions) => `Añadir ${named('entity')}`,
+  addNewEntity: ({ named }: ContextOptions) =>
+    `Añadir nueva ${named('entity')}`,
   amount: 'Monto',
   by: 'Por',
   category: 'Categoria | Categorias',
@@ -16,17 +19,20 @@ const es = {
   default: 'Default',
   defaultError: 'Un error ha ocurrido',
   description: 'Descripción',
-  duplicatedError: (ctx: any) => `Ya existe ${ctx.named('entity')}`,
+  duplicatedError: ({ named }: ContextOptions) =>
+    `Ya existe ${named('entity')}`,
   email: 'Correo',
-  emptyEntityMessage: (ctx: any) =>
-    `No hay ${ctx.named('entity')} para mostrar aún. `,
+  emptyEntityMessage: ({ named }: ContextOptions) =>
+    `No hay ${named('entity')} para mostrar aún. `,
   entity: 'Entidad | Entidades',
-  entityRange: (ctx: any) => `Rango por ${ctx.named('entity')}`,
+  entityRange: ({ named }: ContextOptions) => `Rango por ${named('entity')}`,
   error: 'Error',
-  errorCreatingEntity: (ctx: any) => `Problema al crear ${ctx.named('entity')}`,
-  errorLoadingEntity: (ctx: any) => `Problema al cargar ${ctx.named('entity')}`,
-  errorUpdatingEntity: (ctx: any) =>
-    `Problema al actualizar ${ctx.named('entity')}`,
+  errorCreatingEntity: ({ named }: ContextOptions) =>
+    `Problema al crear ${named('entity')}`,
+  errorLoadingEntity: ({ named }: ContextOptions) =>
+    `Problema al cargar ${named('entity')}`,
+  errorUpdatingEntity: ({ named }: ContextOptions) =>
+    `Problema al actualizar ${named('entity')}`,
   fieldsRequired: '*Campos requeridos',
   finished: 'Terminada',
   info: 'Info',
@@ -45,7 +51,8 @@ const es = {
   newM: 'Nuevo',
   nextDate: 'Próxima fecha',
   no: 'No',
-  noEntities: (ctx: any) => `No hay ${ctx.named('entities')} disponibles`,
+  noEntities: ({ named }: ContextOptions) =>
+    `No hay ${named('entities')} disponibles`,
   oldFirst: 'Viejos primero',
   orders: 'Ordenes',
   password: 'Contraseña',
@@ -53,9 +60,10 @@ const es = {
   payments: 'Pagos',
   profile: 'Perfil',
   search: 'Buscar',
-  searchEntity: (ctx: any) => `Buscar ${ctx.named('entity')}`,
-  selectEntity: (ctx: any) => `Selecciona ${ctx.named('entity')}`,
-  selectedEntity: (ctx: any) => `${ctx.named('entity')} seleccionadas`,
+  searchEntity: ({ named }: ContextOptions) => `Buscar ${named('entity')}`,
+  selectEntity: ({ named }: ContextOptions) => `Selecciona ${named('entity')}`,
+  selectedEntity: ({ named }: ContextOptions) =>
+    `${named('entity')} seleccionadas`,
   signError: 'Fallo al registrarse. Verifica tus datos de registro',
   signSwitch: 'Autenticarse',
   signup: 'Registrar',

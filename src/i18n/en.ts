@@ -1,7 +1,9 @@
+import { ContextOptions } from './context.model';
+
 const en = {
   add: 'Add',
-  addEntity: (ctx: any) => `Add ${ctx.named('entity')}`,
-  addNewEntity: (ctx: any) => `Add new ${ctx.named('entity')}`,
+  addEntity: ({ named }: ContextOptions) => `Add ${named('entity')}`,
+  addNewEntity: ({ named }: ContextOptions) => `Add new ${named('entity')}`,
   amount: 'Amount',
   by: 'By',
   category: 'Category | Categories',
@@ -16,16 +18,20 @@ const en = {
   default: 'Default',
   defaultError: 'An error ocurred',
   description: 'Description',
-  duplicatedError: (ctx: any) => `Already exist ${ctx.named('entity')}`,
+  duplicatedError: ({ named }: ContextOptions) =>
+    `Already exist ${named('entity')}`,
   email: 'Email',
-  emptyEntityMessage: (ctx: any) =>
-    `No ${ctx.named('entity')} to display yet. `,
+  emptyEntityMessage: ({ named }: ContextOptions) =>
+    `No ${named('entity')} to display yet. `,
   entity: 'Entity | Entities',
-  entityRange: (ctx: any) => `${ctx.named('entity')} range`,
-  errorCreatingEntity: (ctx: any) => `Failed creating ${ctx.named('entity')}`,
+  entityRange: ({ named }: ContextOptions) => `${named('entity')} range`,
+  errorCreatingEntity: ({ named }: ContextOptions) =>
+    `Failed creating ${named('entity')}`,
   error: 'Error',
-  errorLoadingEntity: (ctx: any) => `Failed loading ${ctx.named('entity')}`,
-  errorUpdatingEntity: (ctx: any) => `Failed updating ${ctx.named('entity')}`,
+  errorLoadingEntity: ({ named }: ContextOptions) =>
+    `Failed loading ${named('entity')}`,
+  errorUpdatingEntity: ({ named }: ContextOptions) =>
+    `Failed updating ${named('entity')}`,
   fieldsRequired: '*Fields required',
   finished: 'Finished',
   info: 'Info',
@@ -44,7 +50,8 @@ const en = {
   newM: 'New',
   nextDate: 'Next Date',
   no: 'No',
-  noEntities: (ctx: any) => `There are no ${ctx.named('entities')} available`,
+  noEntities: ({ named }: ContextOptions) =>
+    `There are no ${named('entities')} available`,
   oldFirst: 'Oldest first',
   orders: 'Order | Orders',
   password: 'Password',
@@ -52,9 +59,9 @@ const en = {
   payments: 'Payment | Payments',
   profile: 'Profile',
   search: 'Search',
-  searchEntity: (ctx: any) => `Search ${ctx.named('entity')}`,
-  selectEntity: (ctx: any) => `Select ${ctx.named('entity')}`,
-  selectedEntity: (ctx: any) => `Selected ${ctx.named('entity')}`,
+  searchEntity: ({ named }: ContextOptions) => `Search ${named('entity')}`,
+  selectEntity: ({ named }: ContextOptions) => `Select ${named('entity')}`,
+  selectedEntity: ({ named }: ContextOptions) => `Selected ${named('entity')}`,
   signError: 'Failed sign up. Check your signup data',
   signSwitch: 'Login instead',
   signup: 'Signup',

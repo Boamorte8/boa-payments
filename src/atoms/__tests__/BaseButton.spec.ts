@@ -1,3 +1,4 @@
+/* eslint-disable @intlify/vue-i18n/no-raw-text */
 import { createTestingPinia, type TestingOptions } from '@pinia/testing';
 import { describe, expect, test, vi } from 'vitest';
 import { mount, RouterLinkStub } from '@vue/test-utils';

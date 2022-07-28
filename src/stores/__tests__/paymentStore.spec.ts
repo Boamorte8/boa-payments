@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 import { createPinia, setActivePinia } from 'pinia';
 
-import { mockOrders } from '../../tests/order-test.utils';
 import { useAuthUserStore } from '../authStore';
 import { usePaymentStore } from '../paymentStore';
 

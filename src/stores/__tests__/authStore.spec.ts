@@ -13,6 +13,7 @@ describe('Auth User Store', () => {
   test('should call auth action when login action is called', async () => {
     const authStore = useAuthUserStore();
     vi.spyOn(authStore, 'auth').mockImplementationOnce(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       (payload: AuthPayload) =>
         new Promise((resolve) => {
           resolve();
@@ -32,6 +33,7 @@ describe('Auth User Store', () => {
   test('should call auth action when signup action is called', async () => {
     const authStore = useAuthUserStore();
     vi.spyOn(authStore, 'auth').mockImplementationOnce(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       (payload: AuthPayload) =>
         new Promise((resolve) => {
           resolve();

@@ -3,7 +3,7 @@ import type { PropType } from 'vue';
 
 import type { BaseItem } from '@app/models';
 
-const props = defineProps({
+defineProps({
   item: {
     type: Object as PropType<BaseItem>,
     required: true,

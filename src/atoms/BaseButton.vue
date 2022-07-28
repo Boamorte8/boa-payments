@@ -5,7 +5,7 @@ import type { RouteLocationRaw } from 'vue-router';
 
 type ButtonType = 'button' | 'reset' | 'submit';
 
-const props = defineProps({
+defineProps({
   mode: {
     type: String,
     required: false,
@@ -87,7 +87,6 @@ const props = defineProps({
 .flat:active,
 .outline:hover,
 .outline:active {
-  /* @apply bg-primary-300; */
   @apply bg-primary-300 dark:text-primary-700;
 }
 </style>

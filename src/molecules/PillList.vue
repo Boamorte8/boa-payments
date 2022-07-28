@@ -2,9 +2,9 @@
 import type { PropType } from 'vue';
 
 import type { BaseItem } from '@app/models';
-import BasePill from '../atoms/BasePill.vue';
+import BasePill from '@atoms/BasePill.vue';
 
-const props = defineProps({
+defineProps({
   label: {
     type: String,
     required: false,
