@@ -1,21 +1,11 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.node.json",
+  "extends": "./tsconfig.json",
   "include": ["src/**/__tests__/*", "src/tests/*", "src/router.ts"],
+  "exclude": [],
   "compilerOptions": {
     "composite": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "paths": {
-      "@stores": ["./src/stores/*"],
-      "@pages": ["./src/pages/*"],
-      "@app/*": ["./src/app/*"],
-      "@atoms/*": ["./src/atoms/*"],
-      "@molecules/*": ["./src/molecules/*"],
-      "@organisms/*": ["./src/organisms/*"],
-      "@templates/*": ["./src/templates/*"],
-    },
+    "lib": [],
     "types": ["node", "jsdom"]
   }
 }
