@@ -1,7 +1,8 @@
 import { app } from '@storybook/vue3';
+import vueRouter from 'storybook-vue3-router';
 
-import NotFound from '../src/pages/NotFound.vue';
-import i18n from '../src/i18n';
+import i18n from '../../src/i18n';
+import NotFound from '../../src/pages/NotFound.vue';
 
 app.use(i18n);
 
@@ -18,4 +19,5 @@ const Template = (args) => ({
   template: '<not-found />',
 });
 
-export const Default = Template.bind({});
+export const Default = Template.bind({ });
+Default.decorators = [vueRouter()];
