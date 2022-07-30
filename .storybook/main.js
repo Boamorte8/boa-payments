@@ -19,8 +19,7 @@ module.exports = {
   "features": {
     "storyStoreV7": true
   },
-  async viteFinal(config, { configType }) {
-    console.log(config.optimizeDeps);
+  async viteFinal(config) {
     return {
       ...config,
       resolve: {

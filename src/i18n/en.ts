@@ -35,6 +35,7 @@ const en = {
   fieldsRequired: '*Fields required',
   finished: 'Finished',
   info: 'Info',
+  information: 'Information',
   largeAmounts: 'Largest Amounts',
   loan: 'Loan',
   login: 'Login',
@@ -74,6 +75,7 @@ const en = {
   totalAmount: 'Total amount',
   tryAgain: 'Try Again',
   type: 'Type',
+  userSettings: 'User Settings',
   warning: 'Warning',
   yes: 'Yes',
   pageNotFound: {
@@ -82,6 +84,14 @@ const en = {
   },
   pageAddOrder: {
     isSubscription: 'Is a subscription?',
+  },
+  pageAuth: {
+    infoPage: 'information page',
+    warning: 'Before to register please read',
+  },
+  pageInfo: {
+    description:
+      'This is a personal project with two main goals. Firstly, a way to control lends and borrows. Second, to practice my skills to programming with Vue',
   },
 };
 

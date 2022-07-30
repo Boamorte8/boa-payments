@@ -1,6 +1,6 @@
 # Boa Payments
 
-This project is a personal project to control your lends and borrows.
+This is a personal project with two main goals. Firstly, a way to control lends and borrows. Second, to practice my skills with programming and Vue
 
 This project was implemented using:
 

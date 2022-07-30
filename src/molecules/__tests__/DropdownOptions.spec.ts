@@ -9,6 +9,7 @@ import BaseButton from '@atoms/BaseButton.vue';
 import DropdownItem from '@atoms/DropdownItem.vue';
 import DropdownOptions from '../DropdownOptions.vue';
 import i18n from '../../i18n';
+import InfoIcon from '@atoms/InfoIcon.vue';
 import LogoutIcon from '@atoms/LogoutIcon.vue';
 import router from '../../router';
 import TranslateIcon from '@atoms/TranslateIcon.vue';
@@ -32,6 +33,7 @@ describe('DropdownOptions', () => {
       global: {
         components: {
           DropdownItem,
+          InfoIcon,
           LogoutIcon,
           MenuButton,
           TranslateIcon,
@@ -56,7 +58,7 @@ describe('DropdownOptions', () => {
     const items = wrapper.findAll('[role="menuitem"]');
 
     expect(DropdownOptions).toBeTruthy();
-    expect(items.length).toBe(1);
+    expect(items.length).toBe(2);
     expect(items[0].text()).toBe('Change lang to es');
   });
 
@@ -69,14 +71,15 @@ describe('DropdownOptions', () => {
         },
       },
     });
-    const button = wrapper.find('#headlessui-menu-button-4');
+    const button = wrapper.find('#headlessui-menu-button-5');
     await button.trigger('click');
 
     const items = wrapper.findAll('[role="menuitem"]');
 
-    expect(items.length).toBe(3);
+    expect(items.length).toBe(4);
     expect(items[0].text()).toBe('Change lang to es');
     expect(items[1].text()).toBe('Profile');
-    expect(items[2].text()).toBe('Logout');
+    expect(items[2].text()).toBe('Information');
+    expect(items[3].text()).toBe('Logout');
   });
 });

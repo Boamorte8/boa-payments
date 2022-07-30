@@ -77,6 +77,27 @@ const handleError = () => {
 
     <BaseLoader :loading="isLoading" />
 
+    <h1 class="dark:text-white font-bold text-xl mb-4">
+      {{ t(mode) }}
+    </h1>
+
+    <BaseCard
+      v-if="mode === 'signup'"
+      class="flex gap-4 mx-auto max-w-fit mb-4"
+    >
+      <WarningIcon class="text-warning-700 h-8 w-8" />
+
+      <p class="dark:text-white font-bold">
+        {{ t('pageAuth.warning') }}
+        <router-link
+          class="text-primary-700 dark:text-primary-300"
+          :to="{ name: 'info' }"
+        >
+          {{ t('pageAuth.infoPage') }}
+        </router-link>
+      </p>
+    </BaseCard>
+
     <BaseCard class="max-w-2xl mx-auto">
       <form
         class="w-full flex flex-col items-center m-4 p-4"

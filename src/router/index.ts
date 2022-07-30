@@ -4,12 +4,13 @@ import {
   type RouteRecordRaw,
 } from 'vue-router';
 
-import { useAuthUserStore } from '../stores';
+import AboutPage from '@pages/AboutPage.vue';
 import AddOrder from '@pages/orders/AddOrder.vue';
 import AddPayment from '@pages/payments/AddPayment.vue';
 import OrdersView from '@pages/orders/OrdersView.vue';
 import PaymentsList from '@pages/payments/PaymentsList.vue';
 import NotFound from '@pages/NotFound.vue';
+import { useAuthUserStore } from '../stores';
 import UserAuth from '@pages/auth/UserAuth.vue';
 import UserData from '@pages/UserData.vue';
 
@@ -44,6 +45,11 @@ const routes: RouteRecordRaw[] = [
     name: 'payments',
     component: PaymentsList,
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/info',
+    name: 'info',
+    component: AboutPage,
   },
   {
     path: '/user',

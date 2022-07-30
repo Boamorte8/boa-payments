@@ -21,6 +21,10 @@ const goToProfile = () => {
   router.push({ name: 'user' });
 };
 
+const goToInfo = () => {
+  router.push({ name: 'info' });
+};
+
 const logout = () => {
   store.logout();
   router.replace('/');
@@ -38,6 +42,10 @@ const logout = () => {
 
     <dropdown-item v-if="store.isAuthenticated" @click="goToProfile">
       <TranslateIcon class="mr-2 text-primary-300" /> {{ t('profile') }}
+    </dropdown-item>
+
+    <dropdown-item @click="goToInfo">
+      <InfoIcon class="mr-2 text-primary-300" /> {{ t('information') }}
     </dropdown-item>
 
     <dropdown-item v-if="store.isAuthenticated" @click="logout">

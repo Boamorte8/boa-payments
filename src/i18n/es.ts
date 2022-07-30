@@ -36,6 +36,7 @@ const es = {
   fieldsRequired: '*Campos requeridos',
   finished: 'Terminada',
   info: 'Info',
+  information: 'Información',
   largeAmounts: 'Grandes montos',
   loan: 'Préstamo',
   login: 'Autenticar',
@@ -76,6 +77,7 @@ const es = {
   totalAmount: 'Monto total',
   tryAgain: 'Intentar de nuevo',
   type: 'Tipo',
+  userSettings: 'Configuración de Usuario',
   warning: 'Advertencia',
   yes: 'Si',
   pageNotFound: {
@@ -85,6 +87,14 @@ const es = {
   },
   pageAddOrder: {
     isSubscription: '¿Es una subscripcion?',
+  },
+  pageAuth: {
+    infoPage: 'la página de información',
+    warning: 'Antes de registrarte por favor lee',
+  },
+  pageInfo: {
+    description:
+      'Este es un proyecto personal con 2 objetivos principales. El primero, encontrar una forma de controlar mis préstamos y deudas. Segundo, practicar mis habilidades programando con Vue',
   },
 };
 

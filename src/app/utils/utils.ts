@@ -10,8 +10,6 @@ export const formatCurrency = (
   new Intl.NumberFormat('en-EN', {
     style: 'currency',
     currency,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
     currencyDisplay: 'narrowSymbol',
   }).format(+value);
 
