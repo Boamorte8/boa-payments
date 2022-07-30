@@ -17,8 +17,8 @@ const changeLanguage = () => {
 
 const changeLangTo = computed(() => (locale.value === 'en' ? 'es' : 'en'));
 
-const goToProfile = () => {
-  router.push({ name: 'user' });
+const goToSettings = () => {
+  router.push({ name: 'config' });
 };
 
 const goToInfo = () => {
@@ -33,15 +33,15 @@ const logout = () => {
 
 <template>
   <MenuItems
-    class="absolute right-0 w-56 mt-2 origin-top-right bg-white dark:bg-background divide-y divide-gray-100 dark:divide-gray-600 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+    class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white dark:bg-background divide-y divide-gray-100 dark:divide-gray-600 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
   >
     <dropdown-item @click="changeLanguage">
       <TranslateIcon class="mr-2 text-primary-300" /> {{ t('changeLang') }}
       {{ changeLangTo }}
     </dropdown-item>
 
-    <dropdown-item v-if="store.isAuthenticated" @click="goToProfile">
-      <TranslateIcon class="mr-2 text-primary-300" /> {{ t('profile') }}
+    <dropdown-item v-if="store.isAuthenticated" @click="goToSettings">
+      <SettingsIcon class="mr-2 text-primary-300" /> {{ t('userSettings') }}
     </dropdown-item>
 
     <dropdown-item @click="goToInfo">

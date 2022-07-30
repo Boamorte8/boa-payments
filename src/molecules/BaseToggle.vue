@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { Switch } from '@headlessui/vue';
 
 const enabled = ref(false);
@@ -18,9 +18,16 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 
-const handleDate = (modelData: unknown) => {
+const handleToggle = (modelData: unknown) => {
   emit('update:modelValue', modelData);
 };
+
+onMounted(() => {
+  if (props.modelValue) {
+    enabled.value = true;
+    handleToggle(props.modelValue);
+  }
+});
 </script>
 
 <template>
@@ -32,7 +39,7 @@ const handleDate = (modelData: unknown) => {
       v-model="enabled"
       :class="enabled ? 'bg-primary-700' : 'bg-primary-300'"
       class="relative inline-flex h-[32px] w-[68px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-      @update:model-value="handleDate"
+      @update:model-value="handleToggle"
     >
       <span
         aria-hidden="true"

@@ -78,7 +78,7 @@ describe('DropdownOptions', () => {
 
     expect(items.length).toBe(4);
     expect(items[0].text()).toBe('Change lang to es');
-    expect(items[1].text()).toBe('Profile');
+    expect(items[1].text()).toBe('User Settings');
     expect(items[2].text()).toBe('Information');
     expect(items[3].text()).toBe('Logout');
   });

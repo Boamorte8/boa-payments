@@ -6,6 +6,9 @@ export const usePreferencesUserStore = defineStore('preferences/user', {
   state: (): PreferenceState => ({
     theme: UserTheme.DARK,
   }),
+  getters: {
+    isDarkTheme: ({ theme }) => theme === UserTheme.DARK,
+  },
   actions: {
     updateTheme(theme: UserTheme) {
       this.theme = theme;

@@ -12,7 +12,7 @@ import PaymentsList from '@pages/payments/PaymentsList.vue';
 import NotFound from '@pages/NotFound.vue';
 import { useAuthUserStore } from '../stores';
 import UserAuth from '@pages/auth/UserAuth.vue';
-import UserData from '@pages/UserData.vue';
+import UserSettings from '@pages/UserSettings.vue';
 
 const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/auth' },
@@ -52,9 +52,9 @@ const routes: RouteRecordRaw[] = [
     component: AboutPage,
   },
   {
-    path: '/user',
-    name: 'user',
-    component: UserData,
+    path: '/config',
+    name: 'config',
+    component: UserSettings,
     meta: { requiresAuth: true },
   },
   { path: '/:notFound(.*)', name: 'notFound', component: NotFound },
