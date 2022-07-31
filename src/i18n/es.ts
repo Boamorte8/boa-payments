@@ -5,6 +5,7 @@ const es = {
   addEntity: ({ named }: ContextOptions) => `Añadir ${named('entity')}`,
   addNewEntity: ({ named }: ContextOptions) =>
     `Añadir nueva ${named('entity')}`,
+  all: 'Todos',
   amount: 'Monto',
   by: 'Por',
   category: 'Categoria | Categorias',
@@ -35,6 +36,7 @@ const es = {
   errorUpdatingEntity: ({ named }: ContextOptions) =>
     `Problema al actualizar ${named('entity')}`,
   fieldsRequired: '*Campos requeridos',
+  filterBy: 'Filtrar por',
   finished: 'Terminada',
   info: 'Info',
   information: 'Información',
@@ -77,6 +79,7 @@ const es = {
   totalAmount: 'Monto total',
   tryAgain: 'Intentar de nuevo',
   type: 'Tipo',
+  unfinished: 'Sin terminar',
   userSettings: 'Configuración de Usuario',
   warning: 'Advertencia',
   yes: 'Si',

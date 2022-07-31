@@ -4,6 +4,7 @@ const en = {
   add: 'Add',
   addEntity: ({ named }: ContextOptions) => `Add ${named('entity')}`,
   addNewEntity: ({ named }: ContextOptions) => `Add new ${named('entity')}`,
+  all: 'All',
   amount: 'Amount',
   by: 'By',
   category: 'Category | Categories',
@@ -34,6 +35,7 @@ const en = {
   errorUpdatingEntity: ({ named }: ContextOptions) =>
     `Failed updating ${named('entity')}`,
   fieldsRequired: '*Fields required',
+  filterBy: 'Filter by',
   finished: 'Finished',
   info: 'Info',
   information: 'Information',
@@ -75,6 +77,7 @@ const en = {
   totalAmount: 'Total amount',
   tryAgain: 'Try Again',
   type: 'Type',
+  unfinished: 'Unfinished',
   userSettings: 'User Settings',
   warning: 'Warning',
   yes: 'Yes',

@@ -118,6 +118,13 @@ export const useOrderStore = defineStore('order', {
         )
       );
     },
+    filterByBoolean(property: OrderKey, value: boolean) {
+      if (property) {
+        this.orders = this.allOrders.filter(
+          (order: Order) => order[property] === value
+        );
+      }
+    },
     setSorting(sorting: SortValue) {
       this.sortBy = sorting;
     },

@@ -12,6 +12,9 @@ const categoryStore = useCategoryStore();
 const orderStore = useOrderStore();
 const { t } = useI18n();
 const entities = [
+  { id: 'all', value: t('all') },
+  { id: 'unfinished', value: t('unfinished') },
+  { id: 'finished', value: t('finished') },
   { id: 'title', value: t('title') },
   { id: 'description', value: t('description') },
   { id: 'amount', value: t('amount') },
@@ -27,13 +30,22 @@ const sortValues = [
   { text: t('smallestAmounts'), value: SortValue.SmallestAmounts },
   { text: t('largeAmounts'), value: SortValue.LargeAmounts },
 ];
-const search = ref();
-const isSearch = ref(true);
+const search = ref('');
 const by: Ref<{ id: string; value: string }> = ref(entities[0]);
 const sortBy = ref();
 const category = ref();
 const categoryKey = ref(0);
 const selectedCategories: Ref<Category[]> = ref([]);
+const isSearch = computed(() => {
+  const { id } = by.value;
+  return (
+    id !== 'dateRange' &&
+    id !== 'amountRange' &&
+    id !== 'all' &&
+    id !== 'unfinished' &&
+    id !== 'finished'
+  );
+});
 const categoryList = computed(() =>
   categoryStore.categories.filter(
     (category) =>
@@ -50,7 +62,7 @@ const onDelete = (category: Category) => {
 };
 
 const clearFilters = () => {
-  search.value = null;
+  search.value = '';
   selectedCategories.value = [];
 };
 
@@ -81,11 +93,21 @@ watchDebounced(
   (value) => {
     if (value) {
       const { id } = value;
-      if (id !== 'dateRange' && id !== 'amountRange') {
+      if (
+        id !== 'dateRange' &&
+        id !== 'amountRange' &&
+        id !== 'unfinished' &&
+        id !== 'finished'
+      ) {
+        if (id === 'all') {
+          search.value = '';
+        }
         orderStore.filter(search.value, value.id as OrderKey);
-        isSearch.value = true;
       } else {
-        isSearch.value = false;
+        if (id === 'unfinished' || id === 'finished') {
+          orderStore.filterByBoolean('finished', id === 'finished');
+        }
+        search.value = '';
       }
     }
   },
@@ -97,6 +119,17 @@ watchDebounced(
   <BaseCard class="w-full lg:p-5 block">
     <div class="w-full">
       <div class="w-full flex flex-wrap gap-4 lg:gap-5">
+        <BaseSelect
+          id="by"
+          v-model="by"
+          item-key="value"
+          name="by"
+          class="min-w-[220px]"
+          :default-value-index="1"
+          :label="t('filterBy')"
+          :items="entities"
+        />
+
         <BaseInput
           v-if="isSearch"
           id="search"
@@ -107,17 +140,6 @@ watchDebounced(
           :placeholder="
             t('searchEntity', { entity: t('orders').toLowerCase() })
           "
-        />
-
-        <BaseSelect
-          id="by"
-          v-model="by"
-          item-key="value"
-          name="by"
-          class="min-w-[220px]"
-          :default-value-index="0"
-          :label="t('by')"
-          :items="entities"
         />
 
         <BaseSelect
