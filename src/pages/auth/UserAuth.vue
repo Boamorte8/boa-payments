@@ -77,10 +77,6 @@ const handleError = () => {
 
     <BaseLoader :loading="isLoading" />
 
-    <h1 class="dark:text-white font-bold text-xl mb-4">
-      {{ t(mode) }}
-    </h1>
-
     <BaseCard
       v-if="mode === 'signup'"
       class="flex gap-4 mx-auto max-w-fit mb-4"
@@ -103,6 +99,10 @@ const handleError = () => {
         class="w-full flex flex-col items-center m-4 p-4"
         @submit.prevent="submitForm"
       >
+        <h1 class="dark:text-white font-bold text-xl mb-4">
+          {{ t(mode) }}
+        </h1>
+
         <BaseInput
           id="email"
           v-model.trim="email"

@@ -45,7 +45,9 @@ const isLoan = computed(() => props.order.type === OrderType.LOAN);
 </script>
 
 <template>
-  <BaseCard class="block min-w-[310px] md:min-w-[325px] lg:min-w-[350px]">
+  <BaseCard
+    class="block min-w-full sm:min-w-[300px] md:min-w-[325px] lg:min-w-[350px]"
+  >
     <div class="w-full">
       <header class="flex w-full gap-4 justify-between mb-4">
         <div

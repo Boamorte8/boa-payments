@@ -5,9 +5,11 @@ import { mount, RouterLinkStub } from '@vue/test-utils';
 import BaseButton from '@atoms/BaseButton.vue';
 import DropdownItem from '@atoms/DropdownItem.vue';
 import i18n from '../../i18n';
+import InfoIcon from '@atoms/InfoIcon.vue';
 import LogoApp from '@atoms/LogoApp.vue';
 import LogoutIcon from '@atoms/LogoutIcon.vue';
 import OptionsIcon from '@atoms/OptionsIcon.vue';
+import SettingsIcon from '@atoms/SettingsIcon.vue';
 import router from '../../router';
 import TheHeader from '../TheHeader.vue';
 import TranslateIcon from '@atoms/TranslateIcon.vue';
@@ -20,9 +22,11 @@ describe('TheHeader', () => {
         components: {
           BaseButton,
           DropdownItem,
+          InfoIcon,
           LogoApp,
           LogoutIcon,
           OptionsIcon,
+          SettingsIcon,
           TranslateIcon,
         },
         plugins: [i18n, router, createTestingPinia(options)],

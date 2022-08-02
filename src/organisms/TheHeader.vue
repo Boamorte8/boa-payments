@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { breakpointsTailwind, useMediaQuery } from '@vueuse/core';
+import {
+  breakpointsTailwind,
+  useMediaQuery,
+  usePreferredColorScheme,
+} from '@vueuse/core';
 import { computed } from 'vue';
 import { Menu } from '@headlessui/vue';
 import { useI18n } from 'vue-i18n';
@@ -13,12 +17,16 @@ import { useAuthUserStore, usePreferencesUserStore } from '@stores/index';
 const { t } = useI18n();
 const store = useAuthUserStore();
 const prefStore = usePreferencesUserStore();
+const preferredColor = usePreferredColorScheme();
 const isMedium = useMediaQuery(`(min-width: ${breakpointsTailwind.sm}px)`);
 
 const mode = computed(() =>
   isMedium.value ? LogoType.Complete : LogoType.Simple
 );
-prefStore.updateTheme(UserTheme.DARK);
+const theme = computed(() =>
+  preferredColor.value === 'light' ? UserTheme.LIGHT : UserTheme.DARK
+);
+prefStore.updateTheme(theme.value);
 </script>
 
 <template>
@@ -30,21 +38,21 @@ prefStore.updateTheme(UserTheme.DARK);
         </router-link>
         <div class="flex gap-2">
           <template v-if="!store.isAuthenticated">
-            <base-button link :to="{ name: 'auth' }">{{
+            <BaseButton link :to="{ name: 'auth' }">{{
               t('login')
-            }}</base-button>
+            }}</BaseButton>
           </template>
           <template v-else>
-            <base-button link :to="{ name: 'orders' }">{{
+            <BaseButton link :to="{ name: 'orders' }">{{
               t('orders', 2)
-            }}</base-button>
-            <base-button link :to="{ name: 'payments' }">{{
+            }}</BaseButton>
+            <BaseButton link :to="{ name: 'payments' }">{{
               t('payments', 2)
-            }}</base-button>
+            }}</BaseButton>
           </template>
-          <base-button menu class="inline-flex items-center">
+          <BaseButton menu class="inline-flex items-center">
             <OptionsIcon />
-          </base-button>
+          </BaseButton>
         </div>
       </nav>
     </header>
