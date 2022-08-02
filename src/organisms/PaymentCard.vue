@@ -28,25 +28,31 @@ const isLoan = computed(() => props.payment.order.type === OrderType.LOAN);
 </script>
 
 <template>
-  <BaseCard class="block min-w-[310px] md:min-w-[325px] lg:min-w-[350px]">
+  <BaseCard
+    class="block min-w-full sm:min-w-[300px] md:min-w-[325px] lg:min-w-[350px]"
+  >
     <div class="w-full">
       <header class="flex w-full gap-4 mb-4">
         <div
           class="flex justify-center items-center rounded-[50%] bg-primary-700 text-white h-12 w-12"
         >
           <CashIcon v-if="isLoan" class="h-7 w-7 text-success-700" />
+
           <LibraryIcon v-else class="h-7 w-7 text-error-700" />
         </div>
 
         <div class="w-[53%] dark:text-white">
           <h3 class="font-bold text-xl">{{ payment.title }}</h3>
+
           <p class="text-sm">{{ payment.order.title }}</p>
         </div>
       </header>
 
       <section>
         <DisplayInfo :label="t('totalAmount')" :value="totalAmount" />
+
         <DisplayInfo :label="t('payDate')" :value="payDate" />
+
         <DisplayInfo
           class="pb-2"
           mode="vertical"

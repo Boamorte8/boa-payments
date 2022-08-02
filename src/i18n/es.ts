@@ -48,6 +48,8 @@ const es = {
   loginFormError:
     'Por favor ingresen un correo electrónico y contraseña válidos (deben tener al menos 6 caracteres).',
   loginSwitch: 'Registrarse',
+  logo: 'BP',
+  logoComplete: 'Boa Payments',
   logout: 'Cerrar sesión',
   name: 'Nombre',
   newF: 'Nueva',
@@ -98,6 +100,9 @@ const es = {
   pageInfo: {
     description:
       'Este es un proyecto personal con 2 objetivos principales. El primero, encontrar una forma de controlar mis préstamos y deudas. Segundo, practicar mis habilidades programando con Vue',
+    githubProfile: 'Boamorte8',
+    madeBy: 'Este proyecto fue hecho por Esteban Salazar Zapata',
+    myGithub: 'Mi perfil de Github es ',
   },
 };
 

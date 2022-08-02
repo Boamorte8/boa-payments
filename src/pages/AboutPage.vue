@@ -10,6 +10,19 @@ const { t } = useI18n();
       {{ t('information') }}
     </h1>
 
-    <p class="dark:text-white">{{ t('pageInfo.description') }}</p>
+    <p class="dark:text-white mb-4">{{ t('pageInfo.description') }}</p>
+
+    <p class="dark:text-white mb-4">{{ t('pageInfo.madeBy') }}</p>
+
+    <p class="dark:text-white mb-4">
+      {{ t('pageInfo.myGithub') }}
+      <a
+        class="text-primary-700 dark:text-primary-300"
+        href="https://github.com/Boamorte8"
+        target="_blank"
+      >
+        {{ t('pageInfo.githubProfile') }}
+      </a>
+    </p>
   </div>
 </template>

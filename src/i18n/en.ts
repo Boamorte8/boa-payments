@@ -47,6 +47,8 @@ const en = {
   loginFormError:
     'Please enter a valid email and password (must be at least 6 characters long).',
   loginSwitch: 'Signup instead',
+  logo: 'BP',
+  logoComplete: 'Boa Payments',
   logout: 'Logout',
   name: 'Name',
   newF: 'New',
@@ -95,6 +97,9 @@ const en = {
   pageInfo: {
     description:
       'This is a personal project with two main goals. Firstly, a way to control lends and borrows. Second, to practice my skills to programming with Vue',
+    githubProfile: 'Boamorte8',
+    madeBy: 'This project was made by Esteban Salazar Zapata',
+    myGithub: 'My Github profile is ',
   },
 };
 

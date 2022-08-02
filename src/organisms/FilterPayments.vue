@@ -86,7 +86,7 @@ watchDebounced(
           name="search"
           :label="t('search')"
           :placeholder="
-            t('searchEntity', { entity: t('orders').toLowerCase() })
+            t('searchEntity', { entity: t('payments').toLowerCase() })
           "
         />
 

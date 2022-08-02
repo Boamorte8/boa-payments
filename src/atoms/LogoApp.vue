@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
 import { LogoType } from '@app/models';
 
+const { t } = useI18n();
 const props = defineProps({
   mode: {
     type: String,
@@ -15,9 +18,11 @@ const props = defineProps({
     <div
       class="title h-10 w-14 rounded-lg p-3 bg-primary-700 flex justify-center items-center"
     >
-      BP
+      {{ t('logo') }}
     </div>
-    <h2 v-if="props.mode === LogoType.Complete" class="title">Boa Payments</h2>
+    <h2 v-if="props.mode === LogoType.Complete" class="title">
+      {{ t('logoComplete') }}
+    </h2>
   </div>
 </template>
 
