@@ -1,5 +1,11 @@
 {
   "redirects": [
-    { "source": "/auth", "destination": "/", "permanent": false }
+    { "source": "/auth", "destination": "/", "permanent": false },
+    { "source": "/orders", "destination": "/", "permanent": false },
+    { "source": "/new-order", "destination": "/", "permanent": false },
+    { "source": "/new-payment", "destination": "/", "permanent": false },
+    { "source": "/payments", "destination": "/", "permanent": false },
+    { "source": "/info", "destination": "/", "permanent": false },
+    { "source": "/config", "destination": "/", "permanent": false }
   ]
 }
