@@ -15,6 +15,7 @@ export const useOrderStore = defineStore('order', {
     saving: false,
     updating: false,
     sortBy: SortValue.OldFirst,
+    selectedOrder: null,
   }),
   getters: {
     areOrdersLoaded: ({ allOrders, loaded }) => loaded && !!allOrders.length,
@@ -127,6 +128,9 @@ export const useOrderStore = defineStore('order', {
     },
     setSorting(sorting: SortValue) {
       this.sortBy = sorting;
+    },
+    setOrder(order: Order) {
+      this.selectedOrder = order;
     },
   },
 });

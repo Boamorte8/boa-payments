@@ -7,6 +7,7 @@ import {
 import AboutPage from '@pages/AboutPage.vue';
 import AddOrder from '@pages/orders/AddOrder.vue';
 import AddPayment from '@pages/payments/AddPayment.vue';
+import OrderDetail from '@pages/orders/OrderDetail.vue';
 import OrdersView from '@pages/orders/OrdersView.vue';
 import PaymentsList from '@pages/payments/PaymentsList.vue';
 import NotFound from '@pages/NotFound.vue';
@@ -26,6 +27,12 @@ const routes: RouteRecordRaw[] = [
     path: '/orders',
     name: 'orders',
     component: OrdersView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/order-details',
+    name: 'order-details',
+    component: OrderDetail,
     meta: { requiresAuth: true },
   },
   {

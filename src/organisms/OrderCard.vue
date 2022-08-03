@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { computed, type PropType } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
 import { formatCurrency, formatDate } from '@app/utils';
 import { OrderType, type Category, type Order } from '@stores/models';
+import { useOrderStore } from '@stores/orderStore';
 
 const { t } = useI18n();
+const router = useRouter();
+const orderStore = useOrderStore();
 const props = defineProps({
   order: {
     type: Object as PropType<Order>,
@@ -42,14 +46,22 @@ const categories = computed(() =>
 );
 
 const isLoan = computed(() => props.order.type === OrderType.LOAN);
+
+const onGoToDetail = () => {
+  orderStore.setOrder(props.order);
+  router.push('/order-details');
+};
 </script>
 
 <template>
   <BaseCard
-    class="block min-w-full sm:min-w-[300px] md:min-w-[325px] lg:min-w-[350px]"
+    class="block min-w-full sm:min-w-[325px] sm:w-[calc(50%-8px)] lg:w-[calc(33%-8px)] lg:min-w-[400px]"
   >
     <div class="w-full">
-      <header class="flex w-full gap-4 justify-between mb-4">
+      <header
+        class="flex w-full gap-4 justify-between mb-4 cursor-pointer"
+        @click="onGoToDetail"
+      >
         <div
           class="flex justify-center items-center rounded-[50%] bg-primary-700 text-white h-12 w-12"
         >

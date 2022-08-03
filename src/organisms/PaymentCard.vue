@@ -29,7 +29,7 @@ const isLoan = computed(() => props.payment.order.type === OrderType.LOAN);
 
 <template>
   <BaseCard
-    class="block min-w-full sm:min-w-[300px] md:min-w-[325px] lg:min-w-[350px]"
+    class="block min-w-full sm:min-w-[325px] sm:w-[calc(50%-8px)] lg:w-[calc(33%-8px)] lg:min-w-[400px]"
   >
     <div class="w-full">
       <header class="flex w-full gap-4 mb-4">

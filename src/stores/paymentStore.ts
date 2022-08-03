@@ -2,9 +2,10 @@ import { defineStore } from 'pinia';
 
 import { endpoints } from '@app/config';
 import { filterByProperty, sortPayments } from '@app/utils';
-import { useAuthUserStore } from './authStore';
 import { SortValue } from '@app/models';
 import type { Order, Payment, PaymentKey, PaymentState } from './models';
+import { useAuthUserStore } from './authStore';
+import { useOrderStore } from './orderStore';
 
 export const usePaymentStore = defineStore('payment', {
   state: (): PaymentState => ({
@@ -21,6 +22,12 @@ export const usePaymentStore = defineStore('payment', {
     isLoading: ({ loading, saving }) => loading || saving,
     filteredPayments: ({ payments, sortBy }) => sortPayments(payments, sortBy),
     noPayments: ({ allPayments, loaded }) => loaded && !allPayments.length,
+    orderPayments: ({ allPayments }) => {
+      const { selectedOrder } = useOrderStore();
+      return selectedOrder
+        ? allPayments.filter(({ order }) => order.id === selectedOrder.id)
+        : [];
+    },
   },
   actions: {
     async loadPayments(errorMessage: string) {

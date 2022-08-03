@@ -60,6 +60,7 @@ const es = {
   noEntities: ({ named }: ContextOptions) =>
     `No hay ${named('entities')} disponibles`,
   oldFirst: 'Viejos primero',
+  orderDetails: 'Detalles de Orden',
   orders: 'Ordenes',
   password: 'Contraseña',
   payDate: 'Dia de pago',

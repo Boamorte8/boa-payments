@@ -5,7 +5,6 @@ import { useRouter } from 'vue-router';
 
 import ErrorsPayments from '@organisms/ErrorsPayments.vue';
 import FilterPayments from '@organisms/FilterPayments.vue';
-import PaymentCard from '@organisms/PaymentCard.vue';
 import { usePaymentStore } from '@stores/paymentStore';
 
 const { t } = useI18n();

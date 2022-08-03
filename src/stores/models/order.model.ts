@@ -39,4 +39,5 @@ export interface OrderState {
   saving: boolean;
   updating: boolean;
   sortBy: SortValue;
+  selectedOrder: Order | null;
 }
