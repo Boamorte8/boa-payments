@@ -4,10 +4,10 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 
 import AddCategory from '@organisms/AddCategory.vue';
+import AddCurrency from '@organisms/AddCurrency.vue';
 import AddEntity from '@organisms/AddEntity.vue';
-import type { BaseSelectItem } from '@app/models';
+import { generateId } from '@app/utils';
 import {
-  currencies,
   OrderType,
   orderTypes,
   TypeToast,
@@ -16,13 +16,15 @@ import {
   type CurrencyValue,
   type Order,
 } from '@stores/models';
-import { generateId } from '@app/utils';
+import type { BaseSelectItem } from '@app/models';
 import { useCategoryStore } from '@stores/categoryStore';
+import { useCurrencyStore } from '@stores/currencyStore';
 import { useEntityStore } from '@stores/entityStore';
 import { useOrderStore } from '@stores/orderStore';
 import { useToastStore } from '@stores/toastStore';
 
 const categoryStore = useCategoryStore();
+const currencyStore = useCurrencyStore();
 const entityStore = useEntityStore();
 const orderStore = useOrderStore();
 const toastStore = useToastStore();
@@ -39,7 +41,7 @@ const category = ref();
 const selectedCategories: Ref<Category[]> = ref([]);
 const entity = ref();
 const categoryKey = ref(0);
-const currencyList = currencies;
+const currencyList = computed(() => currencyStore.getCurrencies);
 const orderTypeList: BaseSelectItem[] = orderTypes.map((type) => ({
   ...type,
   text: t(type.text),
@@ -56,7 +58,11 @@ const categoryList = computed(() =>
 );
 const entities = computed(() => entityStore.entities);
 const isLoading = computed(
-  () => entityStore.isLoading || categoryStore.isLoading || orderStore.isLoading
+  () =>
+    entityStore.isLoading ||
+    categoryStore.isLoading ||
+    orderStore.isLoading ||
+    currencyStore.isLoading
 );
 const startDateLabel = computed(() => t('startDate') + '*');
 const nextDateLabel = computed(() => t('nextDate') + '*');
@@ -137,6 +143,10 @@ const addNewCategory = () => {
   categoryStore.toggleModal(true);
 };
 
+const addNewCurrency = () => {
+  currencyStore.toggleModal(true);
+};
+
 const onDelete = (category: Category) => {
   selectedCategories.value = selectedCategories.value.filter(
     (selected: Category) => selected.id !== category.id
@@ -149,6 +159,7 @@ const onDelete = (category: Category) => {
     <BaseLoader :loading="isLoading" />
     <AddEntity />
     <AddCategory />
+    <AddCurrency />
 
     <form class="p-4" @submit.prevent="addNewOrder">
       <BaseCard>
@@ -196,16 +207,29 @@ const onDelete = (category: Category) => {
               :options="{ currency }"
             />
 
-            <BaseSelect
-              id="currency"
-              v-model="currencyModel"
-              item-key="value"
-              name="currency"
-              class="min-w-[110px]"
-              :default-value-index="1"
-              :items="currencyList"
-              :label="t('currency')"
-            />
+            <div>
+              <BaseLabel class="mb-2">{{ t('currency') }}</BaseLabel>
+
+              <div class="flex flex-wrap gap-4 items-center">
+                <BaseSelect
+                  id="currency"
+                  v-model="currencyModel"
+                  item-key="value"
+                  name="currency"
+                  class="min-w-[110px]"
+                  :default-value-index="1"
+                  :items="currencyList"
+                />
+
+                <BaseButton mode="flat" @click="addNewCurrency">
+                  {{
+                    t('addNewEntity', {
+                      entity: t('currency').toLowerCase(),
+                    })
+                  }}
+                </BaseButton>
+              </div>
+            </div>
 
             <BaseSelect
               id="type"

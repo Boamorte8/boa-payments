@@ -17,7 +17,7 @@ const es = {
   confirmDelete: 'Confirmar eliminación',
   confirmDeleteEntity: ({ named }: ContextOptions) =>
     `¿Estas seguro que quieres eliminar ${named('entity')}?`,
-  currency: 'Moneda',
+  currency: 'Moneda | Monedas',
   currentAmount: 'Monto actual',
   darkMode: 'Modo oscuro',
   date: 'Fecha',
@@ -85,12 +85,14 @@ const es = {
   startDate: 'Fecha de Inicio',
   subscription: 'Subscripción',
   success: 'Éxito',
+  text: 'Texto',
   title: 'Titulo',
   totalAmount: 'Monto total',
   tryAgain: 'Intentar de nuevo',
   type: 'Tipo',
   unfinished: 'Sin terminar',
   userSettings: 'Configuración de Usuario',
+  value: 'Valor',
   warning: 'Advertencia',
   yes: 'Si',
   pageNotFound: {

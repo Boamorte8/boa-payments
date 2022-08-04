@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 
 import { TypeToast } from '@stores/models';
 import { useCategoryStore } from '@stores/categoryStore';
+import { useCurrencyStore } from '@stores/currencyStore';
 import { useEntityStore } from '@stores/entityStore';
 import { useOrderStore } from '@stores/orderStore';
 import { usePaymentStore } from '@stores/paymentStore';
@@ -12,6 +13,7 @@ import { useToastStore } from '@stores/toastStore';
 const { t } = useI18n();
 const store = useOrderStore();
 const categoryStore = useCategoryStore();
+const currencyStore = useCurrencyStore();
 const entityStore = useEntityStore();
 const paymentStore = usePaymentStore();
 const toastStore = useToastStore();
@@ -20,7 +22,11 @@ const errorLoadingMessage = computed(
   () => store.loaded && !!errorMessage.value
 );
 const isLoading = computed(
-  () => store.isLoading || categoryStore.isLoading || entityStore.isLoading
+  () =>
+    store.isLoading ||
+    categoryStore.isLoading ||
+    entityStore.isLoading ||
+    currencyStore.isLoading
 );
 const noOrders = computed(() => store.noOrders);
 
@@ -55,6 +61,17 @@ const loadCategories = async () => {
   }
 };
 
+const loadCurrencies = async () => {
+  try {
+    const errorMessage = t('errorLoadingEntity', {
+      entity: t('currency', 2).toLowerCase(),
+    });
+    await currencyStore.loadCurrencies(errorMessage);
+  } catch (error: any) {
+    displayError(error);
+  }
+};
+
 const loadOrders = async () => {
   try {
     const errorMessage = t('errorLoadingEntity', {
@@ -81,6 +98,7 @@ loadPayments();
 loadOrders();
 loadEntities();
 loadCategories();
+loadCurrencies();
 </script>
 
 <template>

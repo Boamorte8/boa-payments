@@ -16,7 +16,7 @@ const en = {
   confirmDelete: 'Confirm delete',
   confirmDeleteEntity: ({ named }: ContextOptions) =>
     `Are you sure that do you want delete ${named('entity')}?`,
-  currency: 'Currency',
+  currency: 'Currency | Currencies',
   currentAmount: 'Current amount',
   darkMode: 'Dark mode',
   date: 'Date',
@@ -83,12 +83,14 @@ const en = {
   startDate: 'Start Date',
   subscription: 'Subscription',
   success: 'Success',
+  text: 'Text',
   title: 'Title',
   totalAmount: 'Total amount',
   tryAgain: 'Try Again',
   type: 'Type',
   unfinished: 'Unfinished',
   userSettings: 'User Settings',
+  value: 'Value',
   warning: 'Warning',
   yes: 'Yes',
   pageNotFound: {
