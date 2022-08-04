@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia';
 
-import type { AuthPayload, AuthState, LoginPayload } from './models';
 import i18n from '../i18n';
+import router from '../router';
+import type { AuthPayload, AuthState, LoginPayload } from './models';
 
 let timer: number;
 const { t } = i18n.global;
@@ -100,6 +101,7 @@ export const useAuthUserStore = defineStore('auth/user', {
     autoLogout() {
       this.logout();
       this.didAutoLogout = true;
+      router.replace('/auth');
     },
   },
 });
