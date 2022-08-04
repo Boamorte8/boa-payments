@@ -12,6 +12,10 @@ const en = {
   cancel: 'Cancel',
   clearFilters: 'Clear filters',
   close: 'Close',
+  confirm: 'Confirm',
+  confirmDelete: 'Confirm delete',
+  confirmDeleteEntity: ({ named }: ContextOptions) =>
+    `Are you sure that do you want delete ${named('entity')}?`,
   currency: 'Currency',
   currentAmount: 'Current amount',
   darkMode: 'Dark mode',
@@ -19,6 +23,7 @@ const en = {
   debt: 'Debt',
   default: 'Default',
   defaultError: 'An error ocurred',
+  delete: 'Delete',
   description: 'Description',
   duplicatedError: ({ named }: ContextOptions) =>
     `Already exist ${named('entity')}`,
@@ -29,6 +34,8 @@ const en = {
   entityRange: ({ named }: ContextOptions) => `${named('entity')} range`,
   errorCreatingEntity: ({ named }: ContextOptions) =>
     `Failed creating ${named('entity')}`,
+  errorDeletingEntity: ({ named }: ContextOptions) =>
+    `Failed deleting ${named('entity')}`,
   error: 'Error',
   errorLoadingEntity: ({ named }: ContextOptions) =>
     `Failed loading ${named('entity')}`,

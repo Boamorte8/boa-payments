@@ -13,13 +13,16 @@ export const useOrderStore = defineStore('order', {
     loaded: false,
     loading: false,
     saving: false,
+    deleting: false,
     updating: false,
+    openConfirmDeleteModal: false,
     sortBy: SortValue.OldFirst,
     selectedOrder: null,
   }),
   getters: {
     areOrdersLoaded: ({ allOrders, loaded }) => loaded && !!allOrders.length,
-    isLoading: ({ loading, saving, updating }) => loading || saving || updating,
+    isLoading: ({ loading, saving, updating, deleting }) =>
+      loading || saving || updating || deleting,
     filteredOrders: ({ orders, sortBy }) => sortOrders(orders, sortBy),
     noOrders: ({ allOrders, loaded }) => loaded && !allOrders.length,
     unfinishedOrders: ({ orders }) => orders.filter((order) => !order.finished),
@@ -103,6 +106,28 @@ export const useOrderStore = defineStore('order', {
 
       this.saving = false;
     },
+    async deleteOrder(order: Order, errorMessage: string) {
+      this.deleting = true;
+      let { userId, token } = useAuthUserStore();
+      userId = userId || '';
+      token = token || '';
+      const response = await fetch(
+        endpoints.updateOrder(userId, token, order.id),
+        { method: 'DELETE' }
+      );
+      const responseData = await response.json();
+      if (!response.ok) {
+        const error = new Error(responseData.message || errorMessage);
+        this.deleting = false;
+        throw error;
+      }
+      this.allOrders = this.allOrders.filter(
+        (orderFind) => orderFind.id !== order.id
+      );
+      this.orders = this.allOrders;
+
+      this.deleting = false;
+    },
     filter(search: string, property: OrderKey) {
       if (search === '' || search === null) {
         this.orders = this.allOrders;
@@ -131,6 +156,9 @@ export const useOrderStore = defineStore('order', {
     },
     setOrder(order: Order) {
       this.selectedOrder = order;
+    },
+    toggleModal(openModal: boolean) {
+      this.openConfirmDeleteModal = openModal;
     },
   },
 });

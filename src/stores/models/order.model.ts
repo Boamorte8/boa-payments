@@ -36,8 +36,10 @@ export interface OrderState {
   orders: Order[];
   loaded: boolean;
   loading: boolean;
+  deleting: boolean;
   saving: boolean;
   updating: boolean;
+  openConfirmDeleteModal: boolean;
   sortBy: SortValue;
   selectedOrder: Order | null;
 }

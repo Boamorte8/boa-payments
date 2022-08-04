@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import DeleteOrder from '@organisms/DeleteOrder.vue';
 import { formatCurrency, formatDate } from '@app/utils';
 import { useOrderStore } from '@stores/orderStore';
 import { usePaymentStore } from '@stores/paymentStore';
@@ -12,7 +13,7 @@ const orderStore = useOrderStore();
 const paymentStore = usePaymentStore();
 const order = computed(() => orderStore.selectedOrder);
 const payments = computed(() => paymentStore.orderPayments);
-
+const isLoading = computed(() => orderStore.isLoading);
 const totalAmount = computed(() =>
   order.value
     ? `${formatCurrency(
@@ -53,10 +54,18 @@ const categories = computed(() =>
 const isLoan = computed(() =>
   order.value ? order.value.type === OrderType.LOAN : ''
 );
+
+const onDelete = () => {
+  orderStore.toggleModal(true);
+};
 </script>
 
 <template>
   <div class="p-4">
+    <BaseLoader :loading="isLoading" />
+
+    <DeleteOrder v-if="order" :order="order" />
+
     <BaseCard class="card flex-col mb-4">
       <div class="flex items-center gap-4 mb-4">
         <h1 class="dark:text-white font-bold text-xl">
@@ -125,6 +134,12 @@ const isLoan = computed(() =>
           :value="categories"
         />
       </div>
+
+      <footer class="w-full flex justify-end">
+        <BaseButton mode="flat" @click="onDelete">
+          {{ t('delete') }}
+        </BaseButton>
+      </footer>
     </BaseCard>
 
     <h2 class="dark:text-white font-bold text-l mb-4">

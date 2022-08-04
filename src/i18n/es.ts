@@ -13,6 +13,10 @@ const es = {
   cancel: 'Cancelar',
   clearFilters: 'Limpiar filtros',
   close: 'Cerrar',
+  confirm: 'Confirmar',
+  confirmDelete: 'Confirmar eliminación',
+  confirmDeleteEntity: ({ named }: ContextOptions) =>
+    `¿Estas seguro que quieres eliminar ${named('entity')}?`,
   currency: 'Moneda',
   currentAmount: 'Monto actual',
   darkMode: 'Modo oscuro',
@@ -20,6 +24,7 @@ const es = {
   debt: 'Deuda',
   default: 'Default',
   defaultError: 'Un error ha ocurrido',
+  delete: 'Eliminar',
   description: 'Descripción',
   duplicatedError: ({ named }: ContextOptions) =>
     `Ya existe ${named('entity')}`,
@@ -31,6 +36,8 @@ const es = {
   error: 'Error',
   errorCreatingEntity: ({ named }: ContextOptions) =>
     `Problema al crear ${named('entity')}`,
+  errorDeletingEntity: ({ named }: ContextOptions) =>
+    `Problema al eliminar ${named('entity')}`,
   errorLoadingEntity: ({ named }: ContextOptions) =>
     `Problema al cargar ${named('entity')}`,
   errorUpdatingEntity: ({ named }: ContextOptions) =>
