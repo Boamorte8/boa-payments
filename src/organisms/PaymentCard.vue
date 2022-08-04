@@ -2,10 +2,13 @@
 import { computed, type PropType } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import DeletePayment from './DeletePayment.vue';
 import { formatCurrency, formatDate } from '@app/utils';
 import { OrderType, type Payment } from '@stores/models';
+import { usePaymentStore } from '@stores/paymentStore';
 
 const { t } = useI18n();
+const paymentStore = usePaymentStore();
 const props = defineProps({
   payment: {
     type: Object as PropType<Payment>,
@@ -25,12 +28,18 @@ const totalAmount = computed(() => {
 const payDate = computed(() => formatDate(new Date(props.payment.payDate)));
 
 const isLoan = computed(() => props.payment.order.type === OrderType.LOAN);
+
+const onDelete = () => {
+  paymentStore.toggleModal(true, props.payment);
+};
 </script>
 
 <template>
   <BaseCard
     class="block min-w-full sm:min-w-[325px] sm:w-[calc(50%-8px)] lg:w-[calc(33%-8px)] lg:min-w-[400px]"
   >
+    <DeletePayment />
+
     <div class="w-full">
       <header class="flex w-full gap-4 mb-4">
         <div
@@ -60,6 +69,12 @@ const isLoan = computed(() => props.payment.order.type === OrderType.LOAN);
           :value="payment.description"
         />
       </section>
+
+      <footer class="w-full flex justify-end">
+        <BaseButton mode="flat" @click="onDelete">
+          {{ t('delete') }}
+        </BaseButton>
+      </footer>
     </div>
   </BaseCard>
 </template>

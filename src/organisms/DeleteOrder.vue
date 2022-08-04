@@ -54,6 +54,9 @@ const onDeleteOrder = async () => {
           })
         }}
       </p>
+      <p class="dark:text-white">
+        {{ order.title }}
+      </p>
     </div>
 
     <template #actions>

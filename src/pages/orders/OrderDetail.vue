@@ -13,7 +13,9 @@ const orderStore = useOrderStore();
 const paymentStore = usePaymentStore();
 const order = computed(() => orderStore.selectedOrder);
 const payments = computed(() => paymentStore.orderPayments);
-const isLoading = computed(() => orderStore.isLoading);
+const isLoading = computed(
+  () => orderStore.isLoading || paymentStore.isLoading
+);
 const totalAmount = computed(() =>
   order.value
     ? `${formatCurrency(

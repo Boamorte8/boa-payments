@@ -14,12 +14,15 @@ export const usePaymentStore = defineStore('payment', {
     loaded: false,
     loading: false,
     saving: false,
+    deleting: false,
+    deletingPayment: null,
+    openConfirmDeleteModal: false,
     sortBy: SortValue.OldFirst,
   }),
   getters: {
     arePaymentsLoaded: ({ allPayments, loaded }) =>
       loaded && !!allPayments.length,
-    isLoading: ({ loading, saving }) => loading || saving,
+    isLoading: ({ loading, saving, deleting }) => loading || saving || deleting,
     filteredPayments: ({ payments, sortBy }) => sortPayments(payments, sortBy),
     noPayments: ({ allPayments, loaded }) => loaded && !allPayments.length,
     orderPayments: ({ allPayments }) => {
@@ -28,6 +31,7 @@ export const usePaymentStore = defineStore('payment', {
         ? allPayments.filter(({ order }) => order.id === selectedOrder.id)
         : [];
     },
+    getDeletingPayment: ({ deletingPayment }) => deletingPayment,
   },
   actions: {
     async loadPayments(errorMessage: string) {
@@ -82,6 +86,28 @@ export const usePaymentStore = defineStore('payment', {
 
       this.saving = false;
     },
+    async deletePayment(payment: Payment, errorMessage: string) {
+      this.deleting = true;
+      let { userId, token } = useAuthUserStore();
+      userId = userId || '';
+      token = token || '';
+      const response = await fetch(
+        endpoints.deletePayment(userId, token, payment.id),
+        { method: 'DELETE' }
+      );
+      const responseData = await response.json();
+      if (!response.ok) {
+        const error = new Error(responseData.message || errorMessage);
+        this.deleting = false;
+        throw error;
+      }
+      this.allPayments = this.allPayments.filter(
+        (paymentFind) => paymentFind.id !== payment.id
+      );
+      this.payments = this.allPayments;
+
+      this.deleting = false;
+    },
     filter(search: string, property: PaymentKey) {
       if (search === '' || search === null) {
         this.payments = this.allPayments;
@@ -100,6 +126,10 @@ export const usePaymentStore = defineStore('payment', {
     },
     setSorting(sorting: SortValue) {
       this.sortBy = sorting;
+    },
+    toggleModal(openModal: boolean, payment: Payment | null) {
+      this.deletingPayment = payment;
+      this.openConfirmDeleteModal = openModal;
     },
   },
 });

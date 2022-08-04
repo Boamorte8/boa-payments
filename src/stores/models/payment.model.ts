@@ -19,5 +19,8 @@ export interface PaymentState {
   loaded: boolean;
   loading: boolean;
   saving: boolean;
+  deleting: boolean;
+  deletingPayment: Payment | null;
+  openConfirmDeleteModal: boolean;
   sortBy: SortValue;
 }

@@ -11,4 +11,6 @@ export const endpoints = {
     `${baseUrl}${userId}/orders/${orderId}.json?auth=${token}`,
   getPayments: (userId: string, token: string) =>
     `${baseUrl}${userId}/payments.json?auth=${token}`,
+  deletePayment: (userId: string, token: string, paymentId: string) =>
+    `${baseUrl}${userId}/payments/${paymentId}.json?auth=${token}`,
 };
