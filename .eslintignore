@@ -1,5 +1,6 @@
 .gitignore
 src/env.d.ts
+dev-dist
 dist
 stories/**/*
 examplestories/**/*
