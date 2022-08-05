@@ -21,6 +21,10 @@ const goToSettings = () => {
   router.push({ name: 'config' });
 };
 
+const goToSummary = () => {
+  router.push({ name: 'summary' });
+};
+
 const goToInfo = () => {
   router.push({ name: 'info' });
 };
@@ -42,6 +46,10 @@ const logout = () => {
 
     <dropdown-item v-if="store.isAuthenticated" @click="goToSettings">
       <SettingsIcon class="mr-2 text-primary-300" /> {{ t('userSettings') }}
+    </dropdown-item>
+
+    <dropdown-item v-if="store.isAuthenticated" @click="goToSummary">
+      <ReportIcon class="mr-2 text-primary-300" /> {{ t('summary') }}
     </dropdown-item>
 
     <dropdown-item @click="goToInfo">

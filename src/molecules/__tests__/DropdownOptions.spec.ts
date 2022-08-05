@@ -64,7 +64,7 @@ describe('DropdownOptions', () => {
     expect(items[0].text()).toBe('Change lang to es');
   });
 
-  test('should display 3 menu items WHEN the user is authenticated', async () => {
+  test('should display 5 menu items WHEN the user is authenticated', async () => {
     const { wrapper } = factory({
       createSpy: vi.fn,
       initialState: {
@@ -78,10 +78,11 @@ describe('DropdownOptions', () => {
 
     const items = wrapper.findAll('[role="menuitem"]');
 
-    expect(items.length).toBe(4);
+    expect(items.length).toBe(5);
     expect(items[0].text()).toBe('Change lang to es');
     expect(items[1].text()).toBe('User Settings');
-    expect(items[2].text()).toBe('Information');
-    expect(items[3].text()).toBe('Logout');
+    expect(items[2].text()).toBe('Summary');
+    expect(items[3].text()).toBe('Information');
+    expect(items[4].text()).toBe('Logout');
   });
 });
