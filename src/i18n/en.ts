@@ -93,6 +93,10 @@ const en = {
   value: 'Value',
   warning: 'Warning',
   yes: 'Yes',
+  offlinePage: {
+    title: 'Offline Ready',
+    description: 'App ready to work offline',
+  },
   pageNotFound: {
     title: 'Page not found',
     description: 'This page could not be found - maybe you need try first to',

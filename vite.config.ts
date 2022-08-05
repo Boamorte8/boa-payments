@@ -15,6 +15,7 @@ export default defineConfig(({ command }) => ({
       include: path.resolve(__dirname, './src/i18n/**'),
     }),
     VitePWA({
+      injectRegister: 'auto',
       registerType: 'autoUpdate',
       devOptions: {
         enabled: true,

@@ -95,6 +95,10 @@ const es = {
   value: 'Valor',
   warning: 'Advertencia',
   yes: 'Si',
+  offlinePage: {
+    title: 'Modo sin conexión listo',
+    description: 'App lista para trabajar sin conexión',
+  },
   pageNotFound: {
     title: 'Página no encontrada',
     description:

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import OfflineModal from '@organisms/OfflineModal.vue';
 import TheHeader from '@organisms/TheHeader.vue';
 import ToastContainer from '@organisms/ToastContainer.vue';
 </script>
@@ -7,6 +8,7 @@ import ToastContainer from '@organisms/ToastContainer.vue';
   <div class="body dark:bg-background-700 min-h-screen h-full">
     <TheHeader />
     <ToastContainer />
+    <OfflineModal />
     <router-view v-slot="slotProps">
       <transition name="route" mode="out-in">
         <component :is="slotProps.Component"></component>
