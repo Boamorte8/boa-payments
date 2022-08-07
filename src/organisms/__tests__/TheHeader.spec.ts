@@ -9,6 +9,7 @@ import InfoIcon from '@atoms/InfoIcon.vue';
 import LogoApp from '@atoms/LogoApp.vue';
 import LogoutIcon from '@atoms/LogoutIcon.vue';
 import OptionsIcon from '@atoms/OptionsIcon.vue';
+import ReportIcon from '@atoms/ReportIcon.vue';
 import SettingsIcon from '@atoms/SettingsIcon.vue';
 import router from '../../router';
 import TheHeader from '../TheHeader.vue';
@@ -26,6 +27,7 @@ describe('TheHeader', () => {
           LogoApp,
           LogoutIcon,
           OptionsIcon,
+          ReportIcon,
           SettingsIcon,
           TranslateIcon,
         },

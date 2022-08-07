@@ -8,6 +8,11 @@ defineProps({
     type: String,
     required: true,
   },
+  classValue: {
+    type: String,
+    required: false,
+    default: '',
+  },
   mode: {
     type: String,
     required: false,
@@ -26,6 +31,6 @@ defineProps({
     "
   >
     <BaseLabel class="mb-0">{{ label }}</BaseLabel>
-    <span class="dark:text-white">{{ value }}</span>
+    <span class="dark:text-white" :class="classValue">{{ value }}</span>
   </div>
 </template>

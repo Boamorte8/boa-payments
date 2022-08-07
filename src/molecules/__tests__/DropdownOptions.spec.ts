@@ -11,6 +11,7 @@ import DropdownOptions from '../DropdownOptions.vue';
 import i18n from '../../i18n';
 import InfoIcon from '@atoms/InfoIcon.vue';
 import LogoutIcon from '@atoms/LogoutIcon.vue';
+import ReportIcon from '@atoms/ReportIcon.vue';
 import SettingsIcon from '@atoms/SettingsIcon.vue';
 import router from '../../router';
 import TranslateIcon from '@atoms/TranslateIcon.vue';
@@ -37,6 +38,7 @@ describe('DropdownOptions', () => {
           InfoIcon,
           LogoutIcon,
           MenuButton,
+          ReportIcon,
           SettingsIcon,
           TranslateIcon,
         },
