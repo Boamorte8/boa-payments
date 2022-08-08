@@ -31,6 +31,7 @@ const es = {
   email: 'Correo',
   emptyEntityMessage: ({ named }: ContextOptions) =>
     `No hay ${named('entity')} para mostrar aún. `,
+  endDate: 'Fecha Final',
   entity: 'Entidad | Entidades',
   entityRange: ({ named }: ContextOptions) => `Rango por ${named('entity')}`,
   error: 'Error',

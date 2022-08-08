@@ -30,6 +30,7 @@ const en = {
   email: 'Email',
   emptyEntityMessage: ({ named }: ContextOptions) =>
     `No ${named('entity')} to display yet. `,
+  endDate: 'End Date',
   entity: 'Entity | Entities',
   entityRange: ({ named }: ContextOptions) => `${named('entity')} range`,
   errorCreatingEntity: ({ named }: ContextOptions) =>

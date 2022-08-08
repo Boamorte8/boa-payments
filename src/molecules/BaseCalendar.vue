@@ -31,6 +31,11 @@ const props = defineProps({
     required: false,
     default: null,
   },
+  maxDate: {
+    type: Date,
+    required: false,
+    default: null,
+  },
   formatInput: {
     type: String,
     required: false,
@@ -83,6 +88,7 @@ onMounted(() => {
       :format="formatInput"
       :placeholder="placeholder"
       :min-date="minDate"
+      :max-date="maxDate"
       :name="name"
       :enable-time-picker="enableTimePicker"
       :teleport="teleport"

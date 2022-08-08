@@ -3,6 +3,7 @@ import { computed, ref, watch, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { watchDebounced } from '@vueuse/core';
 
+import DateRange from '@molecules/DateRange.vue';
 import { SortValue } from '@app/models';
 import type { Category, OrderKey } from '@stores/models';
 import { useCategoryStore } from '@stores/categoryStore';
@@ -19,7 +20,6 @@ const entities = [
   { id: 'description', value: t('description') },
   { id: 'amount', value: t('amount') },
   { id: 'currentAmount', value: t('currentAmount') },
-  { id: 'amountRange', value: t('entityRange', { entity: t('amount') }) },
   { id: 'dateRange', value: t('entityRange', { entity: t('date') }) },
 ];
 const sortValues = [
@@ -35,17 +35,18 @@ const by: Ref<{ id: string; value: string }> = ref(entities[0]);
 const sortBy = ref();
 const category = ref();
 const categoryKey = ref(0);
+const dateRange = ref();
 const selectedCategories: Ref<Category[]> = ref([]);
 const isSearch = computed(() => {
   const { id } = by.value;
   return (
     id !== 'dateRange' &&
-    id !== 'amountRange' &&
     id !== 'all' &&
     id !== 'unfinished' &&
     id !== 'finished'
   );
 });
+const isDateSearch = computed(() => by.value.id === 'dateRange');
 const categoryList = computed(() =>
   categoryStore.categories.filter(
     (category) =>
@@ -93,12 +94,7 @@ watchDebounced(
   (value) => {
     if (value) {
       const { id } = value;
-      if (
-        id !== 'dateRange' &&
-        id !== 'amountRange' &&
-        id !== 'unfinished' &&
-        id !== 'finished'
-      ) {
+      if (id !== 'dateRange' && id !== 'unfinished' && id !== 'finished') {
         if (id === 'all') {
           search.value = '';
         }
@@ -141,6 +137,8 @@ watchDebounced(
             t('searchEntity', { entity: t('orders').toLowerCase() })
           "
         />
+
+        <DateRange v-if="isDateSearch" v-model="dateRange"></DateRange>
 
         <BaseSelect
           id="category"
