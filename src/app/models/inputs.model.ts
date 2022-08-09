@@ -15,3 +15,8 @@ export interface BaseItem {
   id: string;
   name: string;
 }
+
+export interface DatesRange {
+  startDate?: Date;
+  endDate?: Date;
+}

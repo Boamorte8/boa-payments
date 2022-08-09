@@ -1,15 +1,22 @@
 <script setup lang="ts">
-import { PropType, ref } from 'vue';
+import { PropType, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-interface DateRange {
-  startDate?: Date;
-  endDate?: Date;
-}
+import { DatesRange } from '@app/models';
 
-const props = defineProps({
+defineProps({
   modelValue: {
-    type: Object as PropType<DateRange>,
+    type: Object as PropType<DatesRange>,
+    default: null,
+  },
+  minLimit: {
+    type: Date,
+    required: false,
+    default: null,
+  },
+  maxLimit: {
+    type: Date,
+    required: false,
     default: null,
   },
 });
@@ -19,6 +26,28 @@ const startDate = ref();
 const endDate = ref();
 
 const emit = defineEmits(['update:modelValue']);
+
+watch(
+  () => startDate.value,
+  (value) => {
+    const modelData: DatesRange = {
+      startDate: value,
+      endDate: endDate.value,
+    };
+    emit('update:modelValue', modelData);
+  }
+);
+
+watch(
+  () => endDate.value,
+  (value) => {
+    const modelData: DatesRange = {
+      startDate: startDate.value,
+      endDate: value,
+    };
+    emit('update:modelValue', modelData);
+  }
+);
 </script>
 
 <template>
@@ -29,7 +58,8 @@ const emit = defineEmits(['update:modelValue']);
       name="startDate"
       :label="t('startDate')"
       :placeholder="t('addEntity', { entity: t('date').toLowerCase() })"
-      :max-date="endDate"
+      :min-date="minLimit"
+      :max-date="endDate || maxLimit"
     />
 
     <BaseCalendar
@@ -38,7 +68,8 @@ const emit = defineEmits(['update:modelValue']);
       name="endDate"
       :label="t('endDate')"
       :placeholder="t('addEntity', { entity: t('date').toLowerCase() })"
-      :min-date="startDate"
+      :min-date="startDate || minLimit"
+      :max-date="maxLimit"
     />
   </div>
 </template>

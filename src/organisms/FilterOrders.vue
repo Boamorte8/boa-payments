@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { watchDebounced } from '@vueuse/core';
 
 import DateRange from '@molecules/DateRange.vue';
-import { SortValue } from '@app/models';
+import { DatesRange, SortValue } from '@app/models';
 import type { Category, OrderKey } from '@stores/models';
 import { useCategoryStore } from '@stores/categoryStore';
 import { useOrderStore } from '@stores/orderStore';
@@ -46,6 +46,9 @@ const isSearch = computed(() => {
     id !== 'finished'
   );
 });
+
+const minDate = computed(() => orderStore.getOlderDate);
+const maxDate = computed(() => orderStore.getNewerDate);
 const isDateSearch = computed(() => by.value.id === 'dateRange');
 const categoryList = computed(() =>
   categoryStore.categories.filter(
@@ -76,6 +79,15 @@ watch(
       categoryKey.value += 1;
       orderStore.filterByCategory(selectedCategories.value);
     }
+  }
+);
+
+watch(
+  () => dateRange.value,
+  ({ startDate, endDate }: DatesRange) => {
+    const initialDate = startDate ? startDate : null;
+    const finalDate = endDate ? endDate : null;
+    orderStore.filterByDateRange(initialDate, finalDate);
   }
 );
 
@@ -138,7 +150,12 @@ watchDebounced(
           "
         />
 
-        <DateRange v-if="isDateSearch" v-model="dateRange"></DateRange>
+        <DateRange
+          v-if="isDateSearch"
+          v-model="dateRange"
+          :min-limit="minDate"
+          :max-limit="maxDate"
+        ></DateRange>
 
         <BaseSelect
           id="category"

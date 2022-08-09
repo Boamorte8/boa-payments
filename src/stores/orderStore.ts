@@ -26,6 +26,14 @@ export const useOrderStore = defineStore('order', {
     filteredOrders: ({ orders, sortBy }) => sortOrders(orders, sortBy),
     noOrders: ({ allOrders, loaded }) => loaded && !allOrders.length,
     unfinishedOrders: ({ orders }) => orders.filter((order) => !order.finished),
+    getOlderDate: ({ allOrders }) =>
+      allOrders.length
+        ? new Date(sortOrders(allOrders, SortValue.OldFirst)[0].startDate)
+        : undefined,
+    getNewerDate: ({ allOrders }) =>
+      allOrders.length
+        ? new Date(sortOrders(allOrders, SortValue.NewFirst)[0].startDate)
+        : undefined,
   },
   actions: {
     async loadOrders(errorMessage: string) {
@@ -143,6 +151,24 @@ export const useOrderStore = defineStore('order', {
           )
         )
       );
+    },
+    filterByDateRange(initialDate: Date | null, finalDate: Date | null) {
+      if (initialDate || finalDate) {
+        this.orders = sortOrders(this.allOrders, SortValue.OldFirst).filter(
+          (order, _, array) => {
+            const { startDate } = order;
+            const date = new Date(startDate).getTime();
+            const lastDate =
+              new Date(array[array.length - 1].startDate).getTime() + 1;
+            return (
+              date - (initialDate?.getTime() || 0) >= 0 &&
+              (finalDate?.getTime() || lastDate) - date >= 0
+            );
+          }
+        );
+      } else {
+        this.orders = this.allOrders;
+      }
     },
     filterByBoolean(property: OrderKey, value: boolean) {
       if (property) {

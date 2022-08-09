@@ -21,12 +21,12 @@ export const sortOrders = (orders: Order[], by: SortValue) => {
   if (by === SortValue.OldFirst) {
     return newArray.sort(
       (a, b) =>
-        new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
     );
   } else if (by === SortValue.NewFirst) {
     return newArray.sort(
       (a, b) =>
-        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+        new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
     );
   } else if (by === SortValue.Title) {
     return newArray.sort((a, b) => {

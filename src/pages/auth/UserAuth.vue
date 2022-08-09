@@ -142,7 +142,7 @@ const handleError = () => {
   &-control {
     @apply w-60 my-2.5;
 
-    &:nth-child(2) {
+    &:nth-child(3) {
       @apply mb-8;
     }
   }
