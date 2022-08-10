@@ -5,7 +5,7 @@
 - Review concepts from javascript weird parts
 - Review concepts from angular
 - Study about google javascript style guide
-- To do other features of the app
+- To do other features of the app OK
 
 ## Questions
 

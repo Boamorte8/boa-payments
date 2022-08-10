@@ -52,7 +52,6 @@ const totalAmounts = computed(() =>
       return result;
     }, [])
 );
-console.log('totalAmounts', totalAmounts);
 </script>
 
 <template>

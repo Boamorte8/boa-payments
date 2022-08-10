@@ -1,6 +1,7 @@
 import { createTestingPinia, type TestingOptions } from '@pinia/testing';
 import { describe, expect, test, vi } from 'vitest';
 import { mount, RouterLinkStub } from '@vue/test-utils';
+import { Menu, MenuButton } from '@headlessui/vue';
 
 import DropdownItem from '../DropdownItem.vue';
 import i18n from '../../i18n';
@@ -8,15 +9,29 @@ import router from '../../router';
 
 describe('DropdownItem', () => {
   function factory(options?: TestingOptions) {
-    const wrapper = mount(DropdownItem, {
+    const App = {
+      components: {
+        DropdownItem,
+        Menu,
+        MenuButton,
+      },
+      template: `
+        <Menu>
+          <dropdown-item><span>test</span></dropdown-item>
+        </Menu>
+      `,
+    };
+    const wrapper = mount(App, {
       global: {
+        components: {
+          DropdownItem,
+          Menu,
+          MenuButton,
+        },
         plugins: [i18n, router, createTestingPinia(options)],
       },
       stubs: {
         RouterLink: RouterLinkStub,
-      },
-      slots: {
-        default: '<span>test</span>',
       },
     });
 
