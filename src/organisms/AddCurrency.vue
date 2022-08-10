@@ -76,6 +76,7 @@ const onAddNewCurrency = async () => {
       <BaseInput
         id="value"
         v-model.trim="value"
+        v-focus
         type="text"
         name="value"
         :label="valueLabel"

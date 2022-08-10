@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 
 import App from './App.vue';
+import { AutoFocus } from '@plugins/AutoFocus';
 import BaseButton from '@atoms/BaseButton.vue';
 import BaseCalendar from '@molecules/BaseCalendar.vue';
 import BaseCard from '@atoms/BaseCard.vue';
@@ -49,6 +50,8 @@ const app = createApp(App);
 app.use(i18n);
 app.use(createPinia());
 app.use(router);
+
+app.directive('focus', AutoFocus);
 
 app.component('BaseButton', BaseButton);
 app.component('BaseCard', BaseCard);

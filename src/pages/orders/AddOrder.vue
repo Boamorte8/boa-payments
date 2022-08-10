@@ -180,6 +180,7 @@ const onDelete = (category: Category) => {
             <BaseInput
               id="title"
               v-model.trim="title"
+              v-focus
               type="text"
               name="title"
               :label="titleLabel"

@@ -76,6 +76,7 @@ const onAddNewEntity = async () => {
       <BaseInput
         id="name"
         v-model.trim="name"
+        v-focus
         type="text"
         name="name"
         :label="nameLabel"

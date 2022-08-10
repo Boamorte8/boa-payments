@@ -20,7 +20,8 @@
       "@atoms/*": ["./src/atoms/*"],
       "@molecules/*": ["./src/molecules/*"],
       "@organisms/*": ["./src/organisms/*"],
-      "@templates/*": ["./src/templates/*"]
+      "@templates/*": ["./src/templates/*"],
+      "@plugins/*": ["./src/plugins/*"]
     },
     "types": ["vite/client", "node"]
   },

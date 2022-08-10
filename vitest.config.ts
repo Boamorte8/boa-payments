@@ -24,6 +24,7 @@ export default defineConfig({
       '@molecules': fileURLToPath(new URL('./src/molecules', import.meta.url)),
       '@organisms': fileURLToPath(new URL('./src/organisms', import.meta.url)),
       '@templates': fileURLToPath(new URL('./src/templates', import.meta.url)),
+      '@plugins': fileURLToPath(new URL('./src/plugins', import.meta.url)),
     },
   },
   test: {

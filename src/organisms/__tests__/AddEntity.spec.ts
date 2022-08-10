@@ -3,6 +3,7 @@ import { describe, expect, test, vi } from 'vitest';
 import { mount, RouterLinkStub } from '@vue/test-utils';
 
 import AddEntity from '../AddEntity.vue';
+import { AutoFocus } from '@plugins/AutoFocus';
 import BaseButton from '@atoms/BaseButton.vue';
 import BaseDialog from '@molecules/BaseDialog.vue';
 import BaseInput from '@molecules/BaseInput.vue';
@@ -19,6 +20,7 @@ describe('BaseDialog', () => {
           BaseInput,
           BaseLabel,
         },
+        directives: { focus: AutoFocus },
         plugins: [i18n, createTestingPinia(options)],
         stubs: {
           teleport: true,
