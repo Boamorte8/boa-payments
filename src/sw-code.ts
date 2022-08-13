@@ -22,7 +22,7 @@ const cacheName = 'BoaPaymentsCustomCache_v1';
 
 precacheAndRoute(manifest);
 
-console.log('version - 8/12/2022-18:50');
+console.log('version - 08122022-19:25');
 
 registerRoute(
   new NavigationRoute(createHandlerBoundToURL('index.html'), {
@@ -62,12 +62,16 @@ function isUrl(url: string): boolean {
 }
 
 self.addEventListener('fetch', (event) => {
-  const availableModes = ['navigate'];
+  const availableModes = ['navigate', 'cors'];
   const { request } = event;
-  console.log('fetch event', request);
   // Check if this is a navigation request
-  if (availableModes.includes(request.mode) && isUrl(request.url)) {
+  if (
+    availableModes.includes(request.mode) &&
+    isUrl(request.url) &&
+    !request.referrer.includes('localhost')
+  ) {
     // Open the cache
+    console.log('fetch event', request);
     event.respondWith(
       caches.open(cacheName).then((cache) => {
         // Go to the network first
