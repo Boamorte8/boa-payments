@@ -15,13 +15,13 @@ export default defineConfig(({ command }) => ({
       include: path.resolve(__dirname, './src/i18n/**'),
     }),
     VitePWA({
-      injectRegister: 'auto',
+      mode: command === 'serve' ? 'development' : 'production',
       registerType: 'autoUpdate',
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'sw-code.ts',
       devOptions: {
-        enabled: true,
-      },
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        enabled: command === 'serve',
       },
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
@@ -29,6 +29,7 @@ export default defineConfig(({ command }) => ({
         short_name: 'BoaPay',
         description: 'Boa Payments help you handle your lends and borrows',
         theme_color: '#1d1e26',
+        background_color: '#1d1e26',
         icons: [
           {
             src: 'pwa-192x192.png',
@@ -44,7 +45,7 @@ export default defineConfig(({ command }) => ({
             src: 'pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any maskable',
+            purpose: 'maskable',
           },
         ],
       },

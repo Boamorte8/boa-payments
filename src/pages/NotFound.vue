@@ -7,7 +7,7 @@ const { t } = useI18n();
 
 <template>
   <section class="pt-4">
-    <BaseCard class="flex-col m-2 max-w-lg md:mx-auto md:my-4">
+    <BaseCard class="flex-col m-2 max-w-lg mx-auto md:my-4">
       <h2 class="font-bold mb-4 text-lg dark:text-white">
         {{ t('pageNotFound.title') }}
       </h2>

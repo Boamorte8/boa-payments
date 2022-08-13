@@ -38,13 +38,7 @@ import WarningIcon from '@atoms/WarningIcon.vue';
 import i18n from './i18n';
 import router from './router';
 import './styles/index.css';
-// import { registerSW } from 'virtual:pwa-register';
 
-// const updateSW = registerSW({
-//   onRegisterError(error) {
-//     console.log('registerSW - onRegisterError', error);
-//   },
-// });
 const app = createApp(App);
 
 app.use(i18n);
