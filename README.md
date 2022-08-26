@@ -12,3 +12,5 @@ This project was implemented using:
 - Icons are from [heroicons](https://heroicons.com/)
 - Authentication and database is handle with Firebase
 - Unit tests with [Vitest](https://vitest.dev/)
+
+You can see and use the app on [this link](https://boa-payments.vercel.app/)
