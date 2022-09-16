@@ -26,8 +26,15 @@
     "types": ["vite-plugin-pwa/client", "vite/client", "node"],
     "jsx": "preserve"
   },
-  "include": ["env.d.ts", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/router.ts"],
-  "exclude": ["src/**/__tests__/*"],
+  "include": [
+    "env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/router.ts"
+  ],
+  "exclude": ["src/**/__tests__/*", "src/tests/**/*"],
   "references": [
     { "path": "./tsconfig.node.json" },
     { "path": "./tsconfig.vitest.json" }
