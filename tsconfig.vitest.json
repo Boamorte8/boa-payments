@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["src/**/__tests__/*", "src/tests/*", "src/router.ts"],
+  "include": ["src/**/__tests__/*", "src/tests/**/*", "src/router.ts"],
   "exclude": [],
   "compilerOptions": {
     "composite": true,

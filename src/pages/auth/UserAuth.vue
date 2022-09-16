@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { useAuthUserStore } from '../../stores';
+import { validateEmail, validatePassword } from '@app/utils';
 
 const { t } = useI18n();
 const email = ref('');
@@ -13,28 +14,25 @@ const isLoading = ref(false);
 const store = useAuthUserStore();
 const mode = ref('login');
 const errorMessage = ref(null);
+const isLogin = computed(() => mode.value === 'login');
 const switchModeButtonCaption = computed(() =>
-  mode.value === 'login' ? 'loginSwitch' : 'signSwitch'
+  isLogin.value ? 'loginSwitch' : 'signSwitch'
 );
 
-const switchAuthMode = () => {
-  mode.value = mode.value === 'login' ? 'signup' : 'login';
-};
+const switchAuthMode = () => (mode.value = isLogin.value ? 'signup' : 'login');
 
 const route = useRoute();
 const router = useRouter();
 
-if (route.query.redirect) {
-  mode.value = 'signup';
-}
+onMounted(() => {
+  if (route.query.redirect) {
+    mode.value = 'signup';
+  }
+});
 
 const submitForm = async () => {
   formIsValid.value = true;
-  if (
-    email.value === '' ||
-    !email.value.includes('@') ||
-    password.value.length < 6
-  ) {
+  if (!validateEmail(email.value) || !validatePassword(password.value)) {
     formIsValid.value = false;
     return;
   }
@@ -63,6 +61,10 @@ const submitForm = async () => {
 const handleError = () => {
   errorMessage.value = null;
 };
+
+const goToRecover = () => {
+  router.push('/recover-pass');
+};
 </script>
 
 <template>
@@ -77,10 +79,7 @@ const handleError = () => {
 
     <BaseLoader :loading="isLoading" />
 
-    <BaseCard
-      v-if="mode === 'signup'"
-      class="flex gap-4 mx-auto max-w-fit mb-4"
-    >
+    <BaseCard v-if="!isLogin" class="flex gap-4 mx-auto max-w-fit mb-4">
       <WarningIcon class="text-warning-700 h-8 w-8" />
 
       <p class="dark:text-white font-bold">
@@ -131,6 +130,15 @@ const handleError = () => {
           <BaseButton mode="flat" type="reset" @click="switchAuthMode">
             {{ t(switchModeButtonCaption) }}
           </BaseButton>
+
+          <BaseButton
+            v-if="isLogin"
+            mode="flat"
+            type="reset"
+            @click="goToRecover"
+          >
+            {{ t('recoverPage.recoverPassword') }}
+          </BaseButton>
         </div>
       </form>
     </BaseCard>
@@ -138,13 +146,11 @@ const handleError = () => {
 </template>
 
 <style lang="postcss" scoped>
-.form {
-  &-control {
-    @apply w-60 my-2.5;
+.form-control {
+  @apply w-60 my-2.5;
 
-    &:nth-child(3) {
-      @apply mb-8;
-    }
+  &:nth-child(3) {
+    @apply mb-8;
   }
 }
 </style>

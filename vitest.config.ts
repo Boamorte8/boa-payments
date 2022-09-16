@@ -33,6 +33,6 @@ export default defineConfig({
     deps: {
       inline: ['@vue', '@vueuse'],
     },
-    setupFiles: ['./src/tests/setup-env.ts', './src/tests/setup.ts'],
+    setupFiles: ['./src/tests/server.ts', './src/tests/setup.ts'],
   },
 });

@@ -5,7 +5,7 @@ import { mockCategories } from '../../tests/category-test.utils';
 import { useAuthUserStore } from '../authStore';
 import { useCategoryStore } from '../categoryStore';
 
-describe('CategortyStore', () => {
+describe('CategoryStore', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
     sessionStorage.removeItem('is-working');

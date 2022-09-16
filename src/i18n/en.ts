@@ -53,7 +53,7 @@ const en = {
   loginError: 'Failed login. Check your login data',
   loginErrorGeneric: 'Failed to authenticate! Try later',
   loginFormError:
-    'Please enter a valid email and password (must be at least 6 characters long).',
+    'Please enter a valid email and password (must be at least 8 characters long, 1 upper case character, 1 lower case character, and 1 number).',
   loginSwitch: 'Signup instead',
   logo: 'BP',
   logoComplete: 'Boa Payments',
@@ -62,6 +62,7 @@ const en = {
   newF: 'New',
   newFirst: 'Newest first',
   newM: 'New',
+  newPassword: 'New password',
   nextDate: 'Next Date',
   no: 'No',
   noEntities: ({ named }: ContextOptions) =>
@@ -116,6 +117,26 @@ const en = {
     githubProfile: 'Boamorte8',
     madeBy: 'This project was made by Esteban Salazar Zapata',
     myGithub: 'My Github profile is ',
+  },
+  recoverPage: {
+    formError: 'Please enter a valid email',
+    instructions:
+      'Enter your email address to send you an email with instructions to reset your password',
+    noExistsEmail: 'Email no exists',
+    recoverPassword: 'Recover password',
+    sendingEmailError: 'Failed sending email! Try again',
+    sendingEmailMessage:
+      'Email sent successfully. Please check your email and follow the instructions',
+    sendingEmailTitle: 'Email sent successfully',
+  },
+  resetPage: {
+    formError:
+      'Please enter a valid password (must be at least 8 characters long, 1 upper case character, 1 lower case character, and 1 number).',
+    instructions: 'Enter your new password',
+    resetPassword: 'Reset password',
+    resetPasswordError: 'Failed changing your password! Try again',
+    resetPasswordMessage: 'Password was changed successfully.',
+    resetPasswordTitle: 'Password changed successfully',
   },
 };
 

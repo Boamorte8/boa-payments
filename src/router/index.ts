@@ -7,14 +7,17 @@ import {
 import AboutPage from '@pages/AboutPage.vue';
 import AddOrder from '@pages/orders/AddOrder.vue';
 import AddPayment from '@pages/payments/AddPayment.vue';
+import NotFound from '@pages/NotFound.vue';
 import OrderDetail from '@pages/orders/OrderDetail.vue';
 import OrdersView from '@pages/orders/OrdersView.vue';
 import PaymentsList from '@pages/payments/PaymentsList.vue';
-import NotFound from '@pages/NotFound.vue';
+import RecoverPass from '@pages/auth/RecoverPass.vue';
 import { useAuthUserStore } from '../stores';
 import UserAuth from '@pages/auth/UserAuth.vue';
 import UserSettings from '@pages/user/UserSettings.vue';
 import UserSummary from '@pages/user/UserSummary.vue';
+import ValidateEmail from '@organisms/ValidateEmail.vue';
+import ResetPassword from '@organisms/ResetPassword.vue';
 
 const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/auth' },
@@ -23,6 +26,25 @@ const routes: RouteRecordRaw[] = [
     name: 'auth',
     component: UserAuth,
     meta: { requiresUnauth: true },
+  },
+  {
+    path: '/recover-pass',
+    name: 'recover-pass',
+    component: RecoverPass,
+    meta: { requiresUnauth: true },
+    children: [
+      { path: '', name: 'redirect', redirect: '/recover-pass/email' },
+      {
+        path: 'email',
+        name: 'email',
+        component: ValidateEmail,
+      },
+      {
+        path: 'password',
+        name: 'password',
+        component: ResetPassword,
+      },
+    ],
   },
   {
     path: '/orders',

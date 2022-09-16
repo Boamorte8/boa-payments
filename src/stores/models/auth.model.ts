@@ -3,6 +3,7 @@ export interface AuthState {
   token: string | null;
   tokenExpiration: number | null;
   didAutoLogout: boolean;
+  emailReset: string | null;
 }
 
 export interface LoginPayload {

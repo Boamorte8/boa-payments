@@ -54,7 +54,7 @@ const es = {
   loginError: 'Fallo al autenticar. Verifica tus datos de acceso',
   loginErrorGeneric: 'Fallo al autenticar. Intenta más tarde',
   loginFormError:
-    'Por favor ingresen un correo electrónico y contraseña válidos (deben tener al menos 6 caracteres).',
+    'Por favor ingresen un correo electrónico y contraseña válidos (debe tener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número).',
   loginSwitch: 'Registrarse',
   logo: 'BP',
   logoComplete: 'Boa Payments',
@@ -63,6 +63,7 @@ const es = {
   newF: 'Nueva',
   newFirst: 'Nuevos primero',
   newM: 'Nuevo',
+  newPassword: 'Nueva contraseña',
   nextDate: 'Próxima fecha',
   no: 'No',
   noEntities: ({ named }: ContextOptions) =>
@@ -119,6 +120,26 @@ const es = {
     githubProfile: 'Boamorte8',
     madeBy: 'Este proyecto fue hecho por Esteban Salazar Zapata',
     myGithub: 'Mi perfil de Github es ',
+  },
+  recoverPage: {
+    formError: 'Por favor ingrese un correo electrónico válido',
+    instructions:
+      'Ingrese su correo electrónico para enviarle un enlace y las instrucciones para restaurar su contraseña',
+    noExistsEmail: 'El correo electrónico no existe',
+    recoverPassword: 'Recuperar contraseña',
+    sendingEmailError: 'Fallo al enviar el correo. Intenta de nuevo',
+    sendingEmailMessage:
+      'El correo enviado correctamente. Por favor revisa tu bandeja y sigue las instrucciones del correo',
+    sendingEmailTitle: 'Correo enviado correctamente',
+  },
+  resetPage: {
+    formError:
+      'Por favor ingrese una contraseña válida (debe tener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número).',
+    instructions: 'Ingrese su nueva contraseña',
+    resetPassword: 'Cambiar contraseña',
+    resetPasswordError: 'Fallo al cambiar la contraseña. Intenta de nuevo',
+    resetPasswordMessage: 'La contraseña ha sido cambiada correctamente.',
+    resetPasswordTitle: 'Contraseña cambiada correctamente',
   },
 };
 

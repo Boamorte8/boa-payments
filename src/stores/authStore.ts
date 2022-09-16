@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia';
 
+import { doPostRequest } from '@app/utils';
+import { endpoints } from '@app/config';
 import i18n from '../i18n';
 import router from '../router';
 import type { AuthPayload, AuthState, LoginPayload } from './models';
@@ -13,6 +15,7 @@ export const useAuthUserStore = defineStore('auth/user', {
     token: null,
     tokenExpiration: null,
     didAutoLogout: false,
+    emailReset: null,
   }),
   getters: {
     isAuthenticated: (state) => !!state.token,
@@ -33,18 +36,14 @@ export const useAuthUserStore = defineStore('auth/user', {
       });
     },
     async auth({ email, password, process, customErrorMessage }: AuthPayload) {
-      const response = await fetch(
-        `https://identitytoolkit.googleapis.com/v1/accounts:${process}?key=AIzaSyCwvlEBeFd4J-TvREJda36ztri5PVESc_k`,
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            email,
-            password,
-            returnSecureToken: true,
-          }),
-        }
+      const response = await doPostRequest(
+        endpoints.getFirebaseUrl(process),
+        JSON.stringify({
+          email,
+          password,
+          returnSecureToken: true,
+        })
       );
-
       const responseData = await response.json();
 
       if (!response.ok) {
@@ -62,6 +61,39 @@ export const useAuthUserStore = defineStore('auth/user', {
       timer = window.setTimeout(() => this.autoLogout(), expiresInTime);
 
       this.setUser(idToken, localId);
+    },
+    async sendEmailReset(email: string, errorMessage: string) {
+      const response = await doPostRequest(
+        endpoints.getFirebaseUrl('sendOobCode'),
+        JSON.stringify({
+          email,
+          requestType: 'PASSWORD_RESET',
+        })
+      );
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        const message = responseData.error ? errorMessage : null;
+        const error = new Error(message || responseData.message);
+        throw error;
+      }
+    },
+    async resetPassword(
+      oobCode: string,
+      newPassword: string,
+      errorMessage: string
+    ) {
+      const response = await doPostRequest(
+        endpoints.getFirebaseUrl('resetPassword'),
+        JSON.stringify({ oobCode, newPassword })
+      );
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        const message = responseData.error ? errorMessage : null;
+        const error = new Error(message || responseData.message);
+        throw error;
+      }
     },
     tryLogin() {
       const token = localStorage.getItem('token');
