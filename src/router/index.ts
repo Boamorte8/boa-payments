@@ -5,19 +5,20 @@ import {
 } from 'vue-router';
 
 import AboutPage from '@pages/AboutPage.vue';
-import AddOrder from '@pages/orders/AddOrder.vue';
-import AddPayment from '@pages/payments/AddPayment.vue';
 import NotFound from '@pages/NotFound.vue';
-import OrderDetail from '@pages/orders/OrderDetail.vue';
-import OrdersView from '@pages/orders/OrdersView.vue';
-import PaymentsList from '@pages/payments/PaymentsList.vue';
 import RecoverPass from '@pages/auth/RecoverPass.vue';
 import { useAuthUserStore } from '../stores';
 import UserAuth from '@pages/auth/UserAuth.vue';
-import UserSettings from '@pages/user/UserSettings.vue';
-import UserSummary from '@pages/user/UserSummary.vue';
 import ValidateEmail from '@organisms/ValidateEmail.vue';
 import ResetPassword from '@organisms/ResetPassword.vue';
+
+const AddOrder = () => import('@pages/orders/AddOrder.vue');
+const AddPayment = () => import('@pages/payments/AddPayment.vue');
+const OrderDetail = () => import('@pages/orders/OrderDetail.vue');
+const OrdersView = () => import('@pages/orders/OrdersView.vue');
+const PaymentsList = () => import('@pages/payments/PaymentsList.vue');
+const UserSettings = () => import('@pages/user/UserSettings.vue');
+const UserSummary = () => import('@pages/user/UserSummary.vue');
 
 const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/auth' },
