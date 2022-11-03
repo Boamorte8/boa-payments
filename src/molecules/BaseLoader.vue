@@ -9,7 +9,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <base-dialog loader fixed :show="props.loading">
+  <BaseDialog loader fixed :show="props.loading">
     <BaseSpinner />
-  </base-dialog>
+  </BaseDialog>
 </template>
