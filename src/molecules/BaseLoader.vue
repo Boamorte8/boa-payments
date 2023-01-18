@@ -1,12 +1,11 @@
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
   loading: {
     type: Boolean,
     required: false,
     default: false,
   },
 });
-console.log(props.loading);
 </script>
 
 <template>

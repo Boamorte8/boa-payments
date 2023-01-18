@@ -62,7 +62,7 @@ defineProps({
   </router-link>
 </template>
 
-<style scoped>
+<style lang="postcss" scoped>
 .button,
 .link {
   @apply inline-flex items-center no-underline text-white leading-4 h-9 rounded-lg py-2 px-4 border-2 border-primary
