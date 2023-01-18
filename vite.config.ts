@@ -1,16 +1,16 @@
-import { fileURLToPath, URL } from 'url';
 import path from 'path';
+import { fileURLToPath, URL } from 'url';
 
-import { defineConfig } from 'vite';
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import vue from '@vitejs/plugin-vue';
-import vueI18n from '@intlify/vite-plugin-vue-i18n';
+import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => ({
   plugins: [
     vue(),
-    vueI18n({
+    VueI18nPlugin({
       runtimeOnly: command === 'serve',
       include: path.resolve(__dirname, './src/i18n/**'),
     }),

@@ -6,10 +6,11 @@ const props = defineProps({
     default: false,
   },
 });
+console.log(props.loading);
 </script>
 
 <template>
-  <base-dialog loader fixed :show="props.loading">
+  <BaseDialog loader fixed :show="loading">
     <BaseSpinner />
-  </base-dialog>
+  </BaseDialog>
 </template>

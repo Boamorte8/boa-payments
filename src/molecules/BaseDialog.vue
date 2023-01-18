@@ -43,31 +43,32 @@ const tryClose = () => {
 
 <template>
   <teleport to="body">
-    <div
-      v-if="show"
-      class="bg-overlay w-full h-screen top-0 left-0 fixed z-10"
-      @click="tryClose"
-    ></div>
-    <transition name="dialog">
-      <dialog v-if="show" open :class="loaderClass">
-        <header
-          v-if="title"
-          class="w-full p-4 text-white bg-primary-700 dark:bg-background-300"
-        >
-          <slot name="header">
-            <h2 class="m-0 font-semibold">{{ props.title }}</h2>
-          </slot>
-        </header>
-        <section class="p-4">
-          <slot></slot>
-        </section>
-        <menu v-if="!fixed" class="flex gap-4 justify-end m-0 p-4">
-          <slot name="actions">
-            <BaseButton @click="tryClose">{{ t('close') }}</BaseButton>
-          </slot>
-        </menu>
-      </dialog>
-    </transition>
+    <template v-if="show">
+      <div
+        class="bg-overlay w-full h-screen top-0 left-0 fixed z-10"
+        @click="tryClose"
+      ></div>
+      <transition name="dialog">
+        <dialog open :class="loaderClass">
+          <header
+            v-if="title"
+            class="w-full p-4 text-white bg-primary-700 dark:bg-background-300"
+          >
+            <slot name="header">
+              <h2 class="m-0 font-semibold">{{ props.title }}</h2>
+            </slot>
+          </header>
+          <section class="p-4">
+            <slot></slot>
+          </section>
+          <menu v-if="!fixed" class="flex gap-4 justify-end m-0 p-4">
+            <slot name="actions">
+              <BaseButton @click="tryClose">{{ t('close') }}</BaseButton>
+            </slot>
+          </menu>
+        </dialog>
+      </transition>
+    </template>
   </teleport>
 </template>
 

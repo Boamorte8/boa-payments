@@ -1,16 +1,16 @@
 import { createTestingPinia, type TestingOptions } from '@pinia/testing';
-import { describe, expect, test, vi } from 'vitest';
 import { mount, RouterLinkStub } from '@vue/test-utils';
+import { describe, expect, test, vi } from 'vitest';
 
 import BaseButton from '@atoms/BaseButton.vue';
-import BaseDialog from '../BaseDialog.vue';
-import BaseLoader from '../BaseLoader.vue';
 import BaseSpinner from '@atoms/BaseSpinner.vue';
 import i18n from '../../i18n';
 import router from '../../router';
+import BaseDialog from '../BaseDialog.vue';
+import BaseLoader from '../BaseLoader.vue';
 
 describe('BaseLoader', () => {
-  function factory(options?: TestingOptions) {
+  function factory(options?: TestingOptions, props?: { loading?: boolean }) {
     const wrapper = mount(BaseLoader, {
       global: {
         components: {
@@ -26,6 +26,7 @@ describe('BaseLoader', () => {
       stubs: {
         RouterLink: RouterLinkStub,
       },
+      props,
     });
 
     return { wrapper };
@@ -43,12 +44,14 @@ describe('BaseLoader', () => {
   });
 
   test('should display spinner when loading is true', async () => {
-    const { wrapper } = factory({
-      createSpy: vi.fn,
-    });
-    await wrapper.setProps({
-      loading: true,
-    });
+    const { wrapper } = factory(
+      {
+        createSpy: vi.fn,
+      },
+      {
+        loading: true,
+      }
+    );
 
     const overlay = wrapper.find('.bg-overlay');
     const spinner = wrapper.find('.lds-roller');
