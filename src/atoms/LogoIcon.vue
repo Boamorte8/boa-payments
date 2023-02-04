@@ -1,0 +1,79 @@
+<template>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 128 128"
+    data-background-color="#755bb4"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="4 0 24 32"
+      class="icon-icon-0"
+      data-fill-palette-color="accent"
+    >
+      <g data-name="66-Financial" fill="#fff" data-fill-palette-color="accent">
+        <path
+          d="M25 0H7a3 3 0 0 0-3 3v26a3 3 0 0 0 3 3h18a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3Zm1 29a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h20Zm0-22H6V3a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1Z"
+          data-fill-palette-color="accent"
+        />
+        <path
+          data-fill-palette-color="accent"
+          d="M8 11h2v2H8zM12 11h2v2h-2zM20 11h4v2h-4zM16 11h2v2h-2z"
+        />
+        <rect
+          x="8"
+          y="16"
+          width="4"
+          height="4"
+          rx="1"
+          ry="1"
+          data-fill-palette-color="accent"
+        />
+        <rect
+          x="14"
+          y="16"
+          width="4"
+          height="4"
+          rx="1"
+          ry="1"
+          data-fill-palette-color="accent"
+        />
+        <rect
+          x="20"
+          y="16"
+          width="4"
+          height="4"
+          rx="1"
+          ry="1"
+          data-fill-palette-color="accent"
+        />
+        <rect
+          x="8"
+          y="23"
+          width="4"
+          height="4"
+          rx="1"
+          ry="1"
+          data-fill-palette-color="accent"
+        />
+        <rect
+          x="14"
+          y="23"
+          width="4"
+          height="4"
+          rx="1"
+          ry="1"
+          data-fill-palette-color="accent"
+        />
+        <rect
+          x="20"
+          y="23"
+          width="4"
+          height="4"
+          rx="1"
+          ry="1"
+          data-fill-palette-color="accent"
+        />
+      </g>
+    </svg>
+  </svg>
+</template>

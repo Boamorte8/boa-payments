@@ -6,6 +6,6 @@
   ],
   "settings": {
     "typescript.tsdk": "node_modules/typescript/lib",
-    "conventionalCommits.scopes": ["core"]
+    "conventionalCommits.scopes": ["core", "about"]
   }
 }

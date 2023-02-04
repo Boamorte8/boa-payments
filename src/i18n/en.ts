@@ -114,9 +114,10 @@ const en = {
   pageInfo: {
     description:
       'This is a personal project with two main goals. Firstly, a way to control lends and borrows. Second, to practice my skills to programming with Vue',
-    githubProfile: 'Boamorte8',
     madeBy: 'This project was made by Esteban Salazar Zapata',
     myGithub: 'My Github profile is ',
+    myLinkedIn: 'My LinkedIn profile is ',
+    myPortfolio: 'My portfolio page is ',
   },
   recoverPage: {
     formError: 'Please enter a valid email',

@@ -117,9 +117,10 @@ const es = {
   pageInfo: {
     description:
       'Este es un proyecto personal con 2 objetivos principales. El primero, encontrar una forma de controlar mis préstamos y deudas. Segundo, practicar mis habilidades programando con Vue',
-    githubProfile: 'Boamorte8',
     madeBy: 'Este proyecto fue hecho por Esteban Salazar Zapata',
     myGithub: 'Mi perfil de Github es ',
+    myLinkedIn: 'Mi perfil de LinkedIn es ',
+    myPortfolio: 'Mi portafolio lo encuentras en este link: ',
   },
   recoverPage: {
     formError: 'Por favor ingrese un correo electrónico válido',

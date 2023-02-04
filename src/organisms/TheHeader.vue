@@ -1,18 +1,18 @@
 <script setup lang="ts">
+import { Menu } from '@headlessui/vue';
 import {
   breakpointsTailwind,
   useMediaQuery,
   usePreferredColorScheme,
 } from '@vueuse/core';
 import { computed } from 'vue';
-import { Menu } from '@headlessui/vue';
 import { useI18n } from 'vue-i18n';
 
-import DropdownOptions from '@molecules/DropdownOptions.vue';
-import LogoApp from '@atoms/LogoApp.vue';
 import { LogoType } from '@app/models';
-import { UserTheme } from '@stores/models';
+import DropdownOptions from '@molecules/DropdownOptions.vue';
+import LogoApp from '@molecules/LogoApp.vue';
 import { useAuthUserStore, usePreferencesUserStore } from '@stores/index';
+import { UserTheme } from '@stores/models';
 
 const { t } = useI18n();
 const store = useAuthUserStore();

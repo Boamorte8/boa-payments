@@ -1,10 +1,10 @@
 import { createTestingPinia, type TestingOptions } from '@pinia/testing';
-import { describe, expect, test, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
+import { describe, expect, test, vi } from 'vitest';
 
-import i18n from '../../i18n';
-import LogoApp from '@atoms/LogoApp.vue';
 import { LogoType } from '@app/models';
+import LogoApp from '@molecules/LogoApp.vue';
+import i18n from '../../i18n';
 
 describe('LogoApp', () => {
   function factory(options?: TestingOptions) {
