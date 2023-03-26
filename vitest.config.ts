@@ -12,7 +12,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
     VueI18nPlugin({
-      include: path.resolve(__dirname, './src/i18n/**'),
+      include: path.resolve(__dirname, './src/i18n/locales/**'),
     }),
   ],
   resolve: {

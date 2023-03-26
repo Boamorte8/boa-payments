@@ -1,6 +1,6 @@
-import { ContextOptions } from './context.model';
+import { ContextOptions } from '../context.model';
 
-const es = {
+export default {
   add: 'Añadir',
   addEntity: ({ named }: ContextOptions) => `Añadir ${named('entity')}`,
   addNewEntity: ({ named }: ContextOptions) =>
@@ -143,5 +143,3 @@ const es = {
     resetPasswordTitle: 'Contraseña cambiada correctamente',
   },
 };
-
-export default es;

@@ -12,7 +12,7 @@ export default defineConfig(({ command }) => ({
     vue(),
     VueI18nPlugin({
       runtimeOnly: command === 'serve',
-      include: path.resolve(__dirname, './src/i18n/**'),
+      include: path.resolve(__dirname, './src/i18n/locales/**'),
     }),
     VitePWA({
       mode: command === 'serve' ? 'development' : 'production',
