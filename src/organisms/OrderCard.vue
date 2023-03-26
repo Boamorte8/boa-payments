@@ -33,7 +33,9 @@ const currentAmount = computed(
     )}/${props.order.currency.toLowerCase()}`
 );
 
-const nextDate = computed(() => formatDate(new Date(props.order.nextDate)));
+const nextDate = computed(() =>
+  props.order.nextDate ? formatDate(new Date(props.order.nextDate)) : ''
+);
 const startDate = computed(() => formatDate(new Date(props.order.startDate)));
 const finishedText = computed(() => (props.order.finished ? 'yes' : 'no'));
 const subscriptionText = computed(() =>
@@ -63,9 +65,9 @@ const onGoToDetail = () => {
         @click="onGoToDetail"
       >
         <div
-          class="flex justify-center items-center rounded-[50%] bg-primary-700 text-white h-12 w-12"
+          class="flex justify-center items-center rounded-[50%] bg-primary-700 text-white h-12 w-12 p-[.7rem]"
         >
-          <UserIcon class="h-6 w-6" />
+          <UserIcon />
         </div>
 
         <div class="w-[53%] dark:text-white">

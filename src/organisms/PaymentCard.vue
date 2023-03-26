@@ -2,10 +2,10 @@
 import { computed, type PropType } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import DeletePayment from './DeletePayment.vue';
 import { formatCurrency, formatDate } from '@app/utils';
 import { OrderType, type Payment } from '@stores/models';
 import { usePaymentStore } from '@stores/paymentStore';
+import DeletePayment from './DeletePayment.vue';
 
 const { t } = useI18n();
 const paymentStore = usePaymentStore();
@@ -43,16 +43,14 @@ const onDelete = () => {
     <div class="w-full">
       <header class="flex w-full gap-4 mb-4">
         <div
-          class="flex justify-center items-center rounded-[50%] bg-primary-700 text-white h-12 w-12"
+          class="flex justify-center items-center rounded-[50%] bg-primary-700 text-white h-12 w-12 p-2"
         >
-          <CashIcon v-if="isLoan" class="h-7 w-7 text-success-700" />
-
-          <LibraryIcon v-else class="h-7 w-7 text-error-700" />
+          <CashIcon v-if="isLoan" class="text-success-700" />
+          <LibraryIcon v-else class="text-error-700" />
         </div>
 
         <div class="w-[53%] dark:text-white">
           <h3 class="font-bold text-xl">{{ payment.title }}</h3>
-
           <p class="text-sm">{{ payment.order.title }}</p>
         </div>
       </header>

@@ -2,19 +2,13 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { CurrencyValue, OrderType } from '@stores/models';
-import { formatCurrency } from '@app/utils';
+import SummaryUserData from '@organisms/SummaryUserData.vue';
+import { OrderType } from '@stores/models';
+import { SummaryData } from '@stores/models/types';
 import { useOrderStore } from '@stores/orderStore';
 
 const { t } = useI18n();
 const orderStore = useOrderStore();
-interface SummaryData {
-  currency: CurrencyValue;
-  totalAmountLoan: number;
-  totalCurrentAmountLoan: number;
-  totalAmountDebt: number;
-  totalCurrentAmountDebt: number;
-}
 
 const totalAmounts = computed(() =>
   orderStore.allOrders
@@ -61,81 +55,41 @@ const totalAmounts = computed(() =>
     </h1>
 
     <BaseCard class="card flex-col mb-4">
-      <div class="mb-4">
-        <h2 class="dark:text-white font-bold text-lg">
+      <div class="flex h-7 gap-2 mb-4 w-full">
+        <div class="w-8">
+          <LibraryIcon class="text-error-700" />
+        </div>
+        <h2 class="dark:text-white font-bold text-xl">
           {{ t('debt', 2) }}
         </h2>
       </div>
 
-      <div
+      <SummaryUserData
         v-for="amount in totalAmounts"
         :key="amount.currency"
-        class="w-full mb-4 last:mb-0"
-      >
-        <h3 class="dark:text-white font-bold text-base mb-2">
-          {{ amount.currency }}
-        </h3>
-
-        <div class="flex w-full gap-4 flex-wrap">
-          <DisplayInfo
-            class="info"
-            mode="vertical"
-            :label="t('totalAmount')"
-            :value="formatCurrency(amount.totalAmountDebt, amount.currency)"
-          />
-
-          <DisplayInfo
-            class="info"
-            mode="vertical"
-            :label="t('currentAmount')"
-            :value="
-              formatCurrency(amount.totalCurrentAmountDebt, amount.currency)
-            "
-          />
-        </div>
-      </div>
+        :amount="amount"
+        :total-amount="amount.totalAmountDebt"
+        :total-current-amount="amount.totalCurrentAmountDebt"
+      />
     </BaseCard>
 
     <BaseCard class="card flex-col mb-4">
-      <div class="mb-4">
+      <div class="flex h-7 gap-2 mb-4 w-full">
+        <div class="w-8">
+          <CashIcon class="text-success-700" />
+        </div>
         <h2 class="dark:text-white font-bold text-xl">
           {{ t('loan', 2) }}
         </h2>
       </div>
 
-      <div
+      <SummaryUserData
         v-for="amount in totalAmounts"
         :key="amount.currency"
-        class="w-full mb-4 last:mb-0"
-      >
-        <h3 class="dark:text-white font-bold text-base mb-2">
-          {{ amount.currency }}
-        </h3>
-
-        <div class="flex w-full gap-4 flex-wrap">
-          <DisplayInfo
-            class="info"
-            mode="vertical"
-            :label="t('totalAmount')"
-            :value="formatCurrency(amount.totalAmountLoan, amount.currency)"
-          />
-
-          <DisplayInfo
-            class="info"
-            mode="vertical"
-            :label="t('currentAmount')"
-            :value="
-              formatCurrency(amount.totalCurrentAmountLoan, amount.currency)
-            "
-          />
-        </div>
-      </div>
+        :amount="amount"
+        :total-amount="amount.totalAmountLoan"
+        :total-current-amount="amount.totalCurrentAmountLoan"
+      />
     </BaseCard>
   </div>
 </template>
-
-<style>
-.info.info {
-  @apply w-full sm:w-[calc(50%-16px)] md:w-[calc(33%-16px)] lg:w-[calc(25%-16px)];
-}
-</style>
